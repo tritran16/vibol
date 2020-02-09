@@ -29,11 +29,11 @@
     </div>
     <div class="form-group">
         {{ Form::label('description', 'Description') }}
-        {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
+        {{ Form::textarea('description', request('description', null), array('class' => 'form-control', 'id' => 'desc')) }}
     </div>
     <div class="form-group">
         {{ Form::label('source', 'Source') }}
-        {{ Form::text('source', request('source', null), array('class' => 'form-control')) }}
+        {{ Form::select('source', ['youtube' => 'Youtube', 'local' => 'Local', 'other' => 'Other'], request('status', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
         {{ Form::label('link', 'Link') }}
@@ -41,10 +41,16 @@
     </div>
     <div class="form-group">
         {{ Form::label('status', 'Status') }}
-        {{ Form::select('status', [0 => 'New', 1 => 'Public'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('status', [0 => 'New', 1 => 'Publish', 2 => 'Un-Publish'], request('status', null), array('class' => 'form-control')) }}
     </div>
     {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
 <button class="btn btn-secondary" onclick="history.back()">Cancel</button>
 {{ Form::close() }}
 
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        CKEDITOR.replace( 'desc' );
+    </script>
+@endpush

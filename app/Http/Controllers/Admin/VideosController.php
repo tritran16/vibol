@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VideoRequest;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class VideosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VideoRequest $request)
     {
         Video::create($request->all());
         return redirect(route('videos.index'))->with('success', 'Created Video successfully!');
@@ -82,7 +83,7 @@ class VideosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VideoRequest $request, $id)
     {
         $video = Video::findOrFail($id);
         if ($video) {

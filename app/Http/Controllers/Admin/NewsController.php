@@ -8,6 +8,8 @@ use App\Models\News;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -53,17 +55,34 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-
-        $news = News::create($request->all());
+        $news = News::create($request->only('title', 'short_desc', 'category_id', 'author',
+            'content', 'source', 'status', 'published_date'));
 //        $request->thumbnail->storeAs('thumbs', $request->thumbnail->getClientOriginalName());
 //        $request->image->storeAs('images', $request->thumbnail->getClientOriginalName());
 
-        $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
-        $request->file('image')->move(public_path('images/'), $imageName);
+//        $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
+//        $request->file('image')->move(public_path('images/'), $imageName);
+//
+//        $thumbName = time().'.'. $request->file('thumbnail')->getClientOriginalExtension();
+//        $request->file('thumbnail')->move(public_path('images/thumb/'), $thumbName);
 
-        $thumbName = time().'.'. $request->file('thumbnail')->getClientOriginalExtension();
-        $request->file('thumbnail')->move(public_path('images/thumb/'), $thumbName);
-        News::where('id', $news->id)->update(['image' => $imageName, 'thumbnail' => $thumbName]);
+
+        if ($request->file('image')){
+            $image = $request->file('image');
+            $file_name  = $image->getClientOriginalName() ;
+            Storage::disk('public')->put('news/images/'. $news->id . '/' . $file_name, File::get($image));
+            News::where('id', $news->id)->update(['image' => 'storage/news/images/'. $news->id . '/' . $file_name]);
+
+        }
+
+        if ($request->file('thumbnail')){
+            $thumbnail = $request->file('thumbnail');
+            $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+            Storage::disk('public')->put('news/thumbnails/'. $news->id . '/'. $thumbnail_name, File::get($thumbnail));
+            News::where('id', $news->id)->update([ 'thumbnail' => 'storage/news/thumbnails/'. $news->id . '/'. $thumbnail_name]);
+        }
+
+
         return redirect(route('news.index'))->with('success', 'Created News successfully!');
     }
 
@@ -108,14 +127,17 @@ class NewsController extends Controller
                 'title', 'category_id', 'short_desc', 'content', 'image', 'thumbnail', 'published_date', 'author', 'status'
             ]));
             if ($request->file('image')) {
-                $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-                $request->file('image')->move(public_path('images/'), $imageName);
-                News::where('id', $id)->update(['image' => $imageName]);
+                $image = $request->file('image');
+                $file_name  = $image->getClientOriginalName() ;
+                Storage::disk('public')->put('news/images/'. $news->id . '/'. $file_name, File::get($image));
+                News::where('id', $news->id)->update(['image' => 'storage/news/images/'. $news->id . '/'.$file_name]);
             }
-            if ($request->file('thumbnail')) {
-                $thumbName = time() . '.' . $request->file('thumbnail')->getClientOriginalExtension();
-                $request->file('thumbnail')->move(public_path('images/thumb/'), $thumbName);
-                News::where('id', $id)->update(['thumbnail' => $thumbName]);
+
+            if ($request->file('thumbnail')){
+                $thumbnail = $request->file('thumbnail');
+                $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+                Storage::disk('public')->put('news/thumbnails/'. $news->id . '/'. $thumbnail_name, File::get($thumbnail));
+                News::where('id', $news->id)->update([ 'thumbnail' => 'storage/news/thumbnails/'. $news->id . '/'.$thumbnail_name]);
             }
 
             return redirect(route('news.index'))->with('success', 'Update News successfully!');
@@ -150,7 +172,7 @@ class NewsController extends Controller
     public  function active($id){
         $news = News::find($id);
         if ($news) {
-            News::where('status', 1)->update(['status' => 2] );
+           // News::where('status', 1)->update(['status' => 2] );
             News::where('id', $id)->update(['status' => 1] );
             return redirect(route('news.index'))->with('success', 'Active News Successful!');
         }

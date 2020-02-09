@@ -146,6 +146,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.9/js/adminlte.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/jquery.daterangepicker.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 @stack('scripts')
 </body>
 </html>

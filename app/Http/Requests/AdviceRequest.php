@@ -27,6 +27,7 @@ class AdviceRequest extends FormRequest
         return [
             'advice' => 'required|string|max:1000',
             'author' => 'nullable|string|max:100',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8000',
         ];
     }
 
@@ -34,7 +35,7 @@ class AdviceRequest extends FormRequest
     {
         return [
             'advice.required' => 'Advice content is required!',
-            'author.max' => 'Author is length must be less than 1000',
+            'author.max' => 'Author is length must be less than 100',
         ];
     }
 }

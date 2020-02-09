@@ -10,7 +10,8 @@ class Video extends Model
     use SoftDeletes;
     protected $table = 'videos';
     public $timestamps = true;
-    public $fillable = ['title' ,'category_id' , 'thumb', 'author', 'description', 'source', 'link', 'status'];
+    public $fillable = ['title' ,'category_id' , 'thumb', 'author', 'description', 'source', 'link', 'status',
+        'likes', 'views'];
     public function category(){
         return $this->belongsTo('App\Models\VideoCategory');
     }

@@ -9,7 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class DailyAdvicesController extends Controller
 {
@@ -28,12 +30,13 @@ class DailyAdvicesController extends Controller
     {
         $perpage = $request->get('limit', 10);;
         $keyword = $request->get('keywword', null);
+        $today_advice = DailyAdvice::where('status', 1)->first();
         if ($keyword) {
-            $advices = DailyAdvice::orderBy("updated_at", 'DESC')->orderBy("status", 'DESC')->where('advice', 'LIKE', "%$keyword%")->paginate($perpage);
+            $advices = DailyAdvice::where('status', '!=', 1)->orderBy("updated_at", 'DESC')->orderBy("updated_at", 'DESC')->where('advice', 'LIKE', "%$keyword%")->paginate($perpage);
         }
         else
-            $advices = DailyAdvice::orderBy("updated_at", 'DESC')->orderBy("status", 'DESC')->paginate($perpage);
-        return view('admin.advices.index', ['advices' => $advices]);
+            $advices = DailyAdvice::where('status', '!=', 1)->orderBy("updated_at", 'DESC')->orderBy("updated_at", 'DESC')->paginate($perpage);
+        return view('admin.advices.index', ['advices' => $advices, 'today_advice' => $today_advice]);
     }
 
     /**
@@ -58,7 +61,19 @@ class DailyAdvicesController extends Controller
         if($request->get('status') == 1) {
             DailyAdvice::where('status', 1)->update(['status' => 2] );
         }
-        DailyAdvice::create($request->all());
+        if ($request->file('image')){
+            $image = $request->file('image');
+            $file_name  = $image->getClientOriginalName() ;
+            Storage::disk('public')->put('advices/images/'. $file_name, File::get($image));
+            $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status']),
+                ['image' => "storage/advices/images/" . $file_name]
+            );
+            //dd($_advice);
+        }
+        else {
+            $_advice = $request->only(['author', 'advice', 'text_position', 'status']);
+        }
+        DailyAdvice::create($_advice);
 
         return redirect(route('daily_advices.index'))->with('success', 'Created Advice successfully!');
 
@@ -109,10 +124,21 @@ class DailyAdvicesController extends Controller
     {
         $advice = DailyAdvice::findOrFail($id);
         if ($advice) {
-            DailyAdvice::where('id', $id)->update($request->only(['author', 'advice', 'status']));
             if($request->get('status') == 1) {
                 DailyAdvice::where('status', 1)->update(['status' => 2] );
             }
+            if ($request->file('image')){
+                $image = $request->file('image');
+                $file_name  = $image->getClientOriginalName() ;
+                Storage::disk('public')->put('advices/images/'. $file_name, File::get($image));
+                $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status']),
+                    ['image' => "storage/advices/images/" . $file_name]
+                );
+            }
+            else {
+                $_advice = $request->only(['name', 'link', 'description', 'status']);
+            }
+            DailyAdvice::where('id', $id)->update($_advice);
             return redirect(route('daily_advices.index'))->with('success', 'Update Daily Advice successfully!');
         }
         else {

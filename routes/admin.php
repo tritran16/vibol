@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/news/categories', 'NewsCategoriesController@index')->name('news.categories.index');
     Route::get('news/active/{id}', 'NewsController@active')->name('admin.news.active');
 
+    Route::resource('books', 'BooksController');
+    Route::resource('book_categories', 'BookCategoriesController');
+
 
 
 });

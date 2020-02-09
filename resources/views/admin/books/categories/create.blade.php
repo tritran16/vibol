@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>Create News Category</h1>
+<h1>Create Book Category</h1>
 
 <!-- if there are creation errors, they will show here -->
 
@@ -14,9 +14,9 @@
         </ul>
     </div>
 @endif
-{{ Form::open(array('action' => ['Admin\NewsCategoriesController@store'], 'method' => 'POST')) }}
+{{ Form::open(array('action' => ['Admin\BookCategoriesController@store'], 'method' => 'POST')) }}
     <div class="form-group">
-        {{ Form::label('name', 'Category Name') }}<span style="color: red">*</span>
+        {{ Form::label('name', 'Book Category Name') }}<span style="color: red">*</span>
         {{ Form::text('name', request('name', null), array('class' => 'form-control')) }}
     </div>
 

@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewsRequest extends FormRequest
+class BookRequest extends FormRequest
 {
 
     /**
@@ -26,14 +25,11 @@ class NewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|integer',
-            'short_desc' => 'required|string|max:255',
-            'content' => 'required|string|max:1000',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:8000',
-            //'published_date' => 'required|date|after:' . Carbon::yesterday()
-
+            'name' => 'required|string|max:255',
+            'pdf_file' => 'required_without:link|mimes:pdf|max:8000',
+            'link' => 'required_without:pdf_file|nullable|string|max:1000',
+            'status' => 'required',
+            'description' => 'nullable|string|max:1000',
         ];
     }
 

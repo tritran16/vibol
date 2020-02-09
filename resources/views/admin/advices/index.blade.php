@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>Daily Advices</h2>
+                            <h2>Advices</h2>
                         </div>
                         <div class="pull-right">
 
@@ -24,10 +24,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Content</th>
+                            <th>Advice</th>
+                            <th>Image</th>
                             <th>Author</th>
                             <th>Status</th>
-                            <th>Created </th>
                             <th>Updated </th>
                         </tr>
                         </thead>
@@ -35,10 +35,20 @@
                         @php
                             $i = 1;
                         @endphp
+                        <tr style="background-color: #00d6b2">
+                            <td></td>
+                            <td>{{ $today_advice->advice }}</td>
+                            <td><img src="{{asset( $today_advice->image)}}" class="img-bordered" style="width: 40px"></td>
+                            <td>{{ $today_advice->author }}</td>
+                            <td>Active</td>
+                            <td>{{ $today_advice->updated_at }}</td>
+                            <td></td>
+                        </tr>
                         @foreach ($advices as $advice)
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $advice->advice }}</td>
+                                <td><img src="{{asset( $advice->image)}}" class="img-bordered" style="width: 40px"></td>
                                 <td>{{ $advice->author }}</td>
                                 <td>@if ($advice->status == 1)
                                         <label class="label label-primary" href="#">Active</label>
@@ -49,11 +59,10 @@
                                     @endif
 
                                 </td>
-                                <td>{{ $advice->created_at }}</td>
                                 <td>{{ $advice->updated_at }}</td>
                                 <td>
                                     @if ($advice->status != 1)
-                                        <a type="button" class="btn btn-success" href="{{route('admin.daily_advices.active', $advice->id)}}" onclick="confirm('Do you want active this advice?')">
+                                        <a type="button" class="btn btn-success" href="{{route('admin.daily_advices.active', $advice->id)}}" onclick="return confirm('Do you want active this advice?')">
                                             <i class="fa fa-check"></i>
                                         </a>
                                     @endif
@@ -61,7 +70,7 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['daily_advices.destroy', $advice->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this Daily Advice?')">
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this Advice?')">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}

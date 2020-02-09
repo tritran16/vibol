@@ -26,6 +26,8 @@ class CreateNewsTable extends Migration
             $table->date('published_date')->nullable();
             $table->text('comment')->nullable();
             $table->smallInteger('status')->default(0)->comment('0: new; 1: public, 2: pending; 3: un-public');
+            $table->integer('views')->default(0);
+            $table->integer('likes')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

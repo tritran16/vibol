@@ -20,13 +20,15 @@
     </div>
     <div class="form-group">
         {{ Form::label('thumbnail', 'Thumbnail Image') }}
-        {!! Form::file('thumbnail', null) !!}
-        <img src="/images/thumb/{{$news->thumbnail}}" width="150px">
+        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg;"]) !!}
+        <img src="{{asset( $news->thumbnail)}}" width="50px">
     </div>
     <div class="form-group">
         {{ Form::label('image', 'Image') }}
-        {!! Form::file('image', null) !!}
-        <img src="/images/{{$news->image}}" width="200px">
+
+        {!! Form::file('image', ['accept' => "image/png, image/jpeg;"]) !!}
+
+        <img src="{{asset($news->image)}}" width="50px">
     </div>
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
@@ -42,16 +44,16 @@
     </div>
     <div class="form-group">
         {{ Form::label('content', 'Content') }}
-        {{ Form::textarea('content', request('content', null), array('class' => 'form-control')) }}
+        {{ Form::textarea('content', request('content', null), array('class' => 'form-control', 'id' => 'content')) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('published_date', 'Publish Date') }}<span style="color: red">*</span>
-        {{ Form::text('published_date', request('published_date', null), array('class' => 'form-control date')) }}
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('published_date', 'Publish Date') }}<span style="color: red">*</span>--}}
+{{--        {{ Form::text('published_date', request('published_date', null), array('class' => 'form-control date')) }}--}}
 
-    </div>
+{{--    </div>--}}
     <div class="form-group">
         {{ Form::label('status', 'Status') }}
-        {{ Form::select('status', [0 => 'New', 1 => 'Publish'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('status', [0 => 'New', 1 => 'Publish', 2 => 'Un-Publish'], request('status', null), array('class' => 'form-control')) }}
     </div>
     {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news.index')}}"> Cancel</a>
@@ -65,5 +67,6 @@
             dateFormat: 'yy/mm/dd',
             minDate: 0,
         });
+        CKEDITOR.replace( 'content' );
     </script>
 @endpush

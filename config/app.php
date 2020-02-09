@@ -177,6 +177,9 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
+
 
     ],
 
@@ -232,6 +235,8 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+
     ],
 
 ];
