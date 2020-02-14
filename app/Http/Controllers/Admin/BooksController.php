@@ -110,9 +110,9 @@ class BooksController extends Controller
         if ($request->file('pdf_file')){
             $pdf_file = $request->file('pdf_file');
             $file_name  = $pdf_file->getClientOriginalName() ;
-            Storage::disk('public')->put('books/pdf/'. $file_name, File::get($pdf_file));
+            Storage::disk('public')->put('books/pdf/'. $book->id . '/'. $file_name, File::get($pdf_file));
             $book = array_merge($request->only(['name', 'link', 'description', 'status']),
-                ['filename' => $file_name, 'link' => env('APP_URL') .'/storage/books/pdf/' . $file_name]
+                ['filename' => $file_name, 'link' => env('APP_URL') .'storage/books/pdf/' . $book->id . '/'.  $file_name]
             );
         }
         else {

@@ -22,11 +22,11 @@
     </div>
     <div class="form-group">
         {{ Form::label('thumbnail', 'Thumbnail Image') }}
-        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg;"]) !!}
+        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
     </div>
     <div class="form-group">
         {{ Form::label('image', 'Image') }}
-        {!! Form::file('image', ['accept' => "image/png, image/jpeg;"]) !!}
+        {!! Form::file('image', ['accept' => "image/png, image/jpg, image/jpeg"]) !!}
     </div>
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
