@@ -18,9 +18,9 @@ class CreateNewsTranslationsTable extends Migration
             $table->string('locale')->index();
 
             // Foreign key to the main model
-            $table->unsignedInteger('news_id');
+            $table->unsignedBigInteger('news_id');
             $table->unique(['news_id', 'locale']);
-            $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
+            $table->foreign('news_id')->references('id')->on('news');//->onDelete('cascade');
 
             // Actual fields you want to translate
             $table->string('title');
