@@ -26,7 +26,7 @@ class BookRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'pdf_file' => 'required_without:link|mimes:pdf|max:8000',
+            'pdf_file' => 'required_without:link|max:8000', // |mimes:pdf
             'link' => 'required_without:pdf_file|nullable|string|max:1000',
             'status' => 'required',
             'description' => 'nullable|string|max:1000',
