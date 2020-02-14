@@ -35,6 +35,7 @@
                         @php
                             $i = 1;
                         @endphp
+                        @if ($today_advice)
                         <tr style="background-color: #00d6b2">
                             <td></td>
                             <td>{{ $today_advice->advice }}</td>
@@ -44,6 +45,13 @@
                             <td>{{ $today_advice->updated_at }}</td>
                             <td></td>
                         </tr>
+                        @else
+                            <tr>
+                                <td colspan="6">
+                                    <span class="center-block">No Advice Today</span>
+                                </td>
+                            </tr>
+                        @endif
                         @foreach ($advices as $advice)
                             <tr>
                                 <td>{{ $i++ }}</td>
