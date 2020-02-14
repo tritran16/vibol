@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use App\Models\BookCategory;
-use App\Repositories\bookRepository;
+use App\Repositories\BookRepository;
 use App\Repositories\VideoCategoryRepository;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class BooksController extends Controller
 {
     private $bookRepository;
 
-    public function __construct(bookRepository $repository)
+    public function __construct(BookRepository $repository)
     {
         $this->middleware('auth:admin');
         $this->bookRepository = $repository;
