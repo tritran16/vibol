@@ -59,8 +59,8 @@ class NewsController extends ApiController
             'prev_page_url' => $news->previousPageUrl(),
             'per_page' => $news->perPage(),
             'total' => $news->total(),
-            "from" => 1,
-            "to" => 15,
+            "from" => $news->perPage() * ($news->currentPage() - 1) + 1,
+            "to" => $news->perPage() * ($news->currentPage() - 1) + $news->perPage(),
         ]);
     }
 
