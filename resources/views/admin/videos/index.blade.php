@@ -39,7 +39,7 @@
                         @foreach ($videos as $item)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td><a href="{{route('videos.show', $item->id)}}">{{ $item->title }}</a></td>
+                                <td><a href="{{route('videos.show', $item->id)}}"><img src="{{asset($item->thumbnail)}}" width="50px"/>{{ $item->title }}</a></td>
                                 <td><a target="_blank" href="{{$item->link}}">{{ $item->source }}</a></td>
                                 <td>@if ($item->status == 1)
                                         <label class="label label-primary" href="#">Active</label>

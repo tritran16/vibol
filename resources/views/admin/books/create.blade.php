@@ -21,6 +21,10 @@
         {{ Form::text('name', request('name', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
+        {{ Form::label('thumbnail', 'Thumbnail Image') }}
+        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
+    </div>
+    <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
         {{ Form::select('category_id',$categories, request('category_id', null), array('class' => 'form-control')) }}
     </div>
@@ -36,6 +40,12 @@
         {{ Form::label('pdf_file', 'PDF File') }}
         {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}
     </div>
+
+    <div class="form-group">
+        {{ Form::label('page_number', 'Page Number') }}
+        {{ Form::text('page_number', request('page_number', null), array('class' => 'form-control')) }}
+    </div>
+
     <div class="form-group">
         {{ Form::label('status', 'Status') }}
         {{ Form::select('status', [ 1 => 'Publish', 2 => 'Un-Publish'], request('status', null), array('class' => 'form-control')) }}

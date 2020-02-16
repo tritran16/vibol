@@ -21,6 +21,10 @@
         {{ Form::text('name', request('name', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
+        {{ Form::label('thumbnail', 'Thumbnail Image') }}
+        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
+    </div>
+    <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
         {{ Form::select('category_id',$categories, request('category_id', null), array('class' => 'form-control')) }}
     </div>
@@ -37,12 +41,16 @@
         {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}
     </div>
     <div class="form-group">
+        {{ Form::label('page_number', 'Page Number') }}
+        {{ Form::number('page_number', request('page_number'), array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
         {{ Form::label('status', 'Status') }}
         {{ Form::select('status', [ 1 => 'Publish', 2 => 'Un-Publish'], request('status', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
         {{ Form::label('is_hot', 'Is Hot Book') }}
-        {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
+        {{ Form::checkbox('is_hot', '1', request('is_hot', $book->is_hot)) }}
     </div>
     {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news.index')}}"> Cancel</a>

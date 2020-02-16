@@ -46,10 +46,22 @@ class NewsController extends ApiController
             $_news['created_at'] = $item->created_at;
             $_news['updated_at'] = $item->updated_at;
 
-            //return $this->successResponse($_news['title']);
+
             $data[] = $_news;
         }
-        return $this->successResponse($data);
+        //return $this->successResponse($news);
+        //$news->data = $data;
+        return $this->successResponse([
+            'current_page' => $news->currentPage(),
+            'data' => $data,
+            'last_page' => $news->lastPage(),
+            'next_page_url' => $news->nextPageUrl(),
+            'prev_page_url' => $news->previousPageUrl(),
+            'per_page' => $news->perPage(),
+            'total' => $news->total(),
+            "from" => 1,
+            "to" => 15,
+        ]);
     }
 
     /**

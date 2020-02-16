@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
+use App\Models\News;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class VideosController extends Controller
 {
@@ -46,7 +49,13 @@ class VideosController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        Video::create($request->all());
+        $video = Video::create($request->all());
+        if ($request->file('thumbnail')){
+            $thumbnail = $request->file('thumbnail');
+            $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+            Storage::disk('public')->put('videos/thumbnails/'. $video->id . '/'. $thumbnail_name, File::get($thumbnail));
+            Video::where('id', $video->id)->update([ 'thumbnail' => 'storage/videos/thumbnails/'. $video->id . '/'.$thumbnail_name]);
+        }
         return redirect(route('videos.index'))->with('success', 'Created Video successfully!');
     }
 
@@ -88,9 +97,14 @@ class VideosController extends Controller
         $video = Video::findOrFail($id);
         if ($video) {
             Video::where('id', $id)->update($request->only([
-                'title', 'category_id', 'thumb', 'description', 'source', 'link', 'status'
+                'title', 'category_id', 'thumb', 'description', 'source', 'link', 'status', 'is_hot'
             ]));
-
+            if ($request->file('thumbnail')){
+                $thumbnail = $request->file('thumbnail');
+                $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+                Storage::disk('public')->put('videos/thumbnails/'. $video->id . '/'. $thumbnail_name, File::get($thumbnail));
+                Video::where('id', $video->id)->update([ 'thumbnail' => 'storage/videos/thumbnails/'. $video->id . '/'.$thumbnail_name]);
+            }
             return redirect(route('videos.index'))->with('success', 'Update Video successfully!');
         }
         else {

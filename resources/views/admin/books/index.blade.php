@@ -60,7 +60,7 @@
                         @foreach ($books as $item)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td><a href="{{route('books.show', $item->id)}}">{{ $item->name }}</a></td>
+                                <td><a href="{{route('books.show', $item->id)}}"><img src="{{asset($item->thumbnail)}}" width="50px"/>  {{ $item->name }}</a></td>
                                 <td>
                                     <a target="_blank" href="{{$item->link?$item->link:asset('storage/books/pdf/'. $item->id . '/'.  $item->filename)}}">{{ $item->link?$item->link:$item->filename }}</a>
                                 </td>

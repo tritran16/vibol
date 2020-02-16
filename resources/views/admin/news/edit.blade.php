@@ -65,7 +65,7 @@
         </div>
     <div class="form-group">
         {{ Form::label('thumbnail', 'Thumbnail Image') }}
-        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg;"]) !!}
+        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
         <img src="{{asset( $news->thumbnail)}}" width="50px">
     </div>
     <div class="form-group">

@@ -14,11 +14,15 @@
         </ul>
     </div>
 @endif
-{{ Form::open(array('action' => ['Admin\VideosController@store'], 'method' => 'POST')) }}
+{{ Form::open(array('action' => ['Admin\VideosController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data')) }}
     <input type="hidden" name="token" value="{{ csrf_token() }}" />
     <div class="form-group">
         {{ Form::label('title', 'Title') }}<span style="color: red">*</span>
         {{ Form::text('title', request('title', null), array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('thumbnail', 'Thumbnail Image') }}
+        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
     </div>
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>

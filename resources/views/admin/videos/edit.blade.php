@@ -13,11 +13,16 @@
         </ul>
     </div>
 @endif
-{{ Form::model($video, array('route' => array('videos.update', $video->id), 'method' => 'PUT')) }}
+{{ Form::model($video, array('route' => array('videos.update', $video->id), 'method' => 'PUT', 'enctype' => 'multipart/form-data')) }}
 <input type="hidden" name="token" value="{{ csrf_token() }}" />
     <div class="form-group">
         {{ Form::label('title', 'Title') }}<span style="color: red">*</span>
         {{ Form::text('title', request('title', null), array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('thumbnail', 'Thumbnail Image') }}
+        {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
+        <img src="{{asset( $video->thumbnail)}}" width="50px">
     </div>
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
@@ -46,7 +51,7 @@
     </div>
     <div class="form-group">
         {{ Form::label('is_hot', 'Is Hot Video') }}
-        {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
+        {{ Form::checkbox('is_hot', '1', request('is_hot', $video->is_hot)) }}
     </div>
     {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
 <button class="btn btn-secondary" onclick="history.back()">Cancel</button>

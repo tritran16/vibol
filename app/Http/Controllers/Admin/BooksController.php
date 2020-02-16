@@ -69,14 +69,19 @@ class BooksController extends Controller
             $pdf_file = $request->file('pdf_file');
             $file_name  = $pdf_file->getClientOriginalName() ;
             Storage::disk('public')->put('books/pdf/'. $file_name, File::get($pdf_file));
-            Book::create(array_merge($request->only(['name', 'category_id', 'description', 'status', 'is_hot']),
+            $book = Book::create(array_merge($request->only(['name', 'category_id', 'description', 'status', 'is_hot']),
                 ['filename' => $file_name, 'link' => env('APP_URL') .'/storage/books/pdf/' . $file_name] ));
         }
         else {
-            Book::create($request->only(['name', 'category_id', 'link', 'description', 'status']));
+            $book = Book::create($request->only(['name', 'category_id', 'link', 'description', 'status']));
         }
 
-
+        if ($request->file('thumbnail')){
+            $thumbnail = $request->file('thumbnail');
+            $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+            Storage::disk('public')->put('books/thumbnails/'. $book->id . '/'. $thumbnail_name, File::get($thumbnail));
+            Book::where('id', $book->id)->update([ 'thumbnail' => 'storage/books/thumbnails/'. $book->id . '/'.$thumbnail_name]);
+        }
 
         return redirect(route('books.index'))->with('success', 'Created Book successfully!');//
     }
@@ -119,15 +124,19 @@ class BooksController extends Controller
             $pdf_file = $request->file('pdf_file');
             $file_name  = $pdf_file->getClientOriginalName() ;
             Storage::disk('public')->put('books/pdf/'. $book->id . '/'. $file_name, File::get($pdf_file));
-            $book = array_merge($request->only(['name', 'link', 'description', 'status', 'is_hot']),
+            $book->update(array_merge($request->only(['name', 'link', 'description', 'status', 'is_hot', 'page_number']),
                 ['filename' => $file_name, 'link' => env('APP_URL') .'storage/books/pdf/' . $book->id . '/'.  $file_name]
-            );
+            ));
         }
         else {
-            $book = $request->only(['name', 'link', 'description', 'status', 'is_hot']);
+            $book->update($request->only(['name', 'link', 'description', 'status', 'is_hot', 'page_number']));
         }
-        Book::where('id', $id)->update($book);
-
+        if ($request->file('thumbnail')){
+            $thumbnail = $request->file('thumbnail');
+            $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+            Storage::disk('public')->put('books/thumbnails/'. $book->id . '/'. $thumbnail_name, File::get($thumbnail));
+            Book::where('id', $book->id)->update([ 'thumbnail' => 'storage/books/thumbnails/'. $book->id . '/'.$thumbnail_name]);
+        }
         return redirect(route('books.index'))->with('success', 'Update Book successfully!');
     }
 
