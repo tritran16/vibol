@@ -124,6 +124,6 @@ class NewsController extends ApiController
             $_category['name'] = $category->translate($lang)->name;
             $data[] = $_category;
         }
-        return $this->successResponse($categories);
+        return $this->successResponse($data);
     }
 }
