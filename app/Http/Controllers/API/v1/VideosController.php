@@ -29,6 +29,10 @@ class VideosController extends ApiController
             $videos = $videos->where('is_hot', 1);
         }
 
+        if ($category_id = $request->get('category_id')) {
+            $videos = $videos->where('category_id', $category_id);
+        }
+
         $direction = $request->get('direction') == 'desc' ? 'desc' : 'asc';
         switch ($request->get('order_by') ) {
             case 'view' :
