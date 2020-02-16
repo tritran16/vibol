@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             {{ Form::label('description_kh', 'Short Description(KH)') }}<span style="color: red">*</span>
-                            {{ Form::text('description_kh', request('description_kh', $news_category->translate('kh')->description), array('class' => 'form-control')) }}
+                            {{ Form::textarea('description_kh', request('description_kh', $news_category->translate('kh')->description), array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="tab-pane" id="english">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             {{ Form::label('description_en', 'Description(En)') }}<span style="color: red">*</span>
-                            {{ Form::text('description_en', request('description_en', $news_category->translate('en')->description), array('class' => 'form-control')) }}
+                            {{ Form::textarea('description_en', request('description_en', $news_category->translate('en')->description), array('class' => 'form-control')) }}
                         </div>
                     </div>
                 </div>
