@@ -26,23 +26,23 @@
             </div><!-- /.card-header -->
             <div class="card-body">
                 <div class="tab-content">
-                    <div class="active tab-pane" id="khmer">
+                    <div class="tab-pane" id="khmer">
                         <div class="form-group">
-                            {{ Form::label('name_kh', 'Name (KH)') }}<span style="color: red">*</span>
+                            {{ Form::label('name_kh', __('common.category.name')) }}<span style="color: red">*</span>
                             {{ Form::text('name_kh', request('name_kh', $news_category->translate('kh')->name), array('class' => 'form-control')) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('description_kh', 'Short Description(KH)') }}<span style="color: red">*</span>
+                            {{ Form::label('description_kh', __('common.category.description') }}
                             {{ Form::textarea('description_kh', request('description_kh', $news_category->translate('kh')->description), array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="tab-pane" id="english">
                         <div class="form-group">
-                            {{ Form::label('name_en', 'Name (EN)') }}<span style="color: red">*</span>
+                            {{ Form::label('name_en',  __('common.category.name')) }}<span style="color: red">*</span>
                             {{ Form::text('name_en', request('name_en', $news_category->translate('en')->name), array('class' => 'form-control')) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('description_en', 'Description(En)') }}<span style="color: red">*</span>
+                            {{ Form::label('description_en',  __('common.category.description')) }}
                             {{ Form::textarea('description_en', request('description_en', $news_category->translate('en')->description), array('class' => 'form-control')) }}
                         </div>
                     </div>

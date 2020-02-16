@@ -45,6 +45,24 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {{session()->get('locale') == 'kh'? 'lang_active': ''}}" href="{{url('admin/set_locale/kh')}}">
+                            <img src="/images/kh.png" width="24px">
+                            Khmer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{session()->get('locale') == 'en'? 'lang_active': ''}}" href="{{url('admin/set_locale/en')}}">
+                            <img src="/images/us.png" width="24px">
+                            English</a>
+                    </li>
+                </ul>
+                <style>
+                    a.lang_active {
+                        background-color: #0b3e6f;
+                    }
+                </style>
+                <ul class="nav navbar-nav">
+
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ auth()->user()->image }}" class="user-image" alt="User Image">

@@ -18,6 +18,7 @@ Route::get('logout', 'LoginController@logout')->name('admin.logout');
 Route::post('logout', 'LoginController@logout')->name('admin.logout');
 
 Route::group(['middleware' => ['auth:admin']], function () {
+    Route::get('set_locale/{locale}', 'HomeController@change_locale')->name('admin.change_language');
     Route::get('profile', 'UserController@showProfile')->name('admin.user.profile.view');
     Route::post('profile', 'UserController@updateProfile')->name('admin.user.profile.update');
 
