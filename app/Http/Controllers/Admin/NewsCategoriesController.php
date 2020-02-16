@@ -52,7 +52,17 @@ class NewsCategoriesController extends Controller
      */
     public function store(NewsCategoryRequest $request)
     {
-        NewsCategory::create($request->only(['name', 'description']));
+        $data = [
+            'en' => [
+                'name'       => $request->input('name_en'),
+                'description' => $request->input('description_en'),
+            ],
+            'kh' => [
+                'name'       => $request->input('name_kh'),
+                'description' => $request->input('description_kh'),
+            ],
+        ];
+        NewsCategory::create($data);
 
         return redirect(route('news_categories.index'))->with('success', 'Created News Category successfully!');//
     }
@@ -90,7 +100,18 @@ class NewsCategoriesController extends Controller
     public function update(NewsCategoryRequest $request, $id)
     {
         $category = NewsCategory::findOrFail($id);
-        NewsCategory::where('id', $id)->update($request->only(['name', 'description']));
+        //NewsCategory::where('id', $id)->update($request->only(['name', 'description']));
+        $data = [
+            'en' => [
+                'name'       => $request->input('name_en'),
+                'description' => $request->input('description_en'),
+            ],
+            'kh' => [
+                'name'       => $request->input('name_kh'),
+                'description' => $request->input('description_kh'),
+            ],
+        ];
+        $category->update($data);
         return redirect(route('news_categories.index'))->with('success', 'Update New Category successfully!');
     }
 

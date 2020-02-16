@@ -26,10 +26,13 @@ class NewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'short_desc_en' => 'required|string|max:255',
+            'content_en' => 'required|string|max:1000',
+            'title_kh' => 'required|string|max:255',
+            'short_desc_kh' => 'required|string|max:255',
+            'content_kh' => 'required|string|max:1000',
             'category_id' => 'required|integer',
-            'short_desc' => 'required|string|max:255',
-            'content' => 'required|string|max:1000',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:8000',
             //'published_date' => 'required|date|after:' . Carbon::yesterday()

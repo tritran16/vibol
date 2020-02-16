@@ -38,9 +38,12 @@
     </div>
     <div class="form-group">
         {{ Form::label('status', 'Status') }}
-        {{ Form::select('status', [0 => 'New', 1 => 'Public'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('status', [ 1 => 'Publish', 2 => 'Un-Publish'], request('status', null), array('class' => 'form-control')) }}
     </div>
-
+    <div class="form-group">
+        {{ Form::label('is_hot', 'Is Hot Book') }}
+        {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
+    </div>
     {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news.index')}}"> Cancel</a>
     {{ Form::close() }}

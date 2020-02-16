@@ -11,11 +11,14 @@ class News extends Model
     use SoftDeletes, Translatable;
     protected $table = 'news';
     public $timestamps = true;
-    protected $fillable = ['title', 'short_desc', 'image', 'category_id', 'thumbnail', 'author',
-        'content', 'source', 'status', 'published_date', 'likes', 'views'];
-
+    protected $fillable = ['id', 'title', 'short_desc', 'image', 'category_id', 'thumbnail', 'author',
+        'content', 'source', 'status', 'published_date', 'likes', 'views', 'is_hot','created_at', 'updated_at'];
+    protected $hidden = ['deleted_at'];
     public $translatedAttributes = ['title', 'short_desc', 'content'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category(){
         return $this->belongsTo('App\Models\NewsCategory');
     }

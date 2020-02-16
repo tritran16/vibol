@@ -27,7 +27,7 @@
                             <th>Title</th>
                             <th>Category</th>
                             <th>Status</th>
-{{--                            <th>Publish At</th>--}}
+                            <th>Is Hot</th>
                             <th>Created At</th>
                             <th></th>
                         </tr>
@@ -39,8 +39,8 @@
                         @foreach ($news as $item)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td><a href="{{route('news.show', $item->id)}}"><img src="{{asset($item->thumbnail)}}" width="50px"/> {{ $item->title }}</a></td>
-                                <td>{{$item->category->name}}</td>
+                                <td><a href="{{route('news.show', $item->id)}}"><img src="{{asset($item->thumbnail)}}" width="50px"/> {{ $item->translate('kh')->title }}</a></td>
+                                <td>{{$item->category->translate('kh')->name}}</td>
                                 <td>@if ($item->status == 1)
                                         <label class="label label-primary" href="#">Publish</label>
                                     @elseif ($item->status == 2)
@@ -50,8 +50,12 @@
                                     @endif
 
                                 </td>
-                                <td>{{ $item->published_date }}</td>
-{{--                                <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>--}}
+                                <td>
+                                    @if ($item->is_hot)
+                                        <label class="label label-danger">Hot</label>
+                                    @endif
+                                </td>
+                                <td>{{ $item->created_at }}</td>
                                 <td>
                                     @if ($item->status != 1)
                                         <a type="button" class="btn btn-success" href="{{route('admin.news.active', $item->id)}}" onclick="confirm('Do you want publish this News?')">

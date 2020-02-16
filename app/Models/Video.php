@@ -10,8 +10,14 @@ class Video extends Model
     use SoftDeletes;
     protected $table = 'videos';
     public $timestamps = true;
-    public $fillable = ['title' ,'category_id' , 'thumb', 'author', 'description', 'source', 'link', 'status',
-        'likes', 'views'];
+    protected $fillable = ['title' ,'category_id' , 'thumb', 'author', 'description', 'source', 'link', 'status',
+        'likes', 'views',  'is_hot', 'created_at', 'updated_at'];
+
+    protected $hidden = ['deleted_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category(){
         return $this->belongsTo('App\Models\VideoCategory');
     }

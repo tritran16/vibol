@@ -27,6 +27,7 @@
                             <th>Title</th>
                             <th>Source</th>
                             <th>Status</th>
+                            <th>Is Hot</th>
                             <th>Created At</th>
                             <th></th>
                         </tr>
@@ -48,6 +49,11 @@
                                         <label class="label label-info" href="#">New</label>
                                     @endif
 
+                                </td>
+                                <td>
+                                    @if ($item->is_hot)
+                                        <label class="label label-danger">Hot</label>
+                                    @endif
                                 </td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>

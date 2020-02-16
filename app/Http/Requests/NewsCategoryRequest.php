@@ -25,8 +25,10 @@ class NewsCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
+            'name_kh' => 'required|string|max:255',
+            'description_kh' => 'nullable|string|max:2000',
+            'name_en' => 'required|string|max:255',
+            'description_en' => 'nullable|string|max:2000',
         ];
     }
 

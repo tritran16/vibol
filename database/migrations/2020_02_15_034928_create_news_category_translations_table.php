@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewsTranslationsTable extends Migration
+class CreateNewsCategoryTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,18 @@ class CreateNewsTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news_translations', function (Blueprint $table) {
+        Schema::create('news_category_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('locale')->index();
 
             // Foreign key to the main model
-            $table->unsignedBigInteger('news_id');
-            $table->unique(['news_id', 'locale']);
-            $table->foreign('news_id')->references('id')->on('news');//->onDelete('cascade');
+            $table->unsignedInteger('news_category_id');
+            $table->unique(['news_category_id', 'locale']);
+            $table->foreign('news_category_id')->references('id')->on('news_categories');//->onDelete('cascade');
 
             // Actual fields you want to translate
-            $table->string('title');
-            $table->string('short_desc', 1000);
-            $table->longText('content');
-
+            $table->string('name');
+            $table->longText('description');
         });
     }
 
@@ -37,6 +35,6 @@ class CreateNewsTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_translations');
+        Schema::dropIfExists('news_category_translations');
     }
 }

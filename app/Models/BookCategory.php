@@ -11,4 +11,6 @@ class BookCategory extends Model
     protected $table = 'book_categories';
     public $timestamps = false;
     protected $fillable = ['name', 'description'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
 }

@@ -11,4 +11,5 @@ class VideoCategory extends Model
     protected $table = 'video_categories';
     public $timestamps = false;
     protected $fillable = ['name', 'description'];
+    protected  $hidden = ['created_at', 'updated_at', 'deleted_at'];
 }

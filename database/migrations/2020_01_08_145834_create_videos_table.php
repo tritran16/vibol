@@ -24,9 +24,9 @@ class CreateVideosTable extends Migration
             $table->string('link', 1000)->nullable();
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);
-            $table->smallInteger('status')->default(0)
-                ->comment('0: new; 1: public, 2: pending; 3: un-public');
-
+            $table->smallInteger('status')->default(1)
+                ->comment('1: public,  2: un-public');
+            $table->tinyInteger('is_hot')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

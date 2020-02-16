@@ -34,7 +34,8 @@
     </div>
     <div class="form-group">
         {{ Form::label('source', 'Source') }}
-        {{ Form::select('source', ['youtube' => 'Youtube', 'local' => 'Local', 'other' => 'Other'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('source', ['youtube' => 'Youtube'], request('status', null), array('class' => 'form-control')) }}
+        <p class="text-danger"><i class="fa fa-warning"></i> Only support youtube link!</p>
     </div>
     <div class="form-group">
         {{ Form::label('link', 'Link') }}
@@ -42,7 +43,12 @@
     </div>
     <div class="form-group">
         {{ Form::label('status', 'Status') }}
-        {{ Form::select('status', [0 => 'New', 1 => 'Publish'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('status', [ 1 => 'Publish', 2 => 'Un-Publish'], request('status', null), array('class' => 'form-control')) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('is_hot', 'Is Hot Video') }}
+        {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
     </div>
 
     {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
@@ -53,6 +59,6 @@
 
 @push('scripts')
     <script type="text/javascript">
-        CKEDITOR.replace( 'desc' );
+        //CKEDITOR.replace( 'desc' );
     </script>
 @endpush

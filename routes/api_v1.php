@@ -15,18 +15,22 @@ Route::get('books', 'API\v1\BooksController@index');
 Route::get('books/{id}', 'API\v1\BooksController@view');
 Route::get('books/like/{id}', 'API\v1\BooksController@like');
 Route::get('books/unlike/{id}', 'API\v1\BooksController@unlike');
+Route::get('books/categories/all', 'API\v1\BooksController@categories');
 
 Route::get('news', 'API\v1\NewsController@index');
 Route::get('news/{id}', 'API\v1\NewsController@view');
 Route::get('news/like/{id}', 'API\v1\NewsController@like');
 Route::get('news/unlike/{id}', 'API\v1\NewsController@unlike');
+Route::get('news/categories/all', 'API\v1\NewsController@categories');
 
 Route::get('videos', 'API\v1\VideosController@index');
 Route::get('videos/{id}', 'API\v1\VideosController@view');
 Route::get('videos/like/{id}', 'API\v1\VideosController@like');
 Route::get('videos/unlike/{id}', 'API\v1\VideosController@unlike');
+Route::get('videos/categories/all', 'API\v1\VideosController@categories');
 
 Route::get('advices/today', 'API\v1\AdvicesController@active');
+Route::get('advices/', 'API\v1\AdvicesController@all_advices');
 Route::get('advices/all', 'API\v1\AdvicesController@all_advices');
 Route::get('advices/{id}', 'API\v1\AdvicesController@view');
 Route::get('advices/like/{id}', 'API\v1\AdvicesController@like');

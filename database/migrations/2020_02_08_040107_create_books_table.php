@@ -20,7 +20,8 @@ class CreateBooksTable extends Migration
             $table->string('link', 1000)->nullable();
             $table->integer('category_id');
             $table->text('description')->nullable();
-            $table->smallInteger('status')->default(0)->comment('0: new; 1: public, 2: pending; 3: un-public');
+            $table->smallInteger('status')->default(1)->comment('1: public, 2: pending; 3: un-public');
+            $table->tinyInteger('is_hot')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

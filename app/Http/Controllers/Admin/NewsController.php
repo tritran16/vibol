@@ -43,7 +43,13 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = NewsCategory::pluck('name', 'id');
+        $categories = [];
+        $_categories = NewsCategory::all();
+        $categories[""] = 'Select Category';
+        foreach ($_categories as $category) {
+            $categories[$category->id] = $category->translate('kh')->name;
+
+        }
         return view('admin.news.create')->with('categories', $categories);
     }
 
@@ -55,8 +61,8 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        $news = News::create($request->only('title', 'short_desc', 'category_id', 'author',
-            'content', 'source', 'status', 'published_date'));
+//        $news = News::create($request->only('title', 'short_desc', 'category_id', 'author',
+//            'content', 'source', 'status', 'published_date'));
 //        $request->thumbnail->storeAs('thumbs', $request->thumbnail->getClientOriginalName());
 //        $request->image->storeAs('images', $request->thumbnail->getClientOriginalName());
 
@@ -66,6 +72,20 @@ class NewsController extends Controller
 //        $thumbName = time().'.'. $request->file('thumbnail')->getClientOriginalExtension();
 //        $request->file('thumbnail')->move(public_path('images/thumb/'), $thumbName);
 
+        $data = [
+            'en' => [
+                'title'       => $request->input('title_en'),
+                'short_desc' => $request->input('short_desc_en'),
+                'content' => $request->input('content_en'),
+            ],
+            'kh' => [
+                'title'       => $request->input('title_kh'),
+                'short_desc' => $request->input('short_desc_kh'),
+                'content' => $request->input('content_kh'),
+            ],
+        ];
+        $news = News::create(array_merge($request->only('title', 'short_desc', 'category_id', 'author',
+            'content', 'source', 'status', 'published_date'), $data));
 
         if ($request->file('image')){
             $image = $request->file('image');
@@ -107,7 +127,14 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        $categories = NewsCategory::pluck('name', 'id');
+        $_categories = NewsCategory::all();
+        $categories = [];
+        $categories[""] = 'Select Category';
+        foreach ($_categories as $category) {
+            $categories[$category->id] = $category->translate('kh')->name;
+
+        }
+
         $news = News::findOrFail($id);
         return view('admin.news.edit')->with('news', $news)->with('categories', $categories);
     }
@@ -123,9 +150,24 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
         if ($news) {
-            News::where('id', $id)->update($request->only([
-                'title', 'category_id', 'short_desc', 'content', 'image', 'thumbnail', 'published_date', 'author', 'status'
+            $news->update($request->only([
+                'category_id', 'image', 'thumbnail', 'published_date', 'author', 'status'
             ]));
+
+            $data = [
+                'en' => [
+                    'title'       => $request->input('title_en'),
+                    'short_desc' => $request->input('short_desc_en'),
+                    'content' => $request->input('content_en'),
+                ],
+                'kh' => [
+                    'title'       => $request->input('title_kh'),
+                    'short_desc' => $request->input('short_desc_kh'),
+                    'content' => $request->input('content_kh'),
+                ],
+            ];
+            $news = $news->update($data);
+
             if ($request->file('image')) {
                 $image = $request->file('image');
                 $file_name  = $image->getClientOriginalName() ;

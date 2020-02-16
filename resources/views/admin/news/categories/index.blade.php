@@ -24,7 +24,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
+                            <th>Name(KH - EN)</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,7 +34,7 @@
                         @foreach ($news_categories as $category)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $category->name }}</td>
+                                <td>{{ $category->translate('kh')->name . ' - ' . $category->translate('en')->name }}</td>
 
                                 <td>
                                     <a class="btn btn-sm btn-primary btn-flat" href="{{ route('news_categories.edit', $category->id) }}">

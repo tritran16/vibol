@@ -139,6 +139,16 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button);
     $('.select2').select2();
+    $(document).ready(function() {
+        var url = window.location;
+        var element = $('ul.sidebar-menu a').filter(function () {
+            return this.href == url || url.href.indexOf(this.href) == 0;
+        }).parent().addClass('active');
+        if (element.is('li')) {
+            element.addClass('active1').parent().parent('li').addClass('active')
+        }
+
+    });
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

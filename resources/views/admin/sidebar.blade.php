@@ -36,7 +36,7 @@
                     <i class="fa fa-arrow-circle-down"></i> Book Category
                 </a>
             </li>
-            <li class="active">
+            <li >
                 <a href="{{ route('books.index') }}">
                     <i class="fa fa-list"></i> Book
                 </a>
@@ -58,7 +58,7 @@
                     <i class="fa fa-arrow-circle-down"></i> Video Category
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="{{ route('videos.index') }}">
                     <i class="fa fa-list"></i> Videos
                 </a>
@@ -75,7 +75,7 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li class="active">
+            <li>
                 <a href="{{ route('news_categories.index') }}">
                     <i class="fa fa-object-group"></i> News Category
                 </a>

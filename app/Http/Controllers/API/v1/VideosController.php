@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Video;
+use App\Models\VideoCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,17 +19,32 @@ class VideosController extends ApiController
      */
     public function index(Request $request){
         $keyword = $request->get('keyword');
-        if (!$keyword) {
-            $data = Video::with('category')
-                ->where('status', 1)
-                ->paginate(API_PAGE_LIMITED);
+        $videos = Video::with('category')
+            ->where('status', 1);
+        if ($keyword) {
+            $videos = $videos
+                ->where('videos.title', 'LIKE', "%$keyword%");
         }
-        else {
-            $data = Video::with('category')
-                ->where('status', 1)
-                ->where('videos.name', 'LIKE', "%$keyword%")
-                ->paginate(API_PAGE_LIMITED);
+        if ($hot = $request->get('is_hot')) {
+            $videos = $videos->where('is_hot', 1);
         }
+
+        $direction = $request->get('direction') == 'desc' ? 'desc' : 'asc';
+        switch ($request->get('order_by') ) {
+            case 'view' :
+                $videos->orderBy('views', $direction);
+            case 'like':
+                $videos->orderBy('likes', $direction);
+            case 'title':
+                $videos->orderBy('title', $direction);
+            default:
+                // TODO
+        }
+
+        // short by id desc
+        $videos->orderBy('created_at', 'DESC');
+
+        $data = $videos->paginate(API_PAGE_LIMITED);
         return $this->successResponse($data);
     }
 
@@ -40,7 +56,8 @@ class VideosController extends ApiController
     public function  view(Request $request, $id){
         $video = Video::find($id);
         if ($video && $video->status == 1) {
-            Video::where('id', $id)->update(['views'=> DB::raw('views + 1'), ]);
+            Video::where('id', $id)->update(['views'=> DB::raw('views + 1') ]);
+            $video->views = $video->views + 1;
             return $this->successResponse($video);
         }
         else return $this->failedResponse(['Not Found Video']);
@@ -70,9 +87,18 @@ class VideosController extends ApiController
         $video = Video::find($id);
         if ($video && $video->status == 1) {
             Video::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
-            $video->likes -=1;
+            $video->likes = $video->likes> 0? $video->likes-1: 0;
             return $this->successResponse($video, __('likeVideoSuccess'));
         }
         else return $this->failedResponse([], __('notFoundVideo'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function categories(Request $request) {
+        $categories = VideoCategory::get();
+        return $this->successResponse($categories);
     }
 }
