@@ -97,6 +97,7 @@
             dateFormat: 'yy/mm/dd',
             minDate: 0,
         });
-        CKEDITOR.replace( 'content' );
+        CKEDITOR.replace( 'content_kh' );
+        CKEDITOR.replace( 'content_en' );
     </script>
 @endpush
