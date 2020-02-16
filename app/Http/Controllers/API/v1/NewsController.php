@@ -39,6 +39,8 @@ class NewsController extends ApiController
             $_news['title'] = $item->translate($lang)->title;
             $_news['short_desc'] = $item->translate($lang)->short_desc;
             $_news['status'] = $item->status;
+            $_news['is_hot'] = $item->is_hot;
+            //$_news['link'] = ;
             $_news['created_at'] = $item->created_at;
             $_news['updated_at'] = $item->updated_at;
 
@@ -72,7 +74,7 @@ class NewsController extends ApiController
             $data['created_at'] =  $news->created_at;
             $data['views'] =  $news->views;
             $data['likes'] =  $news->likes;
-
+            $data['is_hot'] = $news->is_hot;
             return $this->successResponse($data);
         }
         else {
