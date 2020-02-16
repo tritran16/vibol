@@ -12,7 +12,7 @@ class Book extends Model
     protected $table = 'books';
     public $timestamps = true;
 
-    protected $fillable = ['name', 'category_id' , 'filename', 'link' ,'description', 'status', 'likes', 'views',
+    protected $fillable = ['name', 'category_id' , 'filename', 'link' ,'description', 'status', 'likes', 'views', 'is_hot',
         'created_at', 'updated_at'];
 
     protected $hidden = ['deleted_at'];

@@ -30,11 +30,19 @@ class BooksController extends Controller
      */
     public function index(Request $request)
     {
+        $categories = BookCategory::pluck('name', 'id');
         $keyword = $request->get('keyword');
-        if ($keyword)
-            $books = $this->bookRepository->findWhere(['name', 'LIKE', $request->get('keyword') ])->paginate(20);
-        else $books = $this->bookRepository->paginate(20);
-        return view('admin.books.index')->with('books', $books);
+        $category_id = $request->get('category_id');
+        $book = Book::where('status', '>=', 0);
+        if ($keyword){
+            $book = $book->where('name', 'LIKE',   '%'. $request->get('keyword'). '%');
+        }
+       // else $books = $this->bookRepository;
+        if ($category_id) {
+            $book = $book->where('category_id', '=', $category_id);
+        }
+        $books = $book->orderBy('id', 'DESC')->paginate(10);
+        return view('admin.books.index', ['categories' => $categories->toArray(), 'category_id' => $category_id])->with('books', $books);
     }
 
     /**
@@ -61,7 +69,7 @@ class BooksController extends Controller
             $pdf_file = $request->file('pdf_file');
             $file_name  = $pdf_file->getClientOriginalName() ;
             Storage::disk('public')->put('books/pdf/'. $file_name, File::get($pdf_file));
-            Book::create(array_merge($request->only(['name', 'category_id', 'description', 'status']),
+            Book::create(array_merge($request->only(['name', 'category_id', 'description', 'status', 'is_hot']),
                 ['filename' => $file_name, 'link' => env('APP_URL') .'/storage/books/pdf/' . $file_name] ));
         }
         else {
@@ -111,12 +119,12 @@ class BooksController extends Controller
             $pdf_file = $request->file('pdf_file');
             $file_name  = $pdf_file->getClientOriginalName() ;
             Storage::disk('public')->put('books/pdf/'. $book->id . '/'. $file_name, File::get($pdf_file));
-            $book = array_merge($request->only(['name', 'link', 'description', 'status']),
+            $book = array_merge($request->only(['name', 'link', 'description', 'status', 'is_hot']),
                 ['filename' => $file_name, 'link' => env('APP_URL') .'storage/books/pdf/' . $book->id . '/'.  $file_name]
             );
         }
         else {
-            $book = $request->only(['name', 'link', 'description', 'status']);
+            $book = $request->only(['name', 'link', 'description', 'status', 'is_hot']);
         }
         Book::where('id', $id)->update($book);
 

@@ -1,12 +1,9 @@
 <?php
 
 return [
+    'keyword' => 'Keyword',
     'category.name' => 'Category',
     'category.description' => 'Description',
-    'news.title' => 'News Title',
-    'news.content' => 'News Content',
-    'news.image' => 'News Image',
-    'news.thumbnail' => 'News Thumbnail',
     'button.add_new' => 'Add New',
     'button.create' => 'Create New',
     'button.update' => 'Update',
