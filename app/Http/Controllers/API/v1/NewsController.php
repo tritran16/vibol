@@ -40,6 +40,8 @@ class NewsController extends ApiController
             $_news['short_desc'] = $item->translate($lang)->short_desc;
             $_news['status'] = $item->status;
             $_news['is_hot'] = $item->is_hot;
+            $_news['views'] = $item->views;
+            $_news['likes'] = $item->likes;
             //$_news['link'] = ;
             $_news['created_at'] = $item->created_at;
             $_news['updated_at'] = $item->updated_at;
