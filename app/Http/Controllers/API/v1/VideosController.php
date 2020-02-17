@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\VideoCollection;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\Video as VideoResource;
 
 if (!defined('API_PAGE_LIMITED'))
     define('API_PAGE_LIMITED', 10);
@@ -49,7 +51,7 @@ class VideosController extends ApiController
         $videos->orderBy('created_at', 'DESC');
 
         $data = $videos->paginate(API_PAGE_LIMITED);
-        return $this->successResponse($data);
+        return $this->successResponse(new VideoCollection($data));
     }
 
     /**
@@ -62,7 +64,7 @@ class VideosController extends ApiController
         if ($video && $video->status == 1) {
             Video::where('id', $id)->update(['views'=> DB::raw('views + 1') ]);
             $video->views = $video->views + 1;
-            return $this->successResponse($video);
+            return $this->successResponse(new VideoResource($video));
         }
         else return $this->failedResponse(['Not Found Video']);
     }
@@ -77,7 +79,7 @@ class VideosController extends ApiController
         if ($video && $video->status == 1) {
             Video::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
             $video->likes +=1;
-            return $this->successResponse($video, __('likeVideoSuccess'));
+            return $this->successResponse(new VideoResource($video), __('likeVideoSuccess'));
         }
         else return $this->failedResponse([], __('notFoundVideo'));
     }

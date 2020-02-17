@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\AdviceCollection;
 use App\Models\DailyAdvice;
+use DemeterChain\A;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\Advice as AdviceResource;
 
 class AdvicesController extends ApiController
 {
@@ -14,13 +17,13 @@ class AdvicesController extends ApiController
      */
     public function index(Request $request){
         $advices = DailyAdvice::paginate();
-        return $this->successResponse($advices);
+        return $this->successResponse(new AdviceCollection($advices));
 
     }
 
     public function view(Request $request, $id){
         $advice = DailyAdvice::findOrFail($id);
-        return $this->successResponse($advice);
+        return $this->successResponse( new AdviceResource($advice));
 
     }
 
@@ -31,7 +34,7 @@ class AdvicesController extends ApiController
     function active(Request $request){
         $advice = DailyAdvice::where('status', 1)->first();
         if ($advice) {
-            return $this->successResponse($advice);
+            return $this->successResponse(new AdviceResource($advice));
         }
         else return $this->failedResponse([], __('notFoundAdvice'));
     }
@@ -40,9 +43,9 @@ class AdvicesController extends ApiController
      * @return \Illuminate\Http\JsonResponse
      */
     function all_advices(Request $request){
-        $advice = DailyAdvice::orderBy('updated_at', 'DESC')->paginate(10);
-        if ($advice) {
-            return $this->successResponse($advice);
+        $advices = DailyAdvice::orderBy('updated_at', 'DESC')->paginate(10);
+        if ($advices) {
+            return $this->successResponse(new AdviceCollection($advices));
         }
         else return $this->failedResponse([], __('notFoundAdvice'));
     }
@@ -57,7 +60,7 @@ class AdvicesController extends ApiController
         if ($advice) {
             DailyAdvice::where('id', $id)->update(['likes'=> DB ::raw('likes + 1'), ]);
             $advice->likes += 1;
-            return $this->successResponse($advice, __('likeAdviceSuccess'));
+            return $this->successResponse(new AdviceResource($advice), __('likeAdviceSuccess'));
         }
         else return $this->failedResponse([], __('notFoundAdvice'));
     }
@@ -72,7 +75,7 @@ class AdvicesController extends ApiController
         if ($advice) {
             DailyAdvice::where('id', $id)->update(['dislikes'=> DB::raw('dislikes + 1'), ]);
             $advice->dislikes += 1;
-            return $this->successResponse($advice, __('likeAdviceSuccess'));
+            return $this->successResponse(new AdviceResource($advice), __('likeAdviceSuccess'));
         }
         else return $this->failedResponse([], __('notFoundAdvice'));
     }

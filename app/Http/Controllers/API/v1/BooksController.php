@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\BookCollection;
 use App\Models\Book;
 use App\Models\BookCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\Book as BookResource;
+use App\Http\Resources\BookCategory as BookCategoryResource;
 
 if (!defined('API_PAGE_LIMITED'))
     define('API_PAGE_LIMITED', 10);
@@ -45,7 +48,7 @@ class BooksController extends ApiController
         $books->orderBy('created_at', 'DESC');
         $querystringArray = $request->only(['keyword','order','hot']);
         $data = $books->paginate(API_PAGE_LIMITED);
-        return $this->successResponse($data);
+        return $this->successResponse(new BookCollection($data));
     }
 
     /**
@@ -58,7 +61,7 @@ class BooksController extends ApiController
         if ($book && $book->status == 1) {
             Book::where('id', $id)->update(['views'=> DB::raw('views + 1'), ]);
             $book->views += 1;
-            return $this->successResponse($book);
+            return $this->successResponse(new BookResource($book));
         }
         else {
             return $this->failedResponse(null, 'Not Found');
@@ -75,7 +78,7 @@ class BooksController extends ApiController
         if ($book && $book->status == 1) {
             Book::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
             $book->likes +=1;
-            return $this->successResponse($book, __('likeBookSuccess'));
+            return $this->successResponse(new BookResource($book), __('likeBookSuccess'));
         }
         else return $this->failedResponse([], __('notFoundBook'));
     }
@@ -90,7 +93,7 @@ class BooksController extends ApiController
         if ($book && $book->status == 1) {
             Book::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
             $book->likes = $book->likes> 0 ? $book->likes-1 : 0;
-            return $this->successResponse($book, __('unLikeBookSuccess'));
+            return $this->successResponse(new BookResource($book), __('unLikeBookSuccess'));
         }
         else return $this->failedResponse([], __('notFoundBook'));
     }

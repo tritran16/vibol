@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\NewsCollection;
 use App\Models\News;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\News as NewsResource;
 
 if (!defined('API_PAGE_LIMITED'))
     define('API_PAGE_LIMITED', 10);
@@ -31,37 +33,38 @@ class NewsController extends ApiController
         }
         $news = $news->orderBy('created_at', 'desc')->paginate(API_PAGE_LIMITED);
 
-        foreach ($news as $item) {
-            $_news = [];//\stdClass::class;
-            $_news['id'] = $item->id;
-            $_news['category'] = ['id' => $item->category->id, 'name' => $item->category->translate($lang)->name];
-            $_news['thumbnail'] = $item->thumbnail;
-            $_news['title'] = $item->translate($lang)->title;
-            $_news['short_desc'] = $item->translate($lang)->short_desc;
-            $_news['status'] = $item->status;
-            $_news['is_hot'] = $item->is_hot;
-            $_news['views'] = $item->views;
-            $_news['likes'] = $item->likes;
-            //$_news['link'] = ;
-            $_news['created_at'] = $item->created_at;
-            $_news['updated_at'] = $item->updated_at;
-
-
-            $data[] = $_news;
-        }
+//        foreach ($news as $item) {
+//            $_news = [];//\stdClass::class;
+//            $_news['id'] = $item->id;
+//            $_news['category'] = ['id' => $item->category->id, 'name' => $item->category->translate($lang)->name];
+//            $_news['thumbnail'] = $item->thumbnail;
+//            $_news['title'] = $item->translate($lang)->title;
+//            $_news['short_desc'] = $item->translate($lang)->short_desc;
+//            $_news['status'] = $item->status;
+//            $_news['is_hot'] = $item->is_hot;
+//            $_news['views'] = $item->views;
+//            $_news['likes'] = $item->likes;
+//            //$_news['link'] = ;
+//            $_news['created_at'] = $item->created_at;
+//            $_news['updated_at'] = $item->updated_at;
+//
+//
+//            $data[] = $_news;
+//        }
         //return $this->successResponse($news);
         //$news->data = $data;
-        return $this->successResponse([
-            'current_page' => $news->currentPage(),
-            'data' => $data,
-            'last_page' => $news->lastPage(),
-            'next_page_url' => $news->nextPageUrl(),
-            'prev_page_url' => $news->previousPageUrl(),
-            'per_page' => $news->perPage(),
-            'total' => $news->total(),
-            "from" => $news->perPage() * ($news->currentPage() - 1) + 1,
-            "to" => $news->perPage() * ($news->currentPage() - 1) + $news->perPage(),
-        ]);
+//        return $this->successResponse([
+//            'current_page' => $news->currentPage(),
+//            'data' => $data,
+//            'last_page' => $news->lastPage(),
+//            'next_page_url' => $news->nextPageUrl(),
+//            'prev_page_url' => $news->previousPageUrl(),
+//            'per_page' => $news->perPage(),
+//            'total' => $news->total(),
+//            "from" => $news->perPage() * ($news->currentPage() - 1) + 1,
+//            "to" => $news->perPage() * ($news->currentPage() - 1) + $news->perPage(),
+//        ]);
+        return $this->successResponse(new NewsCollection($news));
     }
 
     /**
@@ -75,21 +78,8 @@ class NewsController extends ApiController
         if ($news  && $news->status == 1) {
             News::where('id', $id)->update(['views'=> DB::raw('views + 1'), ]);
            // $translate_data = $news->translate($lang);
-            $data['id'] = $news->id;
-            $data['category'] =  ['id' => $news->category_id, 'name' => $news->category->translate($lang)->name ];
-            $data['status'] =  $news->status;
-            $data['title'] =  $news->translate($lang)->title;
-            $data['short_desc'] =  $news->translate($lang)->short_desc;
-            $data['content'] =  $news->translate($lang)->content;
-            $data['image'] =  $news->image;
-            $data['thumbnail'] =  $news->thumbnail;
-            $data['author'] =  $news->author;
-            $data['source'] =  $news->source;
-            $data['created_at'] =  $news->created_at;
-            $data['views'] =  $news->views;
-            $data['likes'] =  $news->likes;
-            $data['is_hot'] = $news->is_hot;
-            return $this->successResponse($data);
+
+            return $this->successResponse(new NewsResource($news));
         }
         else {
             return $this->failedResponse(null, 'Not Found');
