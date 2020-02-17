@@ -23,6 +23,9 @@
     <div class="form-group">
         {{ Form::label('thumbnail', 'Thumbnail Image') }}
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
+        <span class="error">(Only file type : image/png or image/jpeg;)</span>
+        <br>
+        <img src="{{asset($book->thumbnail)}}" class="img-bordered" style="width: 100px">
     </div>
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
@@ -56,7 +59,7 @@
         {{ Form::label('is_hot', 'Is Hot Book') }}
         {{ Form::checkbox('is_hot', '1', request('is_hot', $book->is_hot)) }}
     </div>
-    {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.update'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news.index')}}"> Cancel</a>
     {{ Form::close() }}
 
