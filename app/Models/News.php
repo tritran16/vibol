@@ -12,7 +12,7 @@ class News extends Model
     protected $table = 'news';
     public $timestamps = true;
     protected $fillable = ['id', 'title', 'short_desc', 'image', 'category_id', 'thumbnail', 'author',
-        'content', 'source', 'status', 'published_date', 'likes', 'views', 'is_hot','created_at', 'updated_at'];
+        'content', 'source', 'status', 'likes', 'views', 'is_hot','created_at', 'updated_at'];
     protected $hidden = ['deleted_at'];
     public $translatedAttributes = ['title', 'short_desc', 'content'];
 

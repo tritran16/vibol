@@ -33,8 +33,8 @@ class NewsCollection extends ResourceCollection
         foreach ($this->collection as $item) {
             $_news['id'] = $item->id;
             $_news['category'] = ['id' => $item->category->id, 'name' => $item->category->translate($lang)->name];
-            $_news['thumbnail'] = env('APP_URL') . "/" .$item->thumbnail;
-            $_news['image'] = env('APP_URL') . "/" .$item->image;
+            $_news['thumbnail'] = url($item->thumbnail);
+            $_news['image'] = url($item->image);
             $_news['title'] = $item->translate($lang)->title;
             $_news['short_desc'] = $item->translate($lang)->short_desc;
             $_news['status'] = $item->status;

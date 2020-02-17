@@ -10,7 +10,7 @@ class Video extends Model
     use SoftDeletes;
     protected $table = 'videos';
     public $timestamps = true;
-    protected $fillable = ['id', 'title', 'thumbnail','category_id' , 'thumb', 'author', 'description', 'source', 'link', 'status',
+    protected $fillable = ['id', 'title', 'thumbnail','category_id' , 'author', 'description', 'source', 'link', 'status',
         'likes', 'views',  'is_hot', 'created_at', 'updated_at'];
 
     protected $hidden = ['deleted_at'];

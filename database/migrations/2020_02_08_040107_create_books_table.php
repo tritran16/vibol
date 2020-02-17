@@ -21,6 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('link', 1000)->nullable();
             $table->integer('page_number')->default(0);
             $table->integer('category_id');
+            $table->string('author')->nullable();
             $table->text('description')->nullable();
             $table->smallInteger('status')->default(1)->comment('1: public, 2: pending; 3: un-public');
             $table->tinyInteger('is_hot')->default(0);

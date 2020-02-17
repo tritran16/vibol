@@ -29,6 +29,10 @@
         {{ Form::select('category_id',$categories, request('category_id', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
+        {{ Form::label('author', 'Author') }}
+        {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
         {{ Form::label('description', 'Description') }}
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
     </div>

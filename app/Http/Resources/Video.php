@@ -14,6 +14,20 @@ class Video extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $data['id'] = $this->id;
+        $data['category'] =  ['id' => $this->category->id, 'name' => $this->category->name ];
+        $data['status'] =  $this->status;
+        $data['title'] =  $this->title;
+        $data['description'] =  $this->description;
+        $data['thumbnail'] =  url($this->thumbnail);
+        $data['link'] =  $this->link;
+        $data['author'] =  $this->author;
+        $data['source'] =  $this->source;
+        $data['views'] =  $this->views;
+        $data['likes'] =  $this->likes;
+        $data['is_hot'] = $this->is_hot;
+        $data['created_at'] =   $this->created_at;
+        $data['updated_at'] =  $this->updated_at;
+        return $data; //parent::toArray($request);
     }
 }

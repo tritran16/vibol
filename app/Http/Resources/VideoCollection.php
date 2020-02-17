@@ -29,8 +29,26 @@ class VideoCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+        foreach ($this->collection as $item) {
+            $video['id'] = $item->id;
+            $video['category'] = ['id' => $item->category->id, 'name' => $item->category->name];
+            $video['thumbnail'] = url($item->thumbnail);
+            $video['title'] = $item->title;
+            $video['description'] = $item->description;
+            $video['status'] = $item->status;
+            $video['link'] = $item->link;
+            $video['author'] = $item->author;
+            $video['source'] = $item->source;
+            $video['is_hot'] = $item->is_hot;
+            $video['views'] = $item->views;
+            $video['likes'] = $item->likes;
+            $video['created_at'] = $item->created_at;
+            $video['updated_at'] = $item->updated_at;
+
+            $data[] = $video;
+        }
         return [
-            'videos' => $this->collection,
+            '$videos' => $data,
             'total' => $this->pagination['total'],
             'per_page' => $this->pagination['perPage'],
             'current_page' => $this->pagination['currentPage'],
