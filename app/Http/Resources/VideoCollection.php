@@ -48,7 +48,7 @@ class VideoCollection extends ResourceCollection
             $data[] = $video;
         }
         return [
-            '$videos' => $data,
+            'videos' => $data,
             'total' => $this->pagination['total'],
             'per_page' => $this->pagination['perPage'],
             'current_page' => $this->pagination['currentPage'],
