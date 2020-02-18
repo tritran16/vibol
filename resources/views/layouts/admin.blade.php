@@ -46,7 +46,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{session()->get('locale') == 'kh'? 'lang_active': ''}}" href="{{url('admin/set_locale/kh')}}">
+                        <a class="nav-link {{session()->get('locale', 'kh') == 'kh'? 'lang_active': ''}}" href="{{url('admin/set_locale/kh')}}">
                             <img src="/images/kh.png" width="24px">
                             Khmer</a>
                     </li>
