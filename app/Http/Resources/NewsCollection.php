@@ -30,13 +30,14 @@ class NewsCollection extends ResourceCollection
     public function toArray($request)
     {
         $lang = $request->header('location','kh');
+        $data = [];
         foreach ($this->collection as $item) {
             $_news['id'] = $item->id;
-            $_news['category'] = ['id' => $item->category->id, 'name' => $item->category->translate($lang)->name];
+            $_news['category'] = ['id' => $item->category_id, 'name' => $item->category_name];
             $_news['thumbnail'] = url($item->thumbnail);
             $_news['image'] = url($item->image);
-            $_news['title'] = $item->translate($lang)->title;
-            $_news['short_desc'] = $item->translate($lang)->short_desc;
+            $_news['title'] = $item->title;
+            $_news['short_desc'] = $item->short_desc;
             $_news['status'] = $item->status;
             $_news['is_hot'] = $item->is_hot;
             $_news['views'] = $item->views;

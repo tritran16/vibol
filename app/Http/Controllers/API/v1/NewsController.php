@@ -23,16 +23,33 @@ class NewsController extends ApiController
 
         $keyword = $request->get('keyword');
         $data = [];
-        $news = News::with('category')->where('status', 1);
+        $news = DB::table('news')
+            ->select('news.id', 'news.category_id', 'news.thumbnail', 'news.image', 'news.status',
+                'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at',
+                'news_categories.id as category_id', 'news_category_translations.name as category_name',
+                'news_translations.title', 'news_translations.short_desc', 'news_translations.content'
+                )
+            ->where('news.status', 1)
+            ->join('news_categories', 'news_categories.id', '=', 'news.category_id')
+            ->join('news_translations', 'news_translations.news_id', '=', 'news.id')
+            ->join('news_category_translations', 'news_category_translations.news_category_id', '=', 'news_categories.id')
+        ;
         if ($keyword) {
-            $news = $news->where('news.name', 'LIKE', "%$keyword%");
+            $news = $news->where('news_translations.title', 'LIKE', "%$keyword%");
         }
 
         if ( $category_id = $request->get('category_id')){
-            $news = $news->where('category_id', $category_id);
+            $news = $news->where('news.category_id', $category_id);
         }
-        $news = $news->orderBy('created_at', 'desc')->paginate(API_PAGE_LIMITED);
-
+        $news = $news->where('news_translations.locale', '=', $lang);
+        $news = $news->where('news_category_translations.locale', '=', $lang);
+        $news = $news->orderBy('news.created_at', 'desc')
+            ->groupBy('news.id', 'news.category_id', 'news.thumbnail', 'news.image', 'news.status',
+                'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at',
+                'news_category_translations.name', 'news_categories.id',
+                'news_translations.title', 'news_translations.short_desc', 'news_translations.content'
+                )
+            ->paginate(API_PAGE_LIMITED);
 //        foreach ($news as $item) {
 //            $_news = [];//\stdClass::class;
 //            $_news['id'] = $item->id;
