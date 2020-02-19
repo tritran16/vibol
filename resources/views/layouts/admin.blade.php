@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +46,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{session()->get('locale', 'kh') == 'kh'? 'lang_active': ''}}" href="{{url('admin/set_locale/kh')}}">
+                        <a class="nav-link {{session()->get('locale') == 'kh'? 'lang_active': ''}}" href="{{url('admin/set_locale/kh')}}">
                             <img src="/images/kh.png" width="24px">
                             Khmer</a>
                     </li>
@@ -78,13 +78,13 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ route('admin.user.profile.view') }}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('admin.user.profile.view') }}" class="btn btn-default btn-flat"> {{ __('common.button.profile') }}</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ route('admin.logout') }}" class="btn btn-default btn-flat"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('common.button.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">

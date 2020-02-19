@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2><span>{{__('book.header')}}</span>
+                            <h2><span>{{__('book.listing.header')}}</span>
                                 <a class="btn btn-success btn-flat" href="{{ route('books.create') }}">
                                     <i class="fa fa-plus"></i> {{__('common.button.create')}}
                                 </a>
@@ -44,12 +44,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{__('book.name')}}</th>
-                            <th>{{__('book.link')}}</th>
-                            <th>{{__('book.category')}}</th>
-                            <th>{{__('book.status')}}</th>
-                            <th>{{__('book.is_hot')}}</th>
-                            <th>{{__('book.created_at')}}</th>
+                            <th>{{__('book.name.label')}}</th>
+                            <th>{{__('book.link.label')}}</th>
+                            <th>{{__('book.category.label')}}</th>
+                            <th>{{__('book.status.label')}}</th>
+                            <th>{{__('book.is_hot.label')}}</th>
+                            <th>{{__('book.created_at.label')}}</th>
                             <th></th>
                         </tr>
                         </thead>

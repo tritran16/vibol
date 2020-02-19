@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use \Illuminate\Support\Facades\Config;
 use \Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
 
 class Locale
 {
@@ -18,12 +17,10 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        $raw_locale = Session::get('locale', 'kh');
-        if (in_array($raw_locale, Config::get('app.locales'))) {
-            $locale = $raw_locale;
+        if(session()->has('locale'))
+        {
+            App::setLocale(session()->get('locale'));
         }
-        else $locale = Config::get('app.locale');
-        App::setLocale($locale);
         return $next($request);
     }
 }

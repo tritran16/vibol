@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>Create News</h1>
+<h1>{{__('news.create.header')}}</h1>
 
 <!-- if there are creation errors, they will show here -->
 
@@ -30,29 +30,29 @@
                     <div class="tab-content">
                         <div class="active tab-pane" id="khmer">
                             <div class="form-group">
-                                {{ Form::label('title_kh', 'Title (KH)') }}<span style="color: red">*</span>
+                                {{ Form::label('title_kh',  __('news.title_khmer')) }}<span style="color: red">*</span>
                                 {{ Form::text('title_kh', request('title_kh', null), array('class' => 'form-control')) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('short_desc_kh', 'Short Description(KH)') }}<span style="color: red">*</span>
+                                {{ Form::label('short_desc_kh',  __('news.short_description_khmer')) }}<span style="color: red">*</span>
                                 {{ Form::text('short_desc_kh', request('short_desc_kh', null), array('class' => 'form-control')) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('content_kh', 'Content (KH)') }}
+                                {{ Form::label('content_kh',  __('news.content_khmer')) }}
                                 {{ Form::textarea('content_kh', request('content_kh', null), array('class' => 'form-control textarea', 'id' => 'content', 'rows' => 10)) }}
                             </div>
                         </div>
                         <div class="tab-pane" id="english">
                             <div class="form-group">
-                                {{ Form::label('title_en', 'Title (EN)') }}<span style="color: red">*</span>
+                                {{ Form::label('title_en',  __('news.title_en')) }}<span style="color: red">*</span>
                                 {{ Form::text('title_en', request('title_en', null), array('class' => 'form-control')) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('short_desc_en', 'Short Description(En)') }}<span style="color: red">*</span>
+                                {{ Form::label('short_desc_en',  __('news.short_description_en')) }}<span style="color: red">*</span>
                                 {{ Form::text('short_desc_en', request('short_desc_en', null), array('class' => 'form-control')) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('content_en', 'Content (EN)') }}
+                                {{ Form::label('content_en',  __('news.content_en')) }}
                                 {{ Form::textarea('content_en', request('content_en', null), array('class' => 'form-control textarea', 'id' => 'content', 'rows' => 10)) }}
                             </div>
                         </div>
@@ -62,32 +62,32 @@
         </div>
     </div>
     <div class="form-group">
-        {{ Form::label('thumbnail', 'Thumbnail Image') }}
+        {{ Form::label('thumbnail',  __('news.thumbnail')) }}
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
     </div>
 
     <div class="form-group">
-        {{ Form::label('image', 'Image') }}
+        {{ Form::label('image',  __('news.image')) }}
         {!! Form::file('image', ['accept' => "image/png, image/jpg, image/jpeg"]) !!}
     </div>
     <div class="form-group">
-        {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
+        {{ Form::label('category_id',  __('news.category.name')) }} <span style="color: red">*</span>
         {{ Form::select('category_id',$categories, request('category_id', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('author', 'Author') }}
+        {{ Form::label('author',  __('news.author')) }}
         {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('status', 'Status') }}
+        {{ Form::label('status',  __('news.status')) }}
         {{ Form::select('status', [ 1 => 'Publish', 2 => 'Un-Publish'], request('status', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('is_hot', 'Is Hot News') }}
+        {{ Form::label('is_hot', __('news.is_hot_news')) }}
         {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
     </div>
-    {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
-    <a class="btn btn-default" href="{{route('news.index')}}"> Cancel</a>
+    {{ Form::submit( __('common.button.create'), array('class' => 'btn btn-primary')) }}
+    <a class="btn btn-default" href="{{route('news.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 
 @endsection

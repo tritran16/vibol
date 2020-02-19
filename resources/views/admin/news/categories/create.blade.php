@@ -52,8 +52,8 @@
             </div>
         </div>
 
-    {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
-    <a class="btn btn-default" href="{{route('news_categories.index')}}"> Cancel</a>
+    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
+    <a class="btn btn-default" href="{{route('news_categories.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 
 @endsection

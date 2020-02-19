@@ -24,11 +24,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
-                            <th>Source</th>
-                            <th>Status</th>
-                            <th>Is Hot</th>
-                            <th>Created At</th>
+                            <th>{{__('video.title.label')}}</th>
+                            <th>{{__('video.source.label')}}</th>
+                            <th>{{__('video.status.label')}}</th>
+                            <th>{{__('video.is_hot.label')}}</th>
+                            <th>{{__('video.create_at.label')}}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -66,7 +66,7 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['videos.destroy', $item->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this videos?')">
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm({{__('video.confirm.delete.msg')}})">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}

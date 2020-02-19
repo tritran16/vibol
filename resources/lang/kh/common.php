@@ -14,12 +14,22 @@ return [
     'button.delete' => 'Delete (KH)',
     'button.edit' => 'Edit (KH)',
     'button.publish' => 'Publish (KH)',
-    'menu.advices' => 'Advices',
+    'menu.advices' => 'Today Advice',
     'menu.books' => 'Books (KH)',
     'menu.books.categories' => 'Book Categories(KH)',
+    'menu.books.list_book' => 'Books(KH)',
     'menu.videos' => 'Videos (KH)',
     'menu.videos.categories' => 'Video Categories (KH)',
+    'menu.videos.list_video' => 'Videos(KH)',
     'menu.news' => 'News (KH)',
     'menu.news.categories' => 'News Categories (KH)',
+    'menu.news.list_news' => 'News(KH)',
+    'menu.users' => 'Users (KH)',
+    'menu.users.roles' => 'Roles User (KH)',
+    'menu.users.list_user' => 'Users (KH)',
+
+    'button.login' => 'Login (KH)',
+    'button.logout' => 'Logout (KH)',
+    'button.profile' => 'Profile (KH)'
 
 ];

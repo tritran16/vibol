@@ -1,15 +1,20 @@
 <?php
 
 return [
-    'news.title' => 'News Title',
-    'news.short_description' => 'Short Description',
-    'news.content' => 'Content',
-    'news.image' => 'Image',
-    'news.thumbnail' => 'Thumbnail',
-    'news.created_at' => 'Created At',
-    'news.updated_at' => 'Updated At',
-    'news.status' => 'Status',
-    'news.category.name' => 'Category Name',
-    'news.is_hot_news' => 'Is Hot News',
-    'news.author' => 'Author'
+    'title_en' => 'Title(English)',
+    'title_khmer' => 'Title(Khmer)',
+    'short_description_khmer' => 'Short Description(Khmer)',
+    'short_description_en' => 'Short Description(English)',
+    'content_khmer' => 'Content(Khmer)',
+    'content_en' => 'Content',
+    'image' => 'Image',
+    'thumbnail' => 'Thumbnail',
+    'created_at' => 'Created At',
+    'updated_at' => 'Updated At',
+    'status' => 'Status',
+    'author' => 'Author',
+    'category.name' => 'Category Name',
+    'is_hot_news' => 'Is Hot News',
+    'news.author' => 'Author',
+    'create.header' => 'Create News (EN)'
 ];

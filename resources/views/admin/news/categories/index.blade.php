@@ -8,12 +8,12 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>News Categories</h2>
+                            <h2>{{__('common.menu.news.categories')}}</h2>
                         </div>
                         <div class="pull-right">
 
                             <a class="btn btn-success btn-flat" href="{{ route('news_categories.create') }}">
-                                <i class="fa fa-plus"></i> Create
+                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
                             </a>
                         </div>
                     </div>
@@ -37,11 +37,11 @@
                                 <td>{{ $category->translate('kh')->name . ' - ' . $category->translate('en')->name }}</td>
 
                                 <td>
-                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('news_categories.edit', $category->id) }}">
+                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('news_categories.edit', $category->id) }}" title="edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['news_categories.destroy', $category->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this Category?')">
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm({{__('common.msg.confirm.delete')}})" title="delete" >
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}

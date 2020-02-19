@@ -19,7 +19,7 @@ class Video extends JsonResource
         $data['status'] =  $this->status;
         $data['title'] =  $this->title;
         $data['description'] =  $this->description;
-        $data['thumbnail'] =  url($this->thumbnail);
+        $data['thumbnail'] =  $this->thumbnail?url($this->thumbnail):null;
         $data['link'] =  $this->link;
         $data['author'] =  $this->author;
         $data['source'] =  $this->source;
