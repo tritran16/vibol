@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>{{__('video.category.header')}}</h1>
+<h1>{{__('video.category.create.header')}}</h1>
 
 <!-- if there are creation errors, they will show here -->
 
@@ -16,7 +16,7 @@
 @endif
 {{ Form::open(array('action' => ['Admin\VideoCategoriesController@store'], 'method' => 'POST')) }}
     <div class="form-group">
-        {{ Form::label('name',{{__('video.category.name')}}) }}<span style="color: red">*</span>
+        {{ Form::label('name',__('video.category.name')) }}<span style="color: red">*</span>
         {{ Form::text('name', request('name', null), array('class' => 'form-control')) }}
     </div>
 

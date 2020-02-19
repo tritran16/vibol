@@ -8,12 +8,12 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>Advices</h2>
+                            <h2>{{__('advice.header')}}</h2>
                         </div>
                         <div class="pull-right">
 
                             <a class="btn btn-success btn-flat" href="{{ route('daily_advices.create') }}">
-                                <i class="fa fa-plus"></i> Create
+                                <i class="fa fa-plus"></i> {{__('advice.create.button')}}
                             </a>
                         </div>
                     </div>
@@ -24,11 +24,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Advice</th>
-                            <th>Image</th>
-                            <th>Author</th>
-                            <th>Status</th>
-                            <th>Updated </th>
+                            <th>{{__('advice.advice')}}</th>
+                            <th>{{__('advice.image')}}</th>
+                            <th>{{__('advice.author')}}</th>
+                            <th>{{__('advice.status')}}</th>
+                            <th>{{__('advice.created_at')}} </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,7 +48,7 @@
                         @else
                             <tr>
                                 <td colspan="6">
-                                    <span class="center-block">No Advice Today</span>
+                                    <span class="center-block">{{__('advice.no_advice_today')}}</span>
                                 </td>
                             </tr>
                         @endif

@@ -16,8 +16,6 @@
 
                         </div>
                         <div class="pull-right">
-
-
                             {!! Form::open(['method' => 'GET', 'url' => '/admin/books', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
                                 <div class="input-group">
 

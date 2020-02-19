@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>Create Advice</h1>
+<h1>{{__('advice.create.header')}}</h1>
 
 <!-- if there are creation errors, they will show here -->
 
@@ -17,16 +17,16 @@
 {{ Form::open(array('action' => ['Admin\DailyAdvicesController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data')) }}
     <input type="hidden" name="token" value="{{ csrf_token() }}" />
     <div class="form-group">
-        {{ Form::label('author', 'Author') }}
+        {{ Form::label('author', __('advice.author')) }}
         {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">
-        {{ Form::label('advice', 'Advice') }}
+        {{ Form::label('advice', __('advice.advice')) }}
         {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('image', 'Image') }}
+        {{ Form::label('image', __('advice.image')) }}
         {{ Form::file('image', ['id' => 'img', 'accept' => "image/png, image/jpeg;"]) }}
         <span class="error">(Only file type : image/png or image/jpeg;)</span>
 
@@ -84,16 +84,16 @@
     });
 </script>
     <div class="form-group">
-        {{ Form::label('text_position', 'Text Position') }}
+        {{ Form::label('text_position', __('advice.text_position')) }}
         {{ Form::select('text_position', [1 => 'Top', 2 => 'Middle', 3 => 'Bottom'], request('text_position', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
         {{ Form::label('status', 'Status') }}
-        {{ Form::select('status', [0 => 'New', 1 => 'Active'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('status', [0 =>  __('advice.status.new'), 1 =>  __('advice.status.active')], request('status', null), array('class' => 'form-control')) }}
     </div>
 
-    {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
-    <a class="btn btn-default" href="{{route('daily_advices.index')}}"> Cancel</a>
+    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
+    <a class="btn btn-default" href="{{route('daily_advices.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 
 @endsection

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'list' => 'News Listing',
+    'title' => 'Title',
     'title_en' => 'Title(English)',
     'title_khmer' => 'Title(Khmer)',
     'short_description_khmer' => 'Short Description(Khmer)',

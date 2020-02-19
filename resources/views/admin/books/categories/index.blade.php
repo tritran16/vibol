@@ -8,12 +8,12 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>Book Categories</h2>
+                            <h2>{{__('book.category.list')}}</h2>
                         </div>
                         <div class="pull-right">
 
                             <a class="btn btn-success btn-flat" href="{{ route('book_categories.create') }}">
-                                <i class="fa fa-plus"></i> Create
+                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
                             </a>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
+                            <th>{{__('book.category.name')}}</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -85,7 +85,7 @@ class NewsController extends Controller
             ],
         ];
         $news = News::create(array_merge($request->only('title', 'short_desc', 'category_id', 'author',
-            'content', 'source', 'status', 'published_date'), $data));
+            'content', 'source', 'status', 'published_date', 'is_hot'), $data));
 
         if ($request->file('image')){
             $image = $request->file('image');
@@ -151,7 +151,7 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         if ($news) {
             $news->update($request->only([
-                'category_id', 'image', 'thumbnail', 'published_date', 'author', 'status'
+                'category_id', 'image', 'thumbnail', 'published_date', 'author', 'status', 'is_hot'
             ]));
 
             $data = [

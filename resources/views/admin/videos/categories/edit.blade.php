@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1> {{__('video.category.edit.header')}}</h1>
+<h1> {{__('video.category.update.header')}}</h1>
 
 <!-- if there are creation errors, they will show here -->
 @if ($errors->any())
@@ -16,7 +16,7 @@
 {{ Form::model($video_category, array('route' => array('video_categories.update', $video_category->id), 'method' => 'PUT')) }}
 
     <div class="form-group">
-        {{ Form::label('name',  __('video.name.label')) }}<span style="color: red">*</span>
+        {{ Form::label('name',  __('video.category.name')) }}<span style="color: red">*</span>
         {{ Form::text('name', request('name', $video_category->author), array('class' => 'form-control')) }}
     </div>
 

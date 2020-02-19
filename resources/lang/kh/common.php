@@ -14,7 +14,7 @@ return [
     'button.delete' => 'Delete (KH)',
     'button.edit' => 'Edit (KH)',
     'button.publish' => 'Publish (KH)',
-    'menu.advices' => 'Today Advice',
+    'menu.advices' => 'Advice (KH)',
     'menu.books' => 'Books (KH)',
     'menu.books.categories' => 'Book Categories(KH)',
     'menu.books.list_book' => 'Books(KH)',

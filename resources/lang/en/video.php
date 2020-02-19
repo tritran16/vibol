@@ -20,6 +20,11 @@ return [
     'confirm.delete.msg' =>  'Do you want to delete this item?',
 
     'category.listing.header' => 'Video Category',
-    'category.name.label' => 'Category '
+    'category.name.label' => 'Category ',
+    'category.list' => 'Video Categories',
+    'category.name' => 'Category Name',
+    'category.description' => 'Description',
+    'category.create.header' => 'Create Video Category',
+    'category.update.header' => 'Edit Video Category',
 
 ];

@@ -12,7 +12,7 @@ return [
     'button.delete' => 'Delete',
     'button.edit' => 'Edit',
     'button.publish' => 'Publish',
-    'menu.advices' => 'Today Advice',
+    'menu.advices' => 'Advices',
     'menu.daily_advice' => 'Daily Advice',
     'menu.books' => 'Books',
     'menu.books.categories' => 'Book Categories',

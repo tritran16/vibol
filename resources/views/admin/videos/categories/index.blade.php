@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>{{__('video.category.listing.header')}}</h2>
+                            <h2>{{__('video.category.list')}}</h2>
                         </div>
                         <div class="pull-right">
 
@@ -24,7 +24,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{__('video.category.name.label')}}</th>
+                            <th>{{__('video.category.name')}}</th>
                         </tr>
                         </thead>
                         <tbody>

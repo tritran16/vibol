@@ -8,12 +8,12 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>Videos</h2>
+                            <h2>{{__('video.header')}}</h2>
                         </div>
                         <div class="pull-right">
 
                             <a class="btn btn-success btn-flat" href="{{ route('videos.create') }}">
-                                <i class="fa fa-plus"></i> Create
+                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
                             </a>
                         </div>
                     </div>

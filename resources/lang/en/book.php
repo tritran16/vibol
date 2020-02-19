@@ -15,4 +15,9 @@ return [
     'description.label' => 'Description',
     'pdf_file.label' => 'PDF File',
     'categories.select'=> 'Select Category',
+    'category.list' => 'Book Categories',
+    'category.name' => 'Category Name',
+    'category.description' => 'Description(KH)',
+    'category.create.header' => 'Create Book Category(KH)',
+    'category.update.header' => 'Edit Book Category(KH)',
 ];

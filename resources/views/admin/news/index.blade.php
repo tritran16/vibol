@@ -8,12 +8,12 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>News</h2>
+                            <h2>{{__('news.list')}}</h2>
                         </div>
                         <div class="pull-right">
 
                             <a class="btn btn-success btn-flat" href="{{ route('news.create') }}">
-                                <i class="fa fa-plus"></i> Create
+                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
                             </a>
                         </div>
                     </div>
@@ -24,11 +24,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Status</th>
-                            <th>Is Hot</th>
-                            <th>Created At</th>
+                            <th>{{__('news.title')}}</th>
+                            <th>{{__('news.category.name')}}</th>
+                            <th>{{__('news.status')}}</th>
+                            <th>{{__('news.is_hot_news')}}</th>
+                            <th>{{__('news.created_at')}}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -53,6 +53,8 @@
                                 <td>
                                     @if ($item->is_hot)
                                         <label class="label label-danger">Hot</label>
+                                    @else
+                                        <label class="label label-primary">No</label>
                                     @endif
                                 </td>
                                 <td>{{ $item->created_at }}</td>
@@ -62,11 +64,11 @@
                                             <i class="fa fa-check"></i>
                                         </a>
                                     @endif
-                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('news.edit', $item->id) }}">
+                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('news.edit', $item->id) }}" title="edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['news.destroy', $item->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this News?')">
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this News?')" title="delete">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}
