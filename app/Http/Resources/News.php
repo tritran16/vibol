@@ -24,8 +24,8 @@ class News extends JsonResource
         $data['title'] =  $this->translate($lang)->title;
         $data['short_desc'] =  $this->translate($lang)->short_desc;
         $data['content'] =  $this->translate($lang)->content;
-        $data['image'] =  $this->image?url($this->image):null;
-        $data['thumbnail'] =  $this->thumbnail?url($this->thumbnail):null;
+        $data['image'] =  isset($this->image)?url($this->image):null;
+        $data['thumbnail'] =  isset($this->thumbnail)?url($this->thumbnail):null;
         $data['author'] =  $this->author;
         $data['source'] =  $this->source;
         $data['created_at'] =  $this->created_at;

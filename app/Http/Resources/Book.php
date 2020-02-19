@@ -22,7 +22,7 @@ class Book extends JsonResource
         $data['status'] =  $this->status;
         $data['name'] =  $this->name;
         $data['description'] =  $this->description;
-        $data['thumbnail'] =  $this->thumbnail?url($this->thumbnail):null;
+        $data['thumbnail'] =  isset($this->thumbnail)?url($this->thumbnail):null;
         $data['link'] =  $this->link;
         $data['page_number'] =  $this->page_number;
         $data['author'] =  $this->author;
