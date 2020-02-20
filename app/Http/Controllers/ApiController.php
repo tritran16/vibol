@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller
 {
+
     /**
      *
      * Function return successful
