@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class NotificationsController extends Controller
@@ -115,28 +116,28 @@ class NotificationsController extends Controller
 
             $push = new PushNotification('apn');
             $push->setConfig([
-                'certificate' => storage_path("app/iosCertificates/ios_dev.p12"),//Storage::disk('iosCertificates')->get("ios_dev.p12"),
+                //'certificate' => storage_path("app/iosCertificates/ios_dev.pem"),//Storage::disk('iosCertificates')->get("ios_dev.p12"),
                 'passPhrase' => '1',
                 'dry_run' => true,
             ]);
             $devices = Device::select('device_token')->where('type', 1)->get();
-            $ios_device_tokens = [];
+            $ios_device_tokens = ['71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'];
             foreach ($devices as $device) {
-                $ios_device_tokens[] =  $device->device_token;
+                //$ios_device_tokens[] =  $device->device_token;
             }
 
             if (count($ios_device_tokens)) {
                 $push->setDevicesToken($ios_device_tokens);
                 $push->setMessage([
                     'data' => [
-                        'title' => $title,
-                        'body' => $body,
-                        'image' => $image,
-                        'item_id' => $item_id,
-                        'date' => Carbon::now()
+                        'title' => "test title",
+                        'body' => "tttttttttttt test"
                     ]
                 ]);
                 $push->send();
+                dd($push->getFeedback());
+
+                Log::info('send success' . json_encode($ios_device_tokens));
             }
             return redirect(route('admin.notification.index'))->with('success', 'Created Notification successfully!');//
         }

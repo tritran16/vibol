@@ -15,9 +15,9 @@ return [
         'apiKey' => 'My_ApiKey',
     ],
     'apn' => [
-        'certificate' => __DIR__ . '/iosCertificates/apns-dev-cert.pem',
-        'passPhrase' => 'pass', //Optional
-        'passFile' => __DIR__ . '/iosCertificates/yourKey.pem', //Optional
-        'dry_run' => true,
+        'certificate' => storage_path("app/iosCertificates/cert_ios_dev.pem"),
+        'passPhrase' => '1', //Optional
+        //'passFile' => __DIR__ . '/iosCertificates/yourKey.pem', //Optional
+        'dry_run' => false,
     ],
 ];
