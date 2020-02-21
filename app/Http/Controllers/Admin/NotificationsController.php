@@ -124,6 +124,7 @@ class NotificationsController extends Controller
             foreach ($devices as $device) {
                 $ios_device_tokens[] =  $device->device_token;
             }
+
             if (count($ios_device_tokens)) {
                 $push->setDevicesToken($ios_device_tokens);
                 $push->setMessage([
@@ -135,6 +136,7 @@ class NotificationsController extends Controller
                         'date' => Carbon::now()
                     ]
                 ]);
+                $push->send();
             }
             return redirect(route('admin.notification.index'))->with('success', 'Created Notification successfully!');//
         }
