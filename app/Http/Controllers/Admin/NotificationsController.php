@@ -115,7 +115,7 @@ class NotificationsController extends Controller
 
             $push = new PushNotification('apn');
             $push->setConfig([
-                'certificate' => storage_path("iosCertificates/ios_dev.p12"),//Storage::disk('iosCertificates')->get("ios_dev.p12"),
+                'certificate' => storage_path("app/iosCertificates/ios_dev.p12"),//Storage::disk('iosCertificates')->get("ios_dev.p12"),
                 'passPhrase' => '1',
                 'dry_run' => true,
             ]);
