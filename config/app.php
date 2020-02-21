@@ -182,6 +182,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Edujugon\PushNotification\Providers\PushNotificationServiceProvider::class
 
+
     ],
 
     /*

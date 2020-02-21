@@ -19,7 +19,12 @@ class News extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(){
+    public function category() {
         return $this->belongsTo('App\Models\NewsCategory');
+    }
+
+    public function notifications()
+    {
+        return $this->morphToMany('App\Models\Notification', 'notification');
     }
 }

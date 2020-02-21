@@ -21,4 +21,9 @@ class Video extends Model
     public function category(){
         return $this->belongsTo('App\Models\VideoCategory');
     }
+
+    public function notifications()
+    {
+        return $this->morphToMany('App\Models\Notification', 'notification');
+    }
 }

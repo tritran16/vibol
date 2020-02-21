@@ -13,4 +13,10 @@ class DailyAdvice extends Model
 
     protected $fillable = ['author', 'advice', 'content', 'image' ,'text_position', 'status', 'likes', 'dislikes'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
+
+    public function notifications()
+    {
+        return $this->morphToMany('App\Notification', 'notification');
+    }
 }
