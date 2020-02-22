@@ -13,7 +13,7 @@ use App\Models\VideoCategory;
 use App\Repositories\NotificationRepository;
 use App\Repositories\VideoCategoryRepository;
 use Carbon\Carbon;
-use Edujugon\PushNotification\PushNotification;
+use Davibennun\LaravelPushNotification\Facades\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -114,31 +114,42 @@ class NotificationsController extends Controller
                 Notification::create(['title' => $title, 'body' => $body, 'notification_type' => 'App\Models\Book', 'notification_id' => $item_id]);
             }
 
-            $push = new PushNotification('apn');
-            $push->setConfig([
-                //'certificate' => storage_path("app/iosCertificates/ios_dev.pem"),//Storage::disk('iosCertificates')->get("ios_dev.p12"),
-                'passPhrase' => '1',
-                'dry_run' => true,
-            ]);
+
             $devices = Device::select('device_token')->where('type', 1)->get();
-            $ios_device_tokens = ['71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'];
-            foreach ($devices as $device) {
-                //$ios_device_tokens[] =  $device->device_token;
-            }
+            $ios_device_tokens = ['71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef', '71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef123456789'];
 
-            if (count($ios_device_tokens)) {
-                $push->setDevicesToken($ios_device_tokens);
-                $push->setMessage([
-                    'data' => [
-                        'title' => "test title",
-                        'body' => "tttttttttttt test"
-                    ]
-                ]);
-                $push->send();
-                dd($push->getFeedback());
+            $devices = PushNotification::DeviceCollection(array(
+                PushNotification::Device('71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'),
+            ));
 
-                Log::info('send success' . json_encode($ios_device_tokens));
+            $message = PushNotification::Message( $title,array(
+                'badge' => 1,
+
+//                'actionLocKey' => 'Action button title!',
+//                'locKey' => 'localized key',
+//                'locArgs' => array(
+//                    'localized args',
+//                    'localized args',
+//                ),
+
+                'custom' => array('data' => array(
+                    'item_type' => $type, 'item_id' => $item_id, 'created_at' => Carbon::now()
+                ))
+            ));
+            $push = new \Davibennun\LaravelPushNotification\PushNotification();
+            $collection = $push->app('appNameIOS')
+                ->to($devices)
+                ->send($message);
+            dd($collection->pushManager);
+            // get response for each device push
+            foreach ($collection->pushManager as $push) {
+                $response = $push->getResponse();
+
             }
+// access to adapter for advanced settings
+            //$push = PushNotification::app('appNameAndroid');
+            //$push->adapter->setAdapterParameters(['sslverifypeer' => false]);
+
             return redirect(route('admin.notification.index'))->with('success', 'Created Notification successfully!');//
         }
 

@@ -180,8 +180,10 @@ return [
 
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Edujugon\PushNotification\Providers\PushNotificationServiceProvider::class
+        //Edujugon\PushNotification\Providers\PushNotificationServiceProvider::class
+        //MedDev\PushNotification\PushNotificationProvider::class,
 
+        'Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider',
 
     ],
 
@@ -238,7 +240,8 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'PushNotification' => Edujugon\PushNotification\Facades\PushNotification::class,
+        //'PushNotification' => Edujugon\PushNotification\Facades\PushNotification::class,
+        'PushNotification' => 'Davibennun\LaravelPushNotification\Facades\PushNotification'
 
     ],
 
