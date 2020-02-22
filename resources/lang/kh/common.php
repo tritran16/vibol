@@ -27,7 +27,7 @@ return [
     'menu.users' => 'Users (KH)',
     'menu.users.roles' => 'Roles User (KH)',
     'menu.users.list_user' => 'Users (KH)',
-
+    'menu.notifications' => 'Notifications(KH)',
     'button.login' => 'Login (KH)',
     'button.logout' => 'Logout (KH)',
     'button.profile' => 'Profile (KH)'

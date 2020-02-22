@@ -116,11 +116,13 @@ class NotificationsController extends Controller
 
 
             $devices = Device::select('device_token')->where('type', 1)->get();
-            $ios_device_tokens = ['71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef', '71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef123456789'];
+            foreach ($devices as $device){
+                //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
+                $ios_device_tokens[] = PushNotification::Device($device->device_token);
 
-            $devices = PushNotification::DeviceCollection(array(
-                PushNotification::Device('71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'),
-            ));
+            }
+
+            $devices = PushNotification::DeviceCollection($ios_device_tokens);
 
             $message = PushNotification::Message( $title,array(
                 'badge' => 1,
@@ -133,6 +135,7 @@ class NotificationsController extends Controller
 //                ),
 
                 'custom' => array('data' => array(
+                    'title' => $title, 'body' => $body,
                     'item_type' => $type, 'item_id' => $item_id, 'created_at' => Carbon::now()
                 ))
             ));
