@@ -119,20 +119,23 @@ class NotificationsController extends Controller
             $ios = Device::select('device_token')->where('type', 1)->groupBy('device_token')->get();
             $ios_device_tokens = ['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
             //$ios_push_model = new Push('appNameIOS');
-            foreach ($ios as $device){
+            $i = 0;
+            foreach ($ios as $device) {
+                $i++;
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
                 //if ($ios_push_model->getAdapter()->supports($device->device_token))
-                    $ios_device_tokens[] = PushNotification::Device($device->device_token);
+                    $ios_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => $i]);
 
             }
 
             $androids = Device::select('device_token')->where('type', 2)->groupBy('device_token')->get();
             $android_device_tokens = [];
-
+            $j = 0;
             foreach ($androids as $device){
+                $j++;
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
                 //if ($push_model->getAdapter()->supports($device->device_token))
-                    $android_device_tokens[] = PushNotification::Device($device->device_token);
+                    $android_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => $j]);
 
             }
 
