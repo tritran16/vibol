@@ -75,8 +75,10 @@ class NotificationsController extends Controller
         $title = $request->get('title');
         $image = url('images/no-image.png');
         $body = $request->get('body');
+        $sType = 'advice';
         if ($item_id) {
             if ($type == 2) {
+                $sType = 'news';
 //                $news = DB:: table('news')
 //                    ->select('news.id', 'news_translations.title', 'news_translations.short_desc')
 //                    ->leftJoin('news_translations', 'news_translations.news_id', '=', 'news.id')
@@ -95,6 +97,7 @@ class NotificationsController extends Controller
 
             }
             elseif ($type == 3) {
+                $sType = 'video';
                 $video = Video::find($item_id);
                 $image = url($video->thumbnail);
                 $notification = new Notification();
@@ -105,6 +108,7 @@ class NotificationsController extends Controller
                 $notification = Notification::create(['title' => $title, 'body' => $body, 'notification_type' => 'App\Models\Video', 'notification_id' => $item_id]);
             }
             elseif ($type == 4) {
+                $sType = 'book';
                 $book = Book::find($item_id);
                 $image = url($book->thumbnail);
                 $notification = new Notification();
@@ -143,16 +147,10 @@ class NotificationsController extends Controller
             $notification_id = isset($notification)?$notification->id: time();
             $message = PushNotification::Message( $title,array(
                 'badge' => 1,
-
-//                'actionLocKey' => 'Action button title!',
-//                'locKey' => 'localized key',
-//                'locArgs' => array(
-//                    'localized args',
-//                    'localized args',
-//                ),
                 'custom' => array($notification_id => array(
-                    'title' => "Push Notification Title", 'description' => "Push notification description",
-                    'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
+                    'title' => $title, 'description' => $body,
+                    'image' => $image,
+                    'item_type' => $sType, 'item_id' => $item_id, 'created_at' => Carbon::now()->format("d/m/Y")
                 ))
             ));
             $push = new \Davibennun\LaravelPushNotification\PushNotification();
@@ -171,7 +169,8 @@ class NotificationsController extends Controller
                 Log::info(json_encode($android_devices));
                 $collection = $push->app('appNameAndroid')
                     ->to($android_devices)
-                    ->send($message);
+                    ->send($message)
+                ;
             }
         catch (\Exception $ex) {
             Log::info($ex->getMessage());
@@ -210,9 +209,29 @@ class NotificationsController extends Controller
         return view('admin.notifications.ajax_load_items')->with('items', $items)->with('type', $type);
     }
 
+    public function ajaxLoadContentNotification(Request $request, $id, $type = 2) {
+        switch ($type) {
+            case 2:
+                $news = News::find($id);
+                return json_encode(['title' => $news->title, 'content' => $news->short_desc]);
+                break;
+            case 3:
+                $video = Video::find($id);
+                return json_encode(['title' => $video->title, 'content' => $video->description]);
+                break;
+            case 4:
+                $book = Book::find($id);
+                return json_encode(['title' => $book->name, 'content' => $book->description]);
+                break;
+        }
+        return null;
+
+    }
+
     public function test(){
         $ios_device_tokens = [];//['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
         $ios_device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4');
+        $ios_device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf3');
         $push = new \Davibennun\LaravelPushNotification\PushNotification();
 
         $message = PushNotification::Message( "Test Message from Tri",array(

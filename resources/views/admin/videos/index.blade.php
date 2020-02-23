@@ -24,11 +24,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{__('video.title.label')}}</th>
-                            <th>{{__('video.source.label')}}</th>
-                            <th>{{__('video.status.label')}}</th>
-                            <th>{{__('video.is_hot.label')}}</th>
-                            <th>{{__('video.create_at.label')}}</th>
+                            <th>{{__('video.title')}}</th>
+                            <th>{{__('video.source')}}</th>
+                            <th>{{__('video.status')}}</th>
+                            <th>{{__('video.is_hot')}}</th>
+                            <th>{{__('video.create_at')}}</th>
                             <th></th>
                         </tr>
                         </thead>

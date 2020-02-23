@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class VideoCollection extends ResourceCollection
@@ -44,8 +45,8 @@ class VideoCollection extends ResourceCollection
                 $video['is_hot'] = $item->is_hot;
                 $video['views'] = $item->views;
                 $video['likes'] = $item->likes;
-                $video['created_at'] = $item->created_at;
-                $video['updated_at'] = $item->updated_at;
+                $video['created_at'] =  Carbon::parse($this->created_at)->format('d/m/Y');
+                $video['updated_at'] =  Carbon::parse($this->updated_at)->format('d/m/Y');
 
                 $data[] = $video;
             }

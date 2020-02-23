@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class News extends JsonResource
@@ -28,7 +29,8 @@ class News extends JsonResource
         $data['thumbnail'] =  isset($this->thumbnail)?url($this->thumbnail):null;
         $data['author'] =  $this->author;
         $data['source'] =  $this->source;
-        $data['created_at'] =  $this->created_at;
+        $data['created_at'] =  Carbon::parse($this->created_at)->format('d/m/Y');
+        $data['updated_at'] =  Carbon::parse($this->updated_at)->format('d/m/Y');
         $data['views'] =  $this->views;
         $data['likes'] =  $this->likes;
         $data['is_hot'] = $this->is_hot;

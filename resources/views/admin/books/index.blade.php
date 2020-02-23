@@ -42,12 +42,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{__('book.name.label')}}</th>
-                            <th>{{__('book.link.label')}}</th>
-                            <th>{{__('book.category.label')}}</th>
-                            <th>{{__('book.status.label')}}</th>
-                            <th>{{__('book.is_hot.label')}}</th>
-                            <th>{{__('book.created_at.label')}}</th>
+                            <th>{{__('book.name')}}</th>
+                            <th>{{__('book.link')}}</th>
+                            <th>{{__('book.category')}}</th>
+                            <th>{{__('book.status')}}</th>
+                            <th>{{__('book.is_hot')}}</th>
+                            <th>{{__('book.created_at')}}</th>
                             <th></th>
                         </tr>
                         </thead>

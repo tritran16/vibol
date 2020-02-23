@@ -23,7 +23,7 @@
 
     <div class="form-group" id="items">
         {{ Form::label('notification_id',  __('notification.item')) }} <span style="color: red">*</span>
-        <select class="form-control" id="items" name="notification_id">
+        <select class="form-control" id="item_id" name="notification_id" onchange="loadContent()">
             <option value="">Select News</option>
             @foreach($news as $n)
                 <option value="{{$n->id}}">{{$n->title}}</option>
@@ -33,12 +33,12 @@
 
     <div class="form-group">
         {{ Form::label('title', __('notification.title')) }}<span style="color: red">*</span>
-        {{ Form::text('title', request('title', null), array('class' => 'form-control')) }}
+        {{ Form::text('title', request('title', null), array('class' => 'form-control', 'id' => 'title')) }}
     </div>
 
     <div class="form-group">
         {{ Form::label('body', __('notification.body')) }}
-        {{ Form::textarea('body', request('body', null), array('class' => 'form-control')) }}
+        {{ Form::textarea('body', request('body', null), array('class' => 'form-control', 'id' => 'content')) }}
     </div>
 
     {{ Form::submit(__('notification.create.button'), array('class' => 'btn btn-primary')) }}
@@ -58,10 +58,16 @@
             });
         });
 
-        // $('#items').change(function () {
-        //     alert($('#items').val());
-        // });
-
-
+        function loadContent() {
+            $.ajax({
+                url: "<?php echo url('admin/notifications/load_content') ?>/" + $('#item_id').val() + "/" + + $('#type').val(),
+                method: 'GET',
+                success : function(data) {
+                    var jdata = $.parseJSON(data);
+                    $('#title').val(jdata.title);
+                    $('#content').val(jdata.content);
+                }
+            });
+        }
     </script>
 @endpush

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class NewsCollection extends ResourceCollection
@@ -42,8 +43,8 @@ class NewsCollection extends ResourceCollection
             $_news['is_hot'] = $item->is_hot;
             $_news['views'] = $item->views;
             $_news['likes'] = $item->likes;
-            $_news['created_at'] = $item->created_at;
-            $_news['updated_at'] = $item->updated_at;
+            $_news['created_at'] = Carbon::parse($this->created_at)->format('d/m/Y');
+            $_news['updated_at'] =  Carbon::parse($this->updated_at)->format('d/m/Y');
 
             $data[] = $_news;
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Book extends JsonResource
@@ -30,8 +31,8 @@ class Book extends JsonResource
         $data['views'] =  $this->views;
         $data['likes'] =  $this->likes;
         $data['is_hot'] = $this->is_hot;
-        $data['created_at'] =  $this->created_at;
-        $data['updated_at'] =  $this->updated_at;
+        $data['created_at'] =  Carbon::parse($this->created_at)->format('d/m/Y');
+        $data['updated_at'] =  Carbon::parse($this->updated_at)->format('d/m/Y');
         $data['is_like'] = isset($this->is_like)?$this->is_like:0;
         return  $data;
         //return parent::toArray($request);
