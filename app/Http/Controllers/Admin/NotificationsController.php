@@ -135,7 +135,7 @@ class NotificationsController extends Controller
                     $android_device_tokens[] = PushNotification::Device($device->device_token);
 
             }
-
+            dd($android_device_tokens);
             $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
             $android_devices = PushNotification::DeviceCollection($android_device_tokens);
            dd($ios_devices);
