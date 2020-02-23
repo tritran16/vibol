@@ -90,7 +90,7 @@ class NotificationsController extends Controller
                 $notification->title = $title;
                 $notification->body = $body;
                 $notification->notification_type = 'App\Models\News';
-                Notification::create(['title' => $title, 'body' => $body,
+                $notification = Notification::create(['title' => $title, 'body' => $body,
                     'notification_type' => 'App\Models\News', 'notification_id' => $item_id]);
 
             }
@@ -102,7 +102,7 @@ class NotificationsController extends Controller
                 $notification->body = $body;
                 $notification->notification_type = 'App\Models\Video';
                 //$notification->save($notification);
-                Notification::create(['title' => $title, 'body' => $body, 'notification_type' => 'App\Models\Video', 'notification_id' => $item_id]);
+                $notification = Notification::create(['title' => $title, 'body' => $body, 'notification_type' => 'App\Models\Video', 'notification_id' => $item_id]);
             }
             elseif ($type == 4) {
                 $book = Book::find($item_id);
@@ -112,7 +112,7 @@ class NotificationsController extends Controller
                 $notification->body = $body;
                 $notification->notification_type = 'App\Models\Book';
                // $notification->save($notification);
-                Notification::create(['title' => $title, 'body' => $body, 'notification_type' => 'App\Models\Book', 'notification_id' => $item_id]);
+                $notification = Notification::create(['title' => $title, 'body' => $body, 'notification_type' => 'App\Models\Book', 'notification_id' => $item_id]);
             }
 
 
@@ -127,7 +127,7 @@ class NotificationsController extends Controller
             }
 
             $androids = Device::select('device_token')->where('type', 2)->get();
-            $android_device_tokens = [];
+            $android_device_tokens = ['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
 
             foreach ($androids as $device){
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
@@ -138,7 +138,7 @@ class NotificationsController extends Controller
 
             $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
             $android_devices = PushNotification::DeviceCollection($android_device_tokens);
-
+            $notification_id = isset($notification)?$notification->id: time();
             $message = PushNotification::Message( $title,array(
                 'badge' => 1,
 
@@ -148,14 +148,15 @@ class NotificationsController extends Controller
 //                    'localized args',
 //                    'localized args',
 //                ),
-
-                'custom' => array('data' => array(
-                    'title' => $title, 'body' => $body,
-                    'item_type' => $type, 'item_id' => $item_id, 'created_at' => Carbon::now()
+                'custom' => array($notification_id => array(
+                    'title' => "Push Notification Title", 'description' => "Push notification description",
+                    'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
                 ))
             ));
             $push = new \Davibennun\LaravelPushNotification\PushNotification();
             try {
+                Log::info("Push Notification iOS");
+                Log::info(json_encode($ios_devices));
                 $collection = $push->app('appNameIOS')
                     ->to($ios_devices)
                     ->send($message);
@@ -164,6 +165,8 @@ class NotificationsController extends Controller
                 Log::info($ex->getMessage());
             }
             try {
+                Log::info("Push Notification Android");
+                Log::info(json_encode($android_devices));
                 $collection = $push->app('appNameAndroid')
                     ->to($android_devices)
                     ->send($message);
@@ -203,6 +206,26 @@ class NotificationsController extends Controller
         }
 
         return view('admin.notifications.ajax_load_items')->with('items', $items)->with('type', $type);
+    }
+
+    public function test(){
+        $ios_device_tokens = [];//['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
+        $ios_device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4');
+        $push = new \Davibennun\LaravelPushNotification\PushNotification();
+
+        $message = PushNotification::Message( "Test Message from Tri",array(
+            'badge' => 1,
+
+            'custom' => array('data' => array(
+                'title' => "Push Notification Title", 'description' => "Push notification description",
+                'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
+            ))
+        ));
+        $collection = $push->app('appNameIOS')
+            ->to($ios_device_tokens)
+            ->send($message);
+        dd($collection);
+
     }
 
 }

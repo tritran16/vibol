@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('notifications', 'NotificationsController@index')->name('admin.notification.index');
     Route::get('notifications/create', 'NotificationsController@create')->name('admin.notification.create');
     Route::post('notifications', 'NotificationsController@store')->name('admin.notification.create.store');
-
+    Route::get('notifications/test', 'NotificationsController@test')->name('admin.notification.test');
     Route::get('notifications/load_list_item/{type}',  'NotificationsController@ajax_load_items')->name('ajax.notifications.load_list_item_by_type');
 });
 
