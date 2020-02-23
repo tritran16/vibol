@@ -145,13 +145,15 @@ class NotificationsController extends Controller
             $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
             $android_devices = PushNotification::DeviceCollection($android_device_tokens);
             $notification_id = isset($notification)?$notification->id: time();
-            $message = PushNotification::Message( "data",array(
+            $message = PushNotification::Message( $title ,array(
                 'badge' => 0,
                 'sound' => 'default',
                 'custom' => array("data" => array(
+                    'id' => $notification_id,
+                    'item_id' => $item_id, 'item_type' => $sType,
                     'title' => $title, 'description' => $body,
                     'thumbnail' => $image,
-                    'item_type' => $sType, 'item_id' => $item_id, 'created_at' => Carbon::now()->format("d/m/Y")
+                      'created_at' => Carbon::now()->format("d/m/Y")
                 ))
             ));
             $push = new \Davibennun\LaravelPushNotification\PushNotification();
