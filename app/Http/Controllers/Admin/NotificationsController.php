@@ -116,7 +116,7 @@ class NotificationsController extends Controller
             }
 
 
-            $ios = Device::select('device_token')->where('type', 1)->get();
+            $ios = Device::select('device_token')->where('type', 1)->groupBy('device_token')->get();
             $ios_device_tokens = [];
             //$ios_push_model = new Push('appNameIOS');
             foreach ($ios as $device){
