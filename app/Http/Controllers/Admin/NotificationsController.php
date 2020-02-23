@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Sly\NotificationPusher\Model\Push;
 
 class NotificationsController extends Controller
 {
@@ -115,14 +116,28 @@ class NotificationsController extends Controller
             }
 
 
-            $devices = Device::select('device_token')->where('type', 1)->get();
-            foreach ($devices as $device){
+            $ios = Device::select('device_token')->where('type', 1)->get();
+            $ios_device_tokens = [];
+            //$ios_push_model = new Push('appNameIOS');
+            foreach ($ios as $device){
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
-                $ios_device_tokens[] = PushNotification::Device($device->device_token);
+                //if ($ios_push_model->getAdapter()->supports($device->device_token))
+                    $ios_device_tokens[] = PushNotification::Device($device->device_token);
 
             }
 
-            $devices = PushNotification::DeviceCollection($ios_device_tokens);
+            $androids = Device::select('device_token')->where('type', 2)->get();
+            $android_device_tokens = [];
+
+            foreach ($androids as $device){
+                //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
+                //if ($push_model->getAdapter()->supports($device->device_token))
+                    $android_device_tokens[] = PushNotification::Device($device->device_token);
+
+            }
+
+            $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
+            $android_devices = PushNotification::DeviceCollection($android_device_tokens);
 
             $message = PushNotification::Message( $title,array(
                 'badge' => 1,
@@ -140,15 +155,27 @@ class NotificationsController extends Controller
                 ))
             ));
             $push = new \Davibennun\LaravelPushNotification\PushNotification();
-            $collection = $push->app('appNameIOS')
-                ->to($devices)
-                ->send($message);
-            dd($collection->pushManager);
-            // get response for each device push
-            foreach ($collection->pushManager as $push) {
-                $response = $push->getResponse();
-
+            try {
+                $collection = $push->app('appNameIOS')
+                    ->to($ios_devices)
+                    ->send($message);
             }
+            catch (\Exception $ex) {
+                Log::info($ex->getMessage());
+            }
+            try {
+                $collection = $push->app('appNameAndroid')
+                    ->to($android_devices)
+                    ->send($message);
+            }
+        catch (\Exception $ex) {
+            Log::info($ex->getMessage());
+        }
+            // get response for each device push
+//            foreach ($collection->pushManager as $push) {
+//                $response = $push->getResponse();
+//
+//            }
 // access to adapter for advanced settings
             //$push = PushNotification::app('appNameAndroid');
             //$push->adapter->setAdapterParameters(['sslverifypeer' => false]);

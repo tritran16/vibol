@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\VideoCollection;
+use App\Models\LikeVideo;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use Illuminate\Http\Request;
@@ -64,6 +65,11 @@ class VideosController extends ApiController
         if ($video && $video->status == 1) {
             Video::where('id', $id)->update(['views'=> DB::raw('views + 1') ]);
             $video->views = $video->views + 1;
+            $device_id = $request->get('device_id');
+            $is_like = LikeVideo::where('video_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            $video->is_like = isset($is_like) ? $is_like : 0;
             return $this->successResponse(new VideoResource($video));
         }
         else return $this->failedResponse(['Not Found Video']);
@@ -77,9 +83,23 @@ class VideosController extends ApiController
     public function like(Request $request, $id){
         $video = Video::find($id);
         if ($video && $video->status == 1) {
-            Video::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
-            $video->likes +=1;
-            return $this->successResponse(new VideoResource($video), __('likeVideoSuccess'));
+            $video->is_like = 1;
+            $device_id = $request->get('device_id');
+            $is_like = LikeVideo::where('video_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            if (!$is_like) {
+                LikeVideo::create(['device_id' => $device_id, 'video_id' => $id]);
+
+                Video::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
+                $video->likes +=1;
+
+                return $this->successResponse(new VideoResource($video), __('likeVideoSuccess'));
+            }
+            else {
+                return $this->successResponse(new VideoResource($video), __('likeVideoSuccess'));
+            }
+
         }
         else return $this->failedResponse([], __('notFoundVideo'));
     }
@@ -92,9 +112,23 @@ class VideosController extends ApiController
     public function unlike(Request $request, $id){
         $video = Video::find($id);
         if ($video && $video->status == 1) {
-            Video::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
-            $video->likes = $video->likes> 0? $video->likes-1: 0;
-            return $this->successResponse($video, __('likeVideoSuccess'));
+            $video->is_like = 0;
+            $device_id = $request->get('device_id');
+            $is_like = LikeVideo::where('video_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            if ($is_like) {
+                LikeVideo::where('device_id' , $device_id)->where('video_id', $id)->delete();
+
+                Video::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
+                $video->likes = $video->likes> 0? $video->likes-1: 0;
+
+                return $this->successResponse(new VideoResource($video), __('unlikeVideoSuccess'));
+            }
+            else {
+                return $this->successResponse(new VideoResource($video), __('unlikeVideoSuccess'));
+            }
+
         }
         else return $this->failedResponse([], __('notFoundVideo'));
     }

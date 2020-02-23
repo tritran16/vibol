@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Resources\BookCollection;
 use App\Models\Book;
 use App\Models\BookCategory;
+use App\Models\LikeBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\Book as BookResource;
@@ -61,6 +62,11 @@ class BooksController extends ApiController
         if ($book && $book->status == 1) {
             Book::where('id', $id)->update(['views'=> DB::raw('views + 1'), ]);
             $book->views += 1;
+            $device_id = $request->get('device_id');
+            $is_like = LikeBook::where('book_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            $book->is_like = isset($is_like) ? $is_like : 0;
             return $this->successResponse(new BookResource($book));
         }
         else {
@@ -76,9 +82,20 @@ class BooksController extends ApiController
     public function like(Request $request, $id){
         $book = Book::find($id);
         if ($book && $book->status == 1) {
-            Book::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
-            $book->likes +=1;
-            return $this->successResponse(new BookResource($book), __('likeBookSuccess'));
+            $book->is_like = 1;
+           // Book::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
+            $device_id = $request->get('device_id');
+            $is_like = LikeBook::where('book_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            if (!$is_like) {
+                LikeBook::create(['device_id' => $device_id, 'book_id' => $id]);
+
+                Book::where('id', $id)->update(['likes' => DB::raw('likes + 1'),]);
+                $book->likes += 1;
+                return $this->successResponse(new BookResource($book), __('likeBookSuccess'));
+            }
+            else return $this->successResponse(new BookResource($book), __('likeBookSuccess'));
         }
         else return $this->failedResponse([], __('notFoundBook'));
     }
@@ -91,9 +108,20 @@ class BooksController extends ApiController
     public function unlike(Request $request, $id){
         $book = Book::find($id);
         if ($book && $book->status == 1) {
-            Book::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
-            $book->likes = $book->likes> 0 ? $book->likes-1 : 0;
-            return $this->successResponse(new BookResource($book), __('unLikeBookSuccess'));
+            $book->is_like = 0;
+            $device_id = $request->get('device_id');
+            $is_like = LikeBook::where('book_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            if ($is_like) {
+                LikeBook::where('device_id' , $device_id)->where('book_id', $id)->delete();
+
+                Book::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
+                $book->likes = $book->likes> 0? $book->likes-1: 0;
+
+                return $this->successResponse(new BookResource($book), __('unlikeBookSuccess'));
+            }
+            else return $this->successResponse(new BookResource($book), __('unlikeBookSuccess'));
         }
         else return $this->failedResponse([], __('notFoundBook'));
     }

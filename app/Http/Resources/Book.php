@@ -32,6 +32,7 @@ class Book extends JsonResource
         $data['is_hot'] = $this->is_hot;
         $data['created_at'] =  $this->created_at;
         $data['updated_at'] =  $this->updated_at;
+        $data['is_like'] = isset($this->is_like)?$this->is_like:0;
         return  $data;
         //return parent::toArray($request);
     }

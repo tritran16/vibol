@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\NewsCollection;
+use App\Models\LikeNews;
 use App\Models\News;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
@@ -95,7 +96,10 @@ class NewsController extends ApiController
         if ($news  && $news->status == 1) {
             News::where('id', $id)->update(['views'=> DB::raw('views + 1'), ]);
            // $translate_data = $news->translate($lang);
+            $device_id = $request->get('device_id');
 
+            $is_like = LikeNews::where('device_id', $device_id)->where('news_id', $id)->first();
+            $news->is_like = isset($is_like) ? 1 : 0;
             return $this->successResponse(new NewsResource($news));
         }
         else {
@@ -111,9 +115,22 @@ class NewsController extends ApiController
     public function like(Request $request, $id){
         $news = News::find($id);
         if ($news && $news->status == 1) {
-            News::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
-            $news->likes += 1;
-            return $this->successResponse($news, __('likeNewsSuccess'));
+            $news->is_like = 1;
+            $device_id = $request->get('device_id');
+            $is_like = LikeNews::where('news_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            if (!$is_like) {
+                LikeNews::create(['device_id' => $device_id, 'news_id' => $id]);
+
+                News::where('id', $id)->update(['likes' => DB::raw('likes + 1'),]);
+                $news->likes += 1;
+
+                return $this->successResponse(new NewsResource($news), __('likeNewsSuccess'));
+            }
+            else {
+                return $this->successResponse(new NewsResource($news), __('likeNewsSuccess'));
+            }
         }
         else return $this->failedResponse([], __('notFoundNews'));
     }
@@ -126,9 +143,20 @@ class NewsController extends ApiController
     public function unlike(Request $request, $id){
         $news = News::find($id);
         if ($news && $news->status == 1) {
-            News::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
-            $news->likes = $news->likes>0?$news->likes-1: 0;
-            return $this->successResponse($news, __('uLlikeNewsSuccess'));
+            $news->is_like = 0;
+            $device_id = $request->get('device_id');
+            $is_like = LikeNews::where('news_id', $id)
+                ->where('device_id', $device_id)
+                ->first();
+            if ($is_like) {
+                LikeNews::where('device_id' , $device_id)->where('news_id', $id)->delete();
+
+                News::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
+                $news->likes = $news->likes> 0? $news->likes-1: 0;
+
+                return $this->successResponse(new NewsResource($news), __('unlikeNewsSuccess'));
+            }
+            else  return $this->successResponse(new NewsResource($news), __('unlikeNewsSuccess'));
         }
         else return $this->failedResponse([], __('notFoundNews'));
     }

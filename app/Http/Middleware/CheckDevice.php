@@ -26,8 +26,9 @@ class CheckDevice
                 ->where('type', $device_type_id)
                 ->first();
             if (!$device) {
-                Device::create(['device_token' => $device_token, 'type' => $device_type == 'Android' ? 1 : 2]);
+                $device = Device::create(['device_token' => $device_token, 'type' => $device_type == 'Android' ? 1 : 2]);
             }
+            $request->attributes->set('device_id', $device->id);
             return $next($request);
         }
         else {
