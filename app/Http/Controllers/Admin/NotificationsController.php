@@ -87,7 +87,7 @@ class NotificationsController extends Controller
 //                    ->groupBy('news.id', 'news_translations.title', 'news_translations.short_desc')
 //                    ->first();
                 $news = News::find($item_id);
-                $image = url($news->thumbnail);
+                $image = isset($news->thumbnail)?url($news  ->thumbnail):url('images/no-image.png');
                 $notification = new Notification();
                 $notification->title = $title;
                 $notification->body = $body;
@@ -99,7 +99,7 @@ class NotificationsController extends Controller
             elseif ($type == 3) {
                 $sType = 'video';
                 $video = Video::find($item_id);
-                $image = url($video->thumbnail);
+                $image = isset($video->thumbnail)?url($video->thumbnail):url('images/no-image.png');
                 $notification = new Notification();
                 $notification->title = $title;
                 $notification->body = $body;
@@ -110,7 +110,7 @@ class NotificationsController extends Controller
             elseif ($type == 4) {
                 $sType = 'book';
                 $book = Book::find($item_id);
-                $image = url($book->thumbnail);
+                $image = isset($book->thumbnail)?url($book->thumbnail):url('images/no-image.png');
                 $notification = new Notification();
                 $notification->title = $title;
                 $notification->body = $body;
@@ -128,7 +128,7 @@ class NotificationsController extends Controller
                 $i++;
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
                 //if ($ios_push_model->getAdapter()->supports($device->device_token))
-                    $ios_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => $i]);
+                    $ios_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => 0]);
 
             }
             $androids = Device::select('device_token')->where('type', 2)->groupBy('device_token')->get();
@@ -138,18 +138,19 @@ class NotificationsController extends Controller
                 $j++;
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
                 //if ($push_model->getAdapter()->supports($device->device_token))
-                    $android_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => $j]);
+                    $android_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => 0]);
 
             }
 
             $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
             $android_devices = PushNotification::DeviceCollection($android_device_tokens);
             $notification_id = isset($notification)?$notification->id: time();
-            $message = PushNotification::Message( $title . " " . $notification_id,array(
-                'badge' => 1,
-                'custom' => array($notification_id => array(
+            $message = PushNotification::Message( "data",array(
+                'badge' => 0,
+                'sound' => 'default',
+                'custom' => array("data" => array(
                     'title' => $title, 'description' => $body,
-                    'image' => $image,
+                    'thumbnail' => $image,
                     'item_type' => $sType, 'item_id' => $item_id, 'created_at' => Carbon::now()->format("d/m/Y")
                 ))
             ));
