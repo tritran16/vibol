@@ -139,7 +139,6 @@ class NotificationsController extends Controller
             }
 
             $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
-            dd($ios_devices);
             $android_devices = PushNotification::DeviceCollection($android_device_tokens);
            dd($ios_devices);
             $notification_id = isset($notification)?$notification->id: time();
