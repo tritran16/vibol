@@ -117,7 +117,7 @@ class NotificationsController extends Controller
 
 
             $ios = Device::select('device_token')->where('type', 1)->groupBy('device_token')->get();
-            $ios_device_tokens = [];
+            $ios_device_tokens = ['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
             //$ios_push_model = new Push('appNameIOS');
             foreach ($ios as $device){
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
@@ -125,10 +125,9 @@ class NotificationsController extends Controller
                     $ios_device_tokens[] = PushNotification::Device($device->device_token);
 
             }
-            dd($ios_device_tokens);
 
-            $androids = Device::select('device_token')->where('type', 2)->get();
-            $android_device_tokens = ['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
+            $androids = Device::select('device_token')->where('type', 2)->groupBy('device_token')->get();
+            $android_device_tokens = [];
 
             foreach ($androids as $device){
                 //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
