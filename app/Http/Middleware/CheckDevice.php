@@ -21,7 +21,7 @@ class CheckDevice
         $device_token = $request->header('device-token');
         $device_type = $request->header('device-type');
         if ($device_token && in_array($device_type, $device_types)) {
-            $device_type_id =  $device_type == 'Android' ? 1 : 2;
+            $device_type_id =  $device_type == 'Android' ? 2 : 1;
             $device = Device::where('device_token', $device_token)
                 ->where('type', $device_type_id)
                 ->first();
