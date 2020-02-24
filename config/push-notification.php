@@ -4,7 +4,7 @@ return array(
 
     'appNameIOS'     => array(
         'environment' =>'development',
-        'certificate' =>storage_path().'/app/iosCertificates/ios_dev.pem',
+        'certificate' =>env('APN_ENV') != 'production'? storage_path().'/app/iosCertificates/ios_dev.pem' : storage_path().'/app/iosCertificates/ios_production.pem' ,
         'passPhrase'  =>'1',
         'service'     =>'apns'
     ),

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NotificationRequest;
 use App\Http\Requests\VideoCategoryRequest;
+use App\Http\Services\NotificationService;
 use App\Models\Book;
 use App\Models\Device;
 use App\Models\News;
@@ -136,25 +137,23 @@ class NotificationsController extends Controller
             $j = 0;
             foreach ($androids as $device){
                 $j++;
-                //'71116dd58c776c9570ca681eecb454434c4bdf277137ca6ef4c2a2a9401d51ef'
-                //if ($push_model->getAdapter()->supports($device->device_token))
-                    $android_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => 0]);
-
+                $android_device_tokens[] = $device->device_token; //PushNotification::Device($device->device_token, ['badge' => 0]);
             }
 
             $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
             $android_devices = PushNotification::DeviceCollection($android_device_tokens);
             $notification_id = isset($notification)?$notification->id: time();
+            $data =  array(
+                'id' => $notification_id,
+                'item_id' => $item_id, 'item_type' => $sType,
+                'title' => $title, 'description' => $body,
+                'thumbnail' => $image,
+                'created_at' => Carbon::now()->format("d/m/Y")
+            );
             $message = PushNotification::Message( $title ,array(
                 'badge' => 0,
                 'sound' => 'default',
-                'custom' => array("data" => array(
-                    'id' => $notification_id,
-                    'item_id' => $item_id, 'item_type' => $sType,
-                    'title' => $title, 'description' => $body,
-                    'thumbnail' => $image,
-                      'created_at' => Carbon::now()->format("d/m/Y")
-                ))
+                'custom' => array("data" => $data)
             ));
             $push = new \Davibennun\LaravelPushNotification\PushNotification();
             try {
@@ -166,10 +165,11 @@ class NotificationsController extends Controller
                 Log::info($ex->getMessage());
             }
             try {
-                $collection = $push->app('appNameAndroid')
-                    ->to($android_devices)
-                    ->send($message)
-                ;
+                $service = new NotificationService();
+                // Test
+               // $android_device_tokens = ['e9HNqAfjv-g:APA91bHQNVfPGJM8W4dosJimUTnsBhsHuqRTX9uHZE2Vhmpp60RyXMurSYLk--WChKaVSgIDQdb6-LCqtZklpkO5vV3fCeU7fjr0OQMG-2aFezKGFaiDDqw8y4yH83hcEX6M2iHXQ-5_'];
+
+                $service->pushToAndroid($android_device_tokens, $title,  ['data' => $data]);
             }
         catch (\Exception $ex) {
             Log::info($ex->getMessage());
@@ -228,23 +228,32 @@ class NotificationsController extends Controller
     }
 
     public function test(){
-        $ios_device_tokens = [];//['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
-        $ios_device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4');
-        $ios_device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf3');
-        $push = new \Davibennun\LaravelPushNotification\PushNotification();
-
-        $message = PushNotification::Message( "Test Message from Tri",array(
-            'badge' => 1,
-
-            'custom' => array('data' => array(
+//        $ios_device_tokens = [];//['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4'];
+//        $ios_device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4');
+//        $ios_device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf3');
+//        $push = new \Davibennun\LaravelPushNotification\PushNotification();
+//
+//        $message = PushNotification::Message( "Test Message from Tri",array(
+//            'badge' => 1,
+//
+//            'custom' => array('data' => array(
+//                'title' => "Push Notification Title", 'description' => "Push notification description",
+//                'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
+//            ))
+//        ));
+//        $collection = $push->app('appNameIOS')
+//            ->to($ios_device_tokens)
+//            ->send($message);
+//        dd($collection);
+        $tokens = ['e9HNqAfjv-g:APA91bHQNVfPGJM8W4dosJimUTnsBhsHuqRTX9uHZE2Vhmpp60RyXMurSYLk--WChKaVSgIDQdb6-LCqtZklpkO5vV3fCeU7fjr0OQMG-2aFezKGFaiDDqw8y4yH83hcEX6M2iHXQ-5_'];
+        $title = "Test Notification";
+        $body = "test test";
+        $data =  array('data' => array(
                 'title' => "Push Notification Title", 'description' => "Push notification description",
                 'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
-            ))
-        ));
-        $collection = $push->app('appNameIOS')
-            ->to($ios_device_tokens)
-            ->send($message);
-        dd($collection);
+            ));
+        $service = new NotificationService();
+        $service->pushToAndroid($tokens, $title, $body, $data);
 
     }
 
