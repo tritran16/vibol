@@ -49,7 +49,7 @@ class VideosController extends ApiController
         }
 
         // short by id desc
-        $videos->orderBy('created_at', 'DESC');
+        $videos->orderBy('videos.created_at', 'DESC');
 
         $data = $videos->paginate(API_PAGE_LIMITED);
         return $this->successResponse(new VideoCollection($data));
