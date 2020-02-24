@@ -43,8 +43,8 @@ class NewsCollection extends ResourceCollection
             $_news['is_hot'] = $item->is_hot;
             $_news['views'] = $item->views;
             $_news['likes'] = $item->likes;
-            $_news['created_at'] = Carbon::parse($this->created_at)->format('d/m/Y');
-            $_news['updated_at'] =  Carbon::parse($this->updated_at)->format('d/m/Y');
+            $_news['created_at'] = Carbon::parse($item->created_at)->format('d/m/Y');
+            $_news['updated_at'] =  Carbon::parse($item->updated_at)->format('d/m/Y');
 
             $data[] = $_news;
         }
