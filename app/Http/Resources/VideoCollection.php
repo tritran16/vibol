@@ -45,8 +45,8 @@ class VideoCollection extends ResourceCollection
                 $video['is_hot'] = $item->is_hot;
                 $video['views'] = $item->views;
                 $video['likes'] = $item->likes;
-                $video['created_at'] =  Carbon::parse($this->created_at)->format('d/m/Y');
-                $video['updated_at'] =  Carbon::parse($this->updated_at)->format('d/m/Y');
+                $video['created_at'] =  Carbon::parse($item->created_at)->format('d/m/Y');
+                $video['updated_at'] =  Carbon::parse($item->updated_at)->format('d/m/Y');
 
                 $data[] = $video;
             }
