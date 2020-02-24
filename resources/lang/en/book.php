@@ -1,11 +1,12 @@
 <?php
 return [
     'listing.header' => 'Books',
+    'view' => 'View Book',
     'create.header' => 'Create Book',
     'update.header' => 'Update Book',
     'name' => 'Book Name',
     'link' => 'Link',
-    'author' => 'Link',
+    'author' => 'Author',
     'thumbnail' => 'Thumbnail',
     'page_number' => 'Page Number',
     'status' => 'Status',

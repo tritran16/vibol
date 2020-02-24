@@ -94,7 +94,9 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        //
+        $categories = BookCategory::pluck('name', 'id');
+        $book = Book::findOrFail($id);
+        return view('admin.books.show')->with('book', $book)->with('categories', $categories);
     }
 
     /**
