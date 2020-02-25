@@ -22,7 +22,11 @@ class BooksController extends ApiController
      */
     public function index(Request $request){
         $keyword = $request->get('keyword');
-        $books = Book::with('category')
+        $books = Book::select('books.id', 'name', 'books.thumbnail', 'books.category_id' , 'books.filename', 'books.link',
+            'books.page_number', 'books.author','books.description', 'books.status', 'books.likes', 'books.views', 'books.is_hot',
+            'books.created_at', 'books.updated_at', 'like_books.id  AS  ike_book_id')
+            ->with('category')
+            ->leftJoin('like_books', 'like_books.book_id', '=', 'books.id')
             ->where('status', 1);
         if ($keyword) {
             $books = $books
@@ -66,7 +70,7 @@ class BooksController extends ApiController
             $is_like = LikeBook::where('book_id', $id)
                 ->where('device_id', $device_id)
                 ->first();
-            $book->is_like = isset($is_like) ? $is_like : 0;
+            $book->is_like = isset($is_like) ? 1 : 0;
             return $this->successResponse(new BookResource($book));
         }
         else {

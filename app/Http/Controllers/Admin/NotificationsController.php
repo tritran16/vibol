@@ -236,7 +236,7 @@ class NotificationsController extends Controller
 //            ->to($ios_device_tokens)
 //            ->send($message);
 //        dd($collection);
-        $tokens = ['e9HNqAfjv-g:APA91bHQNVfPGJM8W4dosJimUTnsBhsHuqRTX9uHZE2Vhmpp60RyXMurSYLk--WChKaVSgIDQdb6-LCqtZklpkO5vV3fCeU7fjr0OQMG-2aFezKGFaiDDqw8y4yH83hcEX6M2iHXQ-5_'];
+        $tokens = ['eXBhbCndmNA:APA91bFXawwyQaBp8dmLlHTGT1aS7OwuSU46E2Gkw0s1h5xz3uvXTADdQRhvC7V2hCIN4IwbNwn7wPeuUSktaWSSOEEY7z3pKVWpbxhGJ9XNyTS65p0ntk2QQyV78gZCakmb_hrhaR2V'];
         $title = "Test Notification";
         $body = "test test";
         $data =  array(

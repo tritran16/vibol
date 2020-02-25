@@ -22,7 +22,9 @@ class VideosController extends ApiController
      */
     public function index(Request $request){
         $keyword = $request->get('keyword');
-        $videos = Video::with('category')
+        $videos = Video::select('videos.*', 'like_videos.id  AS  like_video_id')
+            ->with('category')
+            ->leftJoin('like_videos', 'like_videos.video_id', '=', 'videos.id')
             ->where('status', 1);
         if ($keyword) {
             $videos = $videos
@@ -66,10 +68,10 @@ class VideosController extends ApiController
             Video::where('id', $id)->update(['views'=> DB::raw('views + 1') ]);
             $video->views = $video->views + 1;
             $device_id = $request->get('device_id');
-            $is_like = LikeVideo::where('video_id', $id)
+            $like_video = LikeVideo::where('video_id', $id)
                 ->where('device_id', $device_id)
                 ->first();
-            $video->is_like = isset($is_like) ? $is_like : 0;
+            $video->is_like = isset($like_video) ? 1 : 0;
             return $this->successResponse(new VideoResource($video));
         }
         else return $this->failedResponse(['Not Found Video']);

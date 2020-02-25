@@ -28,12 +28,16 @@ class NewsController extends ApiController
             ->select('news.id', 'news.category_id', 'news.thumbnail', 'news.image', 'news.status',
                 'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at',
                 'news_categories.id as category_id', 'news_category_translations.name as category_name',
-                'news_translations.title', 'news_translations.short_desc', 'news_translations.content'
+                'news_translations.title', 'news_translations.short_desc', 'news_translations.content',
+                'like_news.id as like_news_id'
                 )
             ->where('news.status', 1)
             ->join('news_categories', 'news_categories.id', '=', 'news.category_id')
             ->join('news_translations', 'news_translations.news_id', '=', 'news.id')
-            ->join('news_category_translations', 'news_category_translations.news_category_id', '=', 'news_categories.id')
+            ->join('news_category_translations', 'news_category_translations.news_category_id',
+                '=', 'news_categories.id')
+            ->leftJoin('like_news', 'like_news.news_id', '=', 'news.id')
+
         ;
         if ($keyword) {
             $news = $news->where('news_translations.title', 'LIKE', "%$keyword%");
@@ -48,7 +52,7 @@ class NewsController extends ApiController
             ->groupBy('news.id', 'news.category_id', 'news.thumbnail', 'news.image', 'news.status',
                 'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at',
                 'news_category_translations.name', 'news_categories.id',
-                'news_translations.title', 'news_translations.short_desc', 'news_translations.content'
+                'news_translations.title', 'news_translations.short_desc', 'news_translations.content', 'like_news.id'
                 )
             ->paginate(API_PAGE_LIMITED);
 //        foreach ($news as $item) {

@@ -24,9 +24,9 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{__('notification.title')}}</th>
-                            <th>{{__('notification.type')}}</th>
                             <th>{{__('notification.item')}}</th>
+                            <th>{{__('notification.type')}}</th>
+                            <th>{{__('notification.date')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,8 +36,7 @@
                         @foreach ($notifications as $notification)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $notification->title }}</td>
-                                <td>{{ $notification->notification_type}}</td>
+
                                 @php
                                     $link = '';
                                     if ($notification->notification_type == 'App\Models\News') {
@@ -55,8 +54,21 @@
                                         $item = \App\Models\Book::find($notification->notification_id);
                                         $item_name =  $item->name;
                                     }
+                                    else { // Advice
+                                         $link = url('admin/daily_advices/');
+                                         $item = \App\Models\DailyAdvice::find($notification->notification_id);
+                                        $item_name =  __('advice.advice');
+                                    }
                                 @endphp
                                 <td><a href="{{$link}}">{{ $item_name }}</a></td>
+                                <td>{{ $notification->notification_type == "App\Models\News" ? __('common.menu.news') :
+                                        ($notification->notification_type == "App\Models\Book" ? __('common.menu.books') :
+                                            (
+                                                $notification->notification_type == "App\Models\Video" ? __('common.menu.videos') :
+                                            __('common.menu.advices')
+                                            )
+                                        )
+                                }}</td>
                                 <td>{{ $notification->created_at }}</td>
                             </tr>
                         @endforeach

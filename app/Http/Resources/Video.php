@@ -29,7 +29,7 @@ class Video extends JsonResource
         $data['is_hot'] = $this->is_hot;
         $data['created_at'] =  Carbon::parse($this->created_at)->format('d/m/Y');
         $data['updated_at'] =  Carbon::parse($this->updated_at)->format('d/m/Y');
-        $data['is_like'] = isset($this->is_like)?$this->is_like:0;
+        $data['is_like'] = isset($this->is_like)?$this->is_like : 0;
         return $data; //parent::toArray($request);
     }
 }

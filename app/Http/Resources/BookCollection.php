@@ -29,8 +29,14 @@ class BookCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+        $data = [];
+        foreach ($this->collection as $item) {
+            $_item = $item;
+            $_item['is_like'] = isset($item['like_book_id']) ? 1 : 0;
+            $data[] = $_item;
+        }
         return [
-            'books' => $this->collection,
+            'books' => $data,
             'total' => $this->pagination['total'],
             'per_page' => $this->pagination['perPage'],
             'current_page' => $this->pagination['currentPage'],
