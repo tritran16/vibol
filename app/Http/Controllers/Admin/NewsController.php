@@ -114,7 +114,14 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        $categories = NewsCategory::pluck('name', 'id');
+        $_categories = NewsCategory::all();
+        $categories = [];
+        $categories[""] = 'Select Category';
+        foreach ($_categories as $category) {
+            $categories[$category->id] = $category->translate('kh')->name;
+
+        }
+
         $news = News::findOrFail($id);
         return view('admin.news.show')->with('news', $news)->with('categories', $categories);
     }

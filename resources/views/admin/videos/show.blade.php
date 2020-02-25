@@ -26,11 +26,11 @@
     </div>
     <div class="form-group">
         {{ Form::label('link', 'Link') }}
-        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}
+        {{ Form::text('link', request('link', null), array('class' => 'form-control', 'disabled' => true)) }}
     </div>
     <div class="form-group">
         {{ Form::label('status', 'Status') }}
-        {{ Form::select('status', [0 => 'New', 1 => 'Public'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('status', [0 => 'New', 1 => 'Public'], request('status', null), array('class' => 'form-control', 'disabled' => true)) }}
     </div>
     <a class="btn btn-sm btn-primary btn-flat" href="{{ route('videos.edit', $video->id) }}">
         <i class="fa fa-pencil"></i> Edit Video

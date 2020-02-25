@@ -21,49 +21,51 @@ class NotificationService
         //
     }
 
-    public function pushIOS($appName, $token, $item_id = null, $item_type = null, $title = null, $content = null, $image = null){
-        if (!$token) return;
-        //$device_token = PushNotification::Device($token);
+    public function pushIOS($tokens, $title , $data){
+        if (!$tokens) return;
 
-        $notification = Notification::create(['title' => $title, 'body' => $content,
-            'notification_type' => $item_type, 'notification_id' => $item_id]);
-        $message = PushNotification::Message( $title ,array(
+        $message = PushNotification::Message( $title, array(
             'badge' => 0,
             'sound' => 'default',
-            'custom' => array("data" => array(
-                'id' => $notification->id,
-                'item_id' => $item_id, 'item_type' => $item_type,
-                'title' => $title, 'description' => $content,
-                'thumbnail' => $image,
-                'created_at' => Carbon::now()->format("d/m/Y")
-            ))
+            'custom' => array("data" => $data)
         ));
+        foreach ($tokens as $token) {
+            $device_tokens[] = PushNotification::Device($token, ['badge' => 0]);
+
+        }
         $push = new \Davibennun\LaravelPushNotification\PushNotification();
-        $push->app($appName)
-            ->to($token)
-            ->send($message);
+        try {
+            $push->app('appNameIOS')
+                ->to($device_tokens)
+                ->send($message);
+        }
+        catch (\Exception $ex) {
+            Log::info($ex->getMessage());
+        }
     }
 
-    public function pushToAndroid($tokens, $title, $data){
+    public function pushToAndroid($tokens, $title, $data, $payload = []){
+        if (!$tokens) return;
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
-        $notificationBuilder->setBody($data)
+        $notificationBuilder->setBody(['data' => $data])
             ->setSound('default');
 
-//        $dataBuilder = new PayloadDataBuilder();
-//        $dataBuilder->addData($data);
+        $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData($payload);
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
-//        $payload_data = $dataBuilder->build();
-        $payload_data = null;
-        // You must change it to get your tokens
-        $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $payload_data);
+        $payload_data = $dataBuilder->build();
 
-        Log::info("Number Success". $downstreamResponse->numberSuccess());
-        Log::info($downstreamResponse->numberFailure());
+
+        // You must change it to get your tokens
+        $downstreamResponse = FCM::sendTo($tokens, $option, $notification, null);
+
+        Log::info("Number Success : ". $downstreamResponse->numberSuccess());
+        Log::info("Number Failed : ". $downstreamResponse->numberFailure());
         $downstreamResponse->numberModification();
 
         // return Array - you must remove all this tokens in your database
@@ -71,5 +73,11 @@ class NotificationService
 
 // return Array (key : oldToken, value : new token - you must change the token in your database)
         $downstreamResponse->tokensToModify();
+
+        // return Array - you should try to resend the message to the tokens in the array
+        $downstreamResponse->tokensToRetry();
+
+// return Array (key:token, value:error) - in production you should remove from your database the tokens present in this array
+        dd($downstreamResponse->tokensWithError());
     }
 }

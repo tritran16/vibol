@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdviceRequest;
+use App\Http\Services\NotificationService;
 use App\Models\DailyAdvice;
+use App\Models\Device;
+use App\Models\Notification;
+use Carbon\Carbon;
+use Davibennun\LaravelPushNotification\Facades\PushNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -73,8 +79,10 @@ class DailyAdvicesController extends Controller
         else {
             $_advice = $request->only(['author', 'advice', 'text_position', 'status']);
         }
-        DailyAdvice::create($_advice);
-
+        $advice = DailyAdvice::create($_advice);
+        if($request->get('status') == 1) {
+            $this->sendNotification($advice);
+        }
         return redirect(route('daily_advices.index'))->with('success', 'Created Advice successfully!');
 
     }
@@ -139,6 +147,10 @@ class DailyAdvicesController extends Controller
                 $_advice = $request->only(['name', 'link', 'description', 'status']);
             }
             DailyAdvice::where('id', $id)->update($_advice);
+            if($request->get('status') == 1) {
+                // Send Notification
+                $this->sendNotification($advice);
+            }
             return redirect(route('daily_advices.index'))->with('success', 'Update Daily Advice successfully!');
         }
         else {
@@ -174,10 +186,61 @@ class DailyAdvicesController extends Controller
         if ($advice) {
             DailyAdvice::where('status', 1)->update(['status' => 2] );
             DailyAdvice::where('id', $id)->update(['status' => 1] );
+            $this->sendNotification($advice);
             return redirect(route('daily_advices.index'))->with('success', 'Active Advice Successful!');
         }
         else {
             return redirect(route('daily_advices.index'))->with('error', 'Not found Advice!');
         }
+    }
+
+    private function sendNotification($advice){
+        $ios = Device::select('device_token')->where('type', 1)->groupBy('device_token')->get();
+        $ios_device_tokens= [];
+        $i = 0;
+        foreach ($ios as $device) {
+            $i++;
+            $ios_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => 0]);
+
+        }
+        $androids = Device::select('device_token')->where('type', 2)->groupBy('device_token')->get();
+        $android_device_tokens = [];
+        $j = 0;
+        foreach ($androids as $device){
+            $j++;
+            $android_device_tokens[] = $device->device_token; //PushNotification::Device($device->device_token, ['badge' => 0]);
+        }
+
+        $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
+        $notification_id = isset($notification)?$notification->id: time();
+        $data =  array(
+            'id' => $notification_id,
+            'item_id' => $advice->id, 'item_type' => 1,
+            'title' => $advice->advice, 'description' => "",
+            'thumbnail' => $advice->image,
+            'created_at' => Carbon::now()->format("d/m/Y")
+        );
+        $message = PushNotification::Message( $advice->advice ,array(
+            'badge' => 0,
+            'sound' => 'default',
+            'custom' => array("data" => $data)
+        ));
+        $push = new \Davibennun\LaravelPushNotification\PushNotification();
+        try {
+            $collection = $push->app('appNameIOS')
+                ->to($ios_devices)
+                ->send($message);
+        }
+        catch (\Exception $ex) {
+            Log::info($ex->getMessage());
+        }
+        try {
+            $service = new NotificationService();
+            $service->pushToAndroid($android_device_tokens, $advice->advice,  ['data' => $data]);
+        }
+        catch (\Exception $ex) {
+            Log::info($ex->getMessage());
+        }
+        Notification::create(['title' => $advice->advice, 'body' => '','notification_type' => 1, 'notification_id' =>$advice->id]);
     }
 }
