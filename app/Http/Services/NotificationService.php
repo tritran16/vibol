@@ -78,6 +78,6 @@ class NotificationService
         $downstreamResponse->tokensToRetry();
 
 // return Array (key:token, value:error) - in production you should remove from your database the tokens present in this array
-        dd($downstreamResponse->tokensWithError());
+        $downstreamResponse->tokensWithError();
     }
 }
