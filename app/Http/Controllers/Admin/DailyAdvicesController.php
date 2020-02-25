@@ -195,52 +195,30 @@ class DailyAdvicesController extends Controller
     }
 
     private function sendNotification($advice){
-        $ios = Device::select('device_token')->where('type', 1)->groupBy('device_token')->get();
-        $ios_device_tokens= [];
-        $i = 0;
-        foreach ($ios as $device) {
-            $i++;
-            $ios_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => 0]);
-
-        }
-        $androids = Device::select('device_token')->where('type', 2)->groupBy('device_token')->get();
-        $android_device_tokens = [];
-        $j = 0;
-        foreach ($androids as $device){
-            $j++;
-            $android_device_tokens[] = $device->device_token; //PushNotification::Device($device->device_token, ['badge' => 0]);
-        }
-
-        $ios_devices = PushNotification::DeviceCollection($ios_device_tokens);
+        $ios_tokens = Device::where('type', 1)->pluck('device_token')->toArray();
+        $android_tokens = Device::where('type', 2)->pluck('device_token')->toArray();
+        $notification = Notification::create(['title' => __("Advice"), 'body' => $advice->advice, 'notification_type' => 'App\Models\DailyAdvice', 'notification_id' => $advice->id]);
+        dd($notification);
         $notification_id = isset($notification)?$notification->id: time();
         $data =  array(
             'id' => $notification_id,
             'item_id' => $advice->id, 'item_type' => 1,
-            'title' => $advice->advice, 'description' => "",
+            'title' => $notification->title, 'description' =>  $notification->body,
             'thumbnail' => $advice->image,
             'created_at' => Carbon::now()->format("d/m/Y")
         );
-        $message = PushNotification::Message( $advice->advice ,array(
-            'badge' => 0,
-            'sound' => 'default',
-            'custom' => array("data" => $data)
-        ));
-        $push = new \Davibennun\LaravelPushNotification\PushNotification();
+        $service = new NotificationService();
         try {
-            $collection = $push->app('appNameIOS')
-                ->to($ios_devices)
-                ->send($message);
+            $service->pushIOS($ios_tokens, $notification->title, $data);
         }
         catch (\Exception $ex) {
             Log::info($ex->getMessage());
         }
         try {
-            $service = new NotificationService();
-            $service->pushToAndroid($android_device_tokens, $advice->advice,  ['data' => $data]);
+            $service->pushToAndroid($android_tokens, $notification->title,  $data);
         }
         catch (\Exception $ex) {
             Log::info($ex->getMessage());
         }
-        Notification::create(['title' => $advice->advice, 'body' => '','notification_type' => 1, 'notification_id' =>$advice->id]);
     }
 }

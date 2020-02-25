@@ -162,9 +162,9 @@ class NotificationsController extends Controller
             try {
                 $service->pushToAndroid($android_tokens, $title,  $data);
             }
-        catch (\Exception $ex) {
-            Log::info($ex->getMessage());
-        }
+            catch (\Exception $ex) {
+                Log::info($ex->getMessage());
+            }
             // get response for each device push
 //            foreach ($collection->pushManager as $push) {
 //                $response = $push->getResponse();
