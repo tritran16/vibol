@@ -38,7 +38,7 @@ class NewsController extends ApiController
                 '=', 'news_categories.id')
             ->leftJoin('like_news', 'like_news.news_id', '=', 'news.id')
             ->where('news.status', 1)
-            ->where('like_books.device_id', $device_id);
+            ->where('like_news.device_id', $device_id);
         if ($keyword) {
             $news = $news->where('news_translations.title', 'LIKE', "%$keyword%");
         }

@@ -27,7 +27,7 @@ class VideosController extends ApiController
             ->with('category')
             ->leftJoin('like_videos', 'like_videos.video_id', '=', 'videos.id')
             ->where('status', 1)
-            ->where('like_books.device_id', $device_id);
+            ->where('like_videos.device_id', $device_id);
         if ($keyword) {
             $videos = $videos
                 ->where('videos.title', 'LIKE', "%$keyword%");
