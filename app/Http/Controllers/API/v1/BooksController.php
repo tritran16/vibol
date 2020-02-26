@@ -22,12 +22,14 @@ class BooksController extends ApiController
      */
     public function index(Request $request){
         $keyword = $request->get('keyword');
+        $device_id = $request->get('device_id');
         $books = Book::select('books.id', 'name', 'books.thumbnail', 'books.category_id' , 'books.filename', 'books.link',
             'books.page_number', 'books.author','books.description', 'books.status', 'books.likes', 'books.views', 'books.is_hot',
             'books.created_at', 'books.updated_at', 'like_books.id  AS  like_book_id')
             ->with('category')
             ->leftJoin('like_books', 'like_books.book_id', '=', 'books.id')
-            ->where('status', 1);
+            ->where('status', 1)
+            ->where('like_books.device_id', $device_id);
         if ($keyword) {
             $books = $books
                 ->where('books.name', 'LIKE', "%$keyword%");

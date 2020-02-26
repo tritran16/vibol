@@ -21,7 +21,7 @@ class NewsController extends ApiController
      */
     public function index(Request $request){
         $lang = $request->header('location','kh');
-
+        $device_id = $request->get('device_id');
         $keyword = $request->get('keyword');
         $data = [];
         $news = DB::table('news')
@@ -31,14 +31,14 @@ class NewsController extends ApiController
                 'news_translations.title', 'news_translations.short_desc', 'news_translations.content',
                 'like_news.id as like_news_id'
                 )
-            ->where('news.status', 1)
+
             ->join('news_categories', 'news_categories.id', '=', 'news.category_id')
             ->join('news_translations', 'news_translations.news_id', '=', 'news.id')
             ->join('news_category_translations', 'news_category_translations.news_category_id',
                 '=', 'news_categories.id')
             ->leftJoin('like_news', 'like_news.news_id', '=', 'news.id')
-
-        ;
+            ->where('news.status', 1)
+            ->where('like_books.device_id', $device_id);
         if ($keyword) {
             $news = $news->where('news_translations.title', 'LIKE', "%$keyword%");
         }
