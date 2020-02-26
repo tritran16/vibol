@@ -37,7 +37,7 @@ class NewsController extends ApiController
             ->join('news_category_translations', 'news_category_translations.news_category_id',
                 '=', 'news_categories.id')
             ->leftJoin('like_news', function($join) use ($device_id) {
-                $join->on('like_news.book_id', '=', 'news.id');
+                $join->on('like_news.news_id', '=', 'news.id');
                 $join->on('like_news.device_id', '=', DB::raw($device_id));
             })
             ->where('news.status', 1);
