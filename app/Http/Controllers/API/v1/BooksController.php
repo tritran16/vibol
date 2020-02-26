@@ -25,11 +25,11 @@ class BooksController extends ApiController
         $device_id = $request->get('device_id');
         $books = Book::select('books.id', 'name', 'books.thumbnail', 'books.category_id' , 'books.filename', 'books.link',
             'books.page_number', 'books.author','books.description', 'books.status', 'books.likes', 'books.views', 'books.is_hot',
-            'books.created_at', 'books.updated_at', 'like_books.id  AS  like_book_id')
+            'books.created_at', 'books.updated_at')
             ->with('category')
-            ->leftJoin('like_books', 'like_books.book_id', '=', 'books.id')
-            ->where('status', 1)
-            ->where('like_books.device_id', $device_id);
+            //->leftJoin('like_books', 'like_books.book_id', '=', 'books.id')
+            ->where('status', 1);
+            //->where('like_books.device_id', $device_id);
         if ($keyword) {
             $books = $books
                 ->where('books.name', 'LIKE', "%$keyword%");
@@ -50,9 +50,9 @@ class BooksController extends ApiController
             default:
                 // TODO
         }
-        $books->groupBy('books.id', 'name', 'books.thumbnail', 'books.category_id' , 'books.filename', 'books.link',
-            'books.page_number', 'books.author','books.description', 'books.status', 'books.likes', 'books.views', 'books.is_hot',
-            'books.created_at', 'books.updated_at', 'like_books.id');
+//        $books->groupBy('books.id', 'name', 'books.thumbnail', 'books.category_id' , 'books.filename', 'books.link',
+//            'books.page_number', 'books.author','books.description', 'books.status', 'books.likes', 'books.views', 'books.is_hot',
+//            'books.created_at', 'books.updated_at', 'like_books.id');
         // short by id desc
         $books->orderBy('created_at', 'DESC');
 
