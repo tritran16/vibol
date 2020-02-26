@@ -23,9 +23,12 @@ class VideosController extends ApiController
     public function index(Request $request){
         $keyword = $request->get('keyword');
         $device_id = $request->get('device_id');
-        $videos = Video::select('videos.*') //, 'like_videos.id  AS  like_video_id')
+        $videos = Video::select('videos.*', 'like_videos.id  AS  like_video_id')
             ->with('category')
-           // ->leftJoin('like_videos', 'like_videos.video_id', '=', 'videos.id')
+            ->leftJoin('like_videos', function($join) use ($device_id) {
+                $join->on('like_videos.video_id', '=', 'videos.id');
+                $join->on('like_videos.device_id', '=', DB::raw($device_id));
+            })
             ->where('status', 1);
            // ->where('like_videos.device_id', $device_id);
         if ($keyword) {

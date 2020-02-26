@@ -27,7 +27,10 @@ class BooksController extends ApiController
             'books.page_number', 'books.author','books.description', 'books.status', 'books.likes', 'books.views', 'books.is_hot',
             'books.created_at', 'books.updated_at')
             ->with('category')
-            //->leftJoin('like_books', 'like_books.book_id', '=', 'books.id')
+            ->leftJoin('like_books', function($join) use ($device_id) {
+                $join->on('like_books.book_id', '=', 'books.id');
+                $join->on('like_books.device_id', '=', DB::raw($device_id));
+            })
             ->where('status', 1);
             //->where('like_books.device_id', $device_id);
         if ($keyword) {
