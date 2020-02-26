@@ -53,7 +53,7 @@ class BooksController extends ApiController
             'books.created_at', 'books.updated_at', 'like_books.id');
         // short by id desc
         $books->orderBy('created_at', 'DESC');
-        
+
         $data = $books->paginate(API_PAGE_LIMITED);
         return $this->successResponse(new BookCollection($data));
     }
