@@ -28,7 +28,7 @@ class NotificationRequest extends FormRequest
             'title' => 'required|string|max:255',
             'body' => 'required|string|max:1000',
             'notification_type' => 'required|integer',
-            'notification_id' => 'nullable|integer'
+            'notification_id' => 'required|integer'
         ];
     }
 

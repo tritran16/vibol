@@ -30,6 +30,7 @@ class BookRequest extends FormRequest
             'link' => 'required_without:pdf_file|nullable|string|max:1000',
             'status' => 'required',
             'description' => 'nullable|string|max:1000',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4000',
         ];
     }
 

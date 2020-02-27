@@ -21,7 +21,7 @@
         {{ Form::text('title', request('title', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('thumbnail', __('video.thumbnail')) }}
+        {{ Form::label('thumbnail', __('video.thumbnail')) }}<span style="color: red">*</span>
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
     </div>
     <div class="form-group">

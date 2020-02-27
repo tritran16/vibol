@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('body', __('notification.body')) }}
+        {{ Form::label('body', __('notification.body')) }}<span style="color: red">*</span>
         {{ Form::textarea('body', request('body', null), array('class' => 'form-control', 'id' => 'content')) }}
     </div>
 

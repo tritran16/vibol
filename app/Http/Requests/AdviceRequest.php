@@ -27,7 +27,7 @@ class AdviceRequest extends FormRequest
         return [
             'advice' => 'required|string|max:1000',
             'author' => 'nullable|string|max:100',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8000',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:8000',
         ];
     }
 

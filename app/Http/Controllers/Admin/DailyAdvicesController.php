@@ -198,7 +198,7 @@ class DailyAdvicesController extends Controller
         $ios_tokens = Device::where('type', 1)->pluck('device_token')->toArray();
         $android_tokens = Device::where('type', 2)->pluck('device_token')->toArray();
         $notification = Notification::create(['title' => __("Advice"), 'body' => $advice->advice, 'notification_type' => 'App\Models\DailyAdvice', 'notification_id' => $advice->id]);
-        dd($notification);
+
         $notification_id = isset($notification)?$notification->id: time();
         $data =  array(
             'id' => $notification_id,

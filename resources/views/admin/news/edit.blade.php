@@ -40,7 +40,7 @@
                                     {{ Form::text('short_desc_kh', request('short_desc_kh', $news->translate('kh')->short_desc), array('class' => 'form-control')) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::label('content_kh', 'Content (KH)') }}
+                                    {{ Form::label('content_kh', 'Content (KH)') }}<span style="color: red">*</span>
                                     {{ Form::textarea('content_kh', request('content_kh', $news->translate('kh')->content), array('class' => 'form-control textarea', 'id' => 'content_kh', 'rows' => 10)) }}
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                     {{ Form::text('short_desc_en', request('short_desc_en', $news->translate('en')->short_desc), array('class' => 'form-control')) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::label('content_en', 'Content (EN)') }}
+                                    {{ Form::label('content_en', 'Content (EN)') }}<span style="color: red">*</span>
                                     {{ Form::textarea('content_en', request('content_en', $news->translate('kh')->content), array('class' => 'form-control textarea', 'id' => 'content_en', 'rows' => 10)) }}
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
             </div>
         </div>
     <div class="form-group">
-        {{ Form::label('thumbnail', 'Thumbnail Image') }}
+        {{ Form::label('thumbnail', 'Thumbnail Image') }}<span style="color: red">*</span>
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
         <img src="{{asset( $news->thumbnail)}}" width="50px">
     </div>

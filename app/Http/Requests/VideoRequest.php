@@ -48,8 +48,8 @@ class VideoRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'link' => 'required|string|max:1000|youtube'
-
+            'link' => 'required|string|max:1000|youtube',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4000',
         ];
     }
 
