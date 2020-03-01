@@ -44,7 +44,7 @@ class ImageService
         $centerX = CEIL(($width - $text_width) / 2);
         $centerX = $centerX < 0 ? 0 : $centerX;
         if ($position == 1) {
-            $centerY = 0;
+            $centerY = $text_height;
         }
         elseif ($position == 2) {
             $centerY = CEIL(($height - $text_height) / 2);
