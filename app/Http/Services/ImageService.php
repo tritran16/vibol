@@ -15,7 +15,7 @@ class ImageService
             return false;
         }
         if(!$font) {
-            $font = 'C:\Windows\Fonts\arial.ttf';
+            $font = storage_path('fonts/arial.ttf');
         }
         if (!$color) {
             $color = "#ffffff";
