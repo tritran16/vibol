@@ -30,7 +30,7 @@ return [
     'button.login' => 'Login',
     'button.logout' => 'Logout',
     'button.profile' => 'Profile',
-
+    'profile' => 'Profile',
     'msg.confirm.delete' => 'Do you want to delete this item?'
 
 ];

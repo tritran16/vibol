@@ -178,15 +178,15 @@ class NewsController extends Controller
             if ($request->file('image')) {
                 $image = $request->file('image');
                 $file_name  = $image->getClientOriginalName() ;
-                Storage::disk('public')->put('news/images/'. $news->id . '/'. $file_name, File::get($image));
-                News::where('id', $news->id)->update(['image' => 'storage/news/images/'. $news->id . '/'.$file_name]);
+                Storage::disk('public')->put('news/images/'. $id . '/'. $file_name, File::get($image));
+                News::where('id', $id)->update(['image' => 'storage/news/images/'. $id . '/'.$file_name]);
             }
 
             if ($request->file('thumbnail')){
                 $thumbnail = $request->file('thumbnail');
                 $thumbnail_name  = $thumbnail->getClientOriginalName() ;
-                Storage::disk('public')->put('news/thumbnails/'. $news->id . '/'. $thumbnail_name, File::get($thumbnail));
-                News::where('id', $news->id)->update([ 'thumbnail' => 'storage/news/thumbnails/'. $news->id . '/'.$thumbnail_name]);
+                Storage::disk('public')->put('news/thumbnails/'. $id . '/'. $thumbnail_name, File::get($thumbnail));
+                News::where('id', $id)->update([ 'thumbnail' => 'storage/news/thumbnails/'. $id . '/'.$thumbnail_name]);
             }
 
             return redirect(route('news.index'))->with('success', 'Update News successfully!');

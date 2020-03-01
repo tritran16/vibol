@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        return view('admin.user.profile', compact('user'));
+        return view('admin.users.profile', compact('user'));
     }
 
     /**
@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $user = $this->userRepository->updateProfile($request);
 
-        $redirect = redirect()->route('admin.user.profile.view');
+        $redirect = redirect()->route('admin.users.profile.view');
 
         return $user
             ? $redirect->withSuccess('Update profile success')

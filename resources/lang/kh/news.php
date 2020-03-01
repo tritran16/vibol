@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'list' => 'List News(KH)',
-    'title' => 'Title(KH)',
+    'list' => 'ព័ត៌មាន',
+    'title' => 'ចំណងជើងព័ត៌មាន',
     'title_en' => 'Title(English)',
-    'title_khmer' => 'Title(Khmer)',
-    'short_description_khmer' => 'Short Description(Khmer)',
+    'title_khmer' => 'ចំណងជើងព័ត៌មាន(Khmer)',
+    'short_description_khmer' => 'ចំណងជើងព័ត៌មាន(Khmer)',
     'short_description_en' => 'Short Description(English)',
-    'content_khmer' => 'Content(Khmer)',
+    'content_khmer' => 'ចំណងជើងព័ត៌មាន(Khmer)',
     'content_en' => 'Content(EN)',
-    'image' => 'Image(KH)',
-    'thumbnail' => 'Thumbnail(KH)',
-    'created_at' => 'Created At(KH)',
-    'updated_at' => 'Updated At(KH)',
-    'status' => 'Status(KH)',
-    'category.name' => 'Category Name(KH)',
-    'is_hot_news' => 'Is Hot News(KH)',
-    'author' => 'Author(KH)',
-    'create.header' => 'Create News(KH)'
+    'image' => 'រូបភាព',
+    'thumbnail' => 'រូបភាពតូច',
+    'created_at' => 'បង្កើតនៅ',
+    'updated_at' => 'បានធ្វើបច្ចុប្បន្នភាពនៅ',
+    'status' => 'បានធ្វើបច្ចុប្បន្នភាពនៅ',
+    'category.name' => 'ប្រភេទព័ត៌មាន',
+    'is_hot_news' => 'ប្រភេទព័ត៌មាន',
+    'author' => 'អ្នកនិពន្ធ',
+    'create.header' => 'បង្កើតព័ត៌មាន'
 
 ];
