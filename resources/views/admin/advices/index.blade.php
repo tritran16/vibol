@@ -74,9 +74,9 @@
                                             <i class="fa fa-check"></i>
                                         </a>
                                     @endif
-                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('daily_advices.edit', $advice->id) }}">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
+{{--                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('daily_advices.edit', $advice->id) }}">--}}
+{{--                                        <i class="fa fa-pencil"></i>--}}
+{{--                                    </a>--}}
                                     {!! Form::open(['method' => 'DELETE','route' => ['daily_advices.destroy', $advice->id],'style'=>'display:inline']) !!}
                                     <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this Advice?')">
                                         <i class="fa fa-trash"></i>
