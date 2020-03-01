@@ -14,3 +14,4 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', 'Admin\HomeController@test')->name('test');

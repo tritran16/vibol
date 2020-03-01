@@ -5,6 +5,8 @@ return [
     'advice' => 'Advice',
     'image' => 'Image',
     'text_position' => 'Text Position',
+    'text_size' => 'Text Size',
+    'text_color' => 'Text Color',
     'status' => 'Status',
     'created_at' => 'Created At',
     'confirm_active_advice' => 'Do you want active this Advice?',

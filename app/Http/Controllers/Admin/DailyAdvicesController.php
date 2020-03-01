@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdviceRequest;
+use App\Http\Services\ImageService;
 use App\Http\Services\NotificationService;
 use App\Models\DailyAdvice;
 use App\Models\Device;
@@ -54,34 +55,41 @@ class DailyAdvicesController extends Controller
     {
         return view('admin.advices.create');
     }
+    public function store(AdviceRequest $request)
+    {
+        $image = $request->file('image');
+        $file_name  = $image->getClientOriginalName() ;
+        Storage::disk('public')->put('advices/images/tmp/'. $file_name, File::get($image));
+        $path = Storage::disk('public')->path('advices/images/tmp/'. $file_name);
+        $img = ImageService::addTextToImage($path, $request->get('advice'),null, $request->get('text_size'), $request->get('text_color'), $request->get('text_position'));
 
+        //header('Content-type: image/jpeg');
+        imagejpeg($img,  Storage::disk('public')->path('advices/images/'. $file_name));
+
+        imagedestroy($img);
+        $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status']),
+            ['image' => "storage/advices/images/" . $file_name]
+        );
+
+        return view('admin.advices.preview')->with('advice', $_advice);
+
+
+
+    }
     /**
-     * Store a newly created resource in storage.
+     * Save a newly created resource in storage.
      *
      * @param AdviceRequest $request
      * @return Response
      */
-    public function store(AdviceRequest $request)
+    public function save(Request $request)
     {
-        //$validated = $request->validated();
-        if($request->get('status') == 1) {
-            DailyAdvice::where('status', 1)->update(['status' => 2] );
-        }
-        if ($request->file('image')){
-            $image = $request->file('image');
-            $file_name  = $image->getClientOriginalName() ;
-            Storage::disk('public')->put('advices/images/'. $file_name, File::get($image));
-            $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status']),
-                ['image' => "storage/advices/images/" . $file_name]
-            );
-            //dd($_advice);
-        }
-        else {
-            $_advice = $request->only(['author', 'advice', 'text_position', 'status']);
-        }
+        $_advice = $request->only(['advice', 'image', 'author', 'text_position', 'status']);
+
         $advice = DailyAdvice::create($_advice);
+        //dd($_advice);
         if($request->get('status') == 1) {
-            $this->sendNotification($advice);
+           $this->sendNotification($advice);
         }
         return redirect(route('daily_advices.index'))->with('success', 'Created Advice successfully!');
 
@@ -197,7 +205,7 @@ class DailyAdvicesController extends Controller
     private function sendNotification($advice){
         $ios_tokens = Device::where('type', 1)->pluck('device_token')->toArray();
         $android_tokens = Device::where('type', 2)->pluck('device_token')->toArray();
-        $notification = Notification::create(['title' => __("Advice"), 'body' => $advice->advice, 'notification_type' => 'App\Models\DailyAdvice', 'notification_id' => $advice->id]);
+        $notification = Notification::create(['title' => $advice->advice, 'body' => $advice->advice, 'notification_type' => 'App\Models\DailyAdvice', 'notification_id' => $advice->id]);
 
         $notification_id = isset($notification)?$notification->id: time();
         $data =  array(

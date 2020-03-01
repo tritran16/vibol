@@ -31,6 +31,8 @@ return [
     'button.logout' => 'Logout',
     'button.profile' => 'Profile',
     'profile' => 'Profile',
-    'msg.confirm.delete' => 'Do you want to delete this item?'
+    'msg.confirm.delete' => 'Do you want to delete this item?',
+    'button.confirm' => 'Confirm',
+    'button.back' => 'Back',
 
 ];

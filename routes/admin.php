@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('daily_advices', 'DailyAdvicesController');
     //Route::get('daily_advices.create', 'DailyAdvicesController@create')->name('admin.daily_advices.create');
     Route::get('daily_advices/active/{id}', 'DailyAdvicesController@active')->name('admin.daily_advices.active');
+    Route::post('daily_advices/save', 'DailyAdvicesController@save')->name('admin.daily_advices.save');
     Route::resource('videos', 'VideosController');
     Route::resource('video_categories', 'VideoCategoriesController');
     Route::get('videos/active/{id}', 'VideosController@active')->name('admin.videos.active');

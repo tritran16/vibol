@@ -27,15 +27,53 @@
     </div>
     <div class="form-group">
         {{ Form::label('image', __('advice.image')) }}
-        {{ Form::file('image', ['id' => 'img', 'accept' => "image/png, image/jpeg;"]) }}
-        <span class="error">(Only file type : image/png or image/jpeg;)</span>
+        {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
+        <span class="error">(Only file type : jpg)</span>
 
     </div>
-<div class="container">
-    <img id="previewImage" src="#" alt="" style="width:100px; display: none" />
-    <div class="top" id="textAdvice"></div>
-</div>
+    <div class="container">
+        <img id="previewImage" src="#" alt="" style="width:100px; display: none" />
+        <div class="top" id="textAdvice"></div>
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('text_size', __('advice.text_size')) }}
+        {{ Form::select('text_size', [
+            8 => '8', 10 => '10', 12 => '12', 14 => '14', 16 => '16', 18 => '18', 20 => '20', 22 => '22', 24 => '24'
+        ],request('text_size', 12), array('class' => 'form-control', 'id' => 'text-size')) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('text_color', __('advice.text_color')) }}
+        <div class="input-group">
+            <span class="input-group-addon">#</span>
+            {{ Form::text('text_color', request('text_color', null), array('class' => 'form-control', 'id' => 'text-color', 'autocomplete'=>"off")) }}
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-lg-10 col-md-10 text-center">
+            <span id="text-advice" class="border"> </span>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('text_position', __('advice.text_position')) }}
+        {{ Form::select('text_position', [1 => 'Top', 2 => 'Middle', 3 => 'Bottom'], request('text_position', null), array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('status', __('advice.status')) }}
+        {{ Form::select('status', [0 =>  __('advice.status.new'), 1 =>  __('advice.status.active')], request('status', null), array('class' => 'form-control')) }}
+    </div>
+
+    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
+    <a class="btn btn-default" href="{{route('daily_advices.index')}}"> {{__('common.button.cancel')}}</a>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" media="screen" type="text/css" href="{{asset('/css/colorpicker.css')}}" />
+<script type="text/javascript" src="{{asset('/js/colorpicker.js')}}"></script>
 <style>
     .container {
         position: relative;
@@ -82,18 +120,43 @@
     $("#img").change(function() {
         preview(this);
     });
-</script>
-    <div class="form-group">
-        {{ Form::label('text_position', __('advice.text_position')) }}
-        {{ Form::select('text_position', [1 => 'Top', 2 => 'Middle', 3 => 'Bottom'], request('text_position', null), array('class' => 'form-control')) }}
-    </div>
-    <div class="form-group">
-        {{ Form::label('status', 'Status') }}
-        {{ Form::select('status', [0 =>  __('advice.status.new'), 1 =>  __('advice.status.active')], request('status', null), array('class' => 'form-control')) }}
-    </div>
+    $('#txtAdvice').on('change', function () {
+        $('#text-advice').html(nl2br(advice));
+    });
+    $('#text-size').on('change', function () {
+        $('#text-advice').css('font-size', $('#text-size').val() + 'px');
+    });
 
-    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
-    <a class="btn btn-default" href="{{route('daily_advices.index')}}"> {{__('common.button.cancel')}}</a>
+    $('#text-color').ColorPicker({
+        color: '#0022ff',
+        onShow: function (colpkr) {
+            $(colpkr).fadeIn(500);
+            return false;
+        },
+        onHide: function (colpkr) {
+            $(colpkr).fadeOut(500);
+            return false;
+        },
+        onChange: function (hsb, hex, rgb) {
+            $('#text-color').val(hex);
+            advice = $('#txtAdvice').val();
+            if (advice) {
+                console.log(advice);
+                $('#text-advice').html(nl2br(advice));
+                $('#text-advice').css('color', '#' + hex);
+                $('#text-advice').css('font-size', $('#text-size').val() + 'px');
+            }
+        }
+    });
+
+    function nl2br (str, is_xhtml) {
+        if (typeof str === 'undefined' || str === null) {
+            return '';
+        }
+        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+    }
+</script>
 {{ Form::close() }}
 
 @endsection

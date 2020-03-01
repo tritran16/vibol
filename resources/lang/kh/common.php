@@ -37,5 +37,7 @@ return [
     'notification_title' => 'ចំណងជើងជូនដំណឹង',
     'notification_type' => 'ប្រភេទជូនដំណឹង',
 
+    'button.confirm' => 'បញ្ជាក់',
+    'button.back' => 'បញ្ជាក់',
 
 ];
