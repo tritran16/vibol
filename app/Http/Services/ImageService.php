@@ -52,8 +52,8 @@ class ImageService
         }
         else {
             $centerY = CEIL($height - $text_height);
-            $centerY = $centerY < 0 ? 0 : $centerY;
-            dd($centerY);
+            $centerY = 500;//$centerY < 0 ? 0 : $centerY;
+
         }
 
 
