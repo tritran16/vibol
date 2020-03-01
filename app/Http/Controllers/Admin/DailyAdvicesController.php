@@ -58,7 +58,7 @@ class DailyAdvicesController extends Controller
     public function store(AdviceRequest $request)
     {
         $image = $request->file('image');
-        $file_name  = $image->getClientOriginalName() ;
+        $file_name  = time() . '_' .$image->getClientOriginalName() ;
         Storage::disk('public')->put('advices/images/tmp/'. $file_name, File::get($image));
         $path = Storage::disk('public')->path('advices/images/tmp/'. $file_name);
         $img = ImageService::addTextToImage($path, $request->get('advice'),null, $request->get('text_size'), $request->get('text_color'), $request->get('text_position'));
@@ -145,7 +145,7 @@ class DailyAdvicesController extends Controller
             }
             if ($request->file('image')){
                 $image = $request->file('image');
-                $file_name  = $image->getClientOriginalName() ;
+                $file_name  = time(). '_' .$image->getClientOriginalName() ;
                 Storage::disk('public')->put('advices/images/'. $file_name, File::get($image));
                 $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status']),
                     ['image' => "storage/advices/images/" . $file_name]
