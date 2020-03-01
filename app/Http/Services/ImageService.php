@@ -51,13 +51,12 @@ class ImageService
             $centerY = $centerY < 0 ? 0 : $centerY;
         }
         else {
-            $centerY = CEIL(($height - $text_height) / 2);
+            $centerY = CEIL($height - $text_height);
             $centerY = $centerY < 0 ? 0 : $centerY;
         }
 
 
         imagettftext($img,  $size, 0, $centerX, $centerY, $color, $font, $text);
-        //imagejpeg($img, Storage::disk('public')->path('images/balloon1.jpg'));
 
         return $img;
 
