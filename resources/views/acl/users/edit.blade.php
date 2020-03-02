@@ -32,15 +32,19 @@
                     {{ Form::text('email', old('email', $user->email), array('class' => 'form-control')) }}
                 </div>
                 <div class="form-group">
-                    @if(!$roles->isEmpty())
-                        {{ Form::label('name', 'Assign User to Roles') }}<br>
-                        @foreach($roles as $value)
-                            <label>{{ Form::checkbox('roles[]', $value->id, array_key_exists($value->id, $userRoles) ? true : false, array('class' => 'name')) }}
-                                {{ $value->name }}</label>
-                            <br/>
-                        @endforeach
-                    @endif
+                    {{ Form::label('password', __('New Password')) }}
+                    {{ Form::password('password', array('class' => 'form-control')) }}
                 </div>
+{{--                <div class="form-group">--}}
+{{--                    @if(!$roles->isEmpty())--}}
+{{--                        {{ Form::label('name', 'Assign User to Roles') }}<br>--}}
+{{--                        @foreach($roles as $value)--}}
+{{--                            <label>{{ Form::checkbox('roles[]', $value->id, array_key_exists($value->id, $userRoles) ? true : false, array('class' => 'name')) }}--}}
+{{--                                {{ $value->name }}</label>--}}
+{{--                            <br/>--}}
+{{--                        @endforeach--}}
+{{--                    @endif--}}
+{{--                </div>--}}
                 <br>
                 <button type="submit" class="btn btn-sm btn-success btn-flat">
                     <i class="fa fa-floppy-o"></i> @lang('Submit')

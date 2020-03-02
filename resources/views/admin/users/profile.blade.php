@@ -12,15 +12,16 @@
                         </div>
                         <div class="pull-right">
 
-                            <a class="btn btn-success btn-flat" href="#">
-                                <i class="fa fa-edit"></i> {{__('common.button.edit')}}
-                            </a>
+{{--                            <a class="btn btn-success btn-flat" href="#">--}}
+{{--                                <i class="fa fa-edit"></i> {{__('common.button.edit')}}--}}
+{{--                            </a>--}}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-2 col-md-2 col-sm-3  "> &nbsp;</div>
+                    <div class="col-lg-6 col-md-8 col-sm-10  ">
 
                         <div class="card hovercard">
                             <div class="cardheader">
@@ -38,20 +39,20 @@
                                 <div class="desc"><i class="fa fa-book"></i> <b>&nbsp;Administrator</b></div>
                             </div>
                             <div class="clearfix">&nbsp;</div>
-                            <div class="bottom">
-                                <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                                <a class="btn btn-danger btn-sm" rel="publisher"
-                                   href="https://plus.google.com/">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                                <a class="btn btn-primary btn-sm" rel="publisher"
-                                   href="https://facebook.com">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                                <div class="clearfix">&nbsp;</div>
-                            </div>
+{{--                            <div class="bottom">--}}
+{{--                                <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/">--}}
+{{--                                    <i class="fa fa-twitter"></i>--}}
+{{--                                </a>--}}
+{{--                                <a class="btn btn-danger btn-sm" rel="publisher"--}}
+{{--                                   href="https://plus.google.com/">--}}
+{{--                                    <i class="fa fa-google-plus"></i>--}}
+{{--                                </a>--}}
+{{--                                <a class="btn btn-primary btn-sm" rel="publisher"--}}
+{{--                                   href="https://facebook.com">--}}
+{{--                                    <i class="fa fa-facebook"></i>--}}
+{{--                                </a>--}}
+{{--                                <div class="clearfix">&nbsp;</div>--}}
+{{--                            </div>--}}
                         </div>
                         <div class="clearfix">&nbsp;</div>
                     </div>

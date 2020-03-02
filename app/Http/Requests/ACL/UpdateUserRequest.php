@@ -28,6 +28,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name'     => 'required|max:40',
             'email' => 'required|email|max:100|unique:users,email,' .$id,
+            'password' => 'nullable|max:20'
         ];
     }
 }

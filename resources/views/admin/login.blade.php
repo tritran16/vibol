@@ -30,7 +30,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <a href="../../index2.html"><b>Administrator</b>Vibol App</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -40,20 +40,20 @@
         <form action="{{ route('admin.login') }}" method="POST">
             @csrf
             <div class="form-group has-feedback">
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                <input id="email" type="email" placeholder="youremail@example.com" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                <input id="password" type="password" placeholder="your password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> Remember Me
-                        </label>
-                    </div>
+{{--                    <div class="checkbox icheck">--}}
+{{--                        <label>--}}
+{{--                            <input type="checkbox"> Remember Me--}}
+{{--                        </label>--}}
+{{--                    </div>--}}
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
@@ -71,8 +71,8 @@
 {{--        </div>--}}
         <!-- /.social-auth-links -->
 
-        <a href="#">I forgot my password</a><br>
-        <a href="register.html" class="text-center">Register a new membership</a>
+{{--        <a href="#">I forgot my password</a><br>--}}
+{{--        <a href="register.html" class="text-center">Register a new membership</a>--}}
 
     </div>
     <!-- /.login-box-body -->

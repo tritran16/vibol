@@ -10,11 +10,11 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li class="">
-                <a href="{{ route('roles.index') }}">
-                    <i class="fa fa-pencil"></i>  {{__('common.menu.users.roles')}}
-                </a>
-            </li>
+{{--            <li class="">--}}
+{{--                <a href="{{ route('roles.index') }}">--}}
+{{--                    <i class="fa fa-pencil"></i>  {{__('common.menu.users.roles')}}--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="">
                 <a href="{{ route('users.index') }}">
                     <i class="fa fa-users"></i> {{__('common.menu.users.list_user')}}

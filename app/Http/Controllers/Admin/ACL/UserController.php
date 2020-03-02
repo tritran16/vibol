@@ -72,8 +72,8 @@ class UserController extends Controller
         $data = $request->only(['name', 'email', 'password']);
         $user = $this->repository->create($data);
 
-        $user->assignRole($request->input('roles'));
-
+        //$user->assignRole($request->input('roles'));
+        $user->assignRole([1]);
         return redirect()->route('users.index')->with('success',__('Create success'));
     }
 
@@ -88,8 +88,8 @@ class UserController extends Controller
     {
         $user = $this->repository->find($id);
 
-        $roles = $this->roleRepository->get();
-        $userRoles = $user->roles->pluck('id', 'id')->all();
+        //$roles = $this->roleRepository->get();
+        //$userRoles = $user->roles->pluck('id', 'id')->all();
 
         return view('acl.users.edit', compact('user', 'roles', 'userRoles'));
     }
@@ -105,25 +105,25 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $input = $request->only('name', 'email');
+        $input = $request->only('name', 'email', 'password');
         $user = $this->repository->update($input, $id);
-        $roleRequests = $request->get('roles');
-        $userRoles = $user->roles()->get();
+//        $roleRequests = $request->get('roles');
+//        $userRoles = $user->roles()->get();
+//
+//        foreach ($userRoles as $userRole) {
+//            if (is_array($roleRequests) && in_array($userRole->id, $roleRequests)) {
+//                if (!$user->hasRole($userRole))
+//                    $user->assignRole($userRole);
+//            } else {
+//                $user->removeRole($userRole);
+//            }
+//        }
 
-        foreach ($userRoles as $userRole) {
-            if (is_array($roleRequests) && in_array($userRole->id, $roleRequests)) {
-                if (!$user->hasRole($userRole))
-                    $user->assignRole($userRole);
-            } else {
-                $user->removeRole($userRole);
-            }
-        }
+//        $roleRequestOther = array_diff($roleRequests, $userRoles->pluck('id')->toArray());
 
-        $roleRequestOther = array_diff($roleRequests, $userRoles->pluck('id')->toArray());
-
-        foreach ($roleRequestOther as $roleId) {
-            $user->assignRole($roleId);
-        }
+//        foreach ($roleRequestOther as $roleId) {
+//            $user->assignRole($roleId);
+//        }
 
         return redirect()->route('users.edit', $id)->with('success', __('Update success'));
     }

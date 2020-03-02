@@ -33,14 +33,14 @@
                     {{ Form::label('password', __('Password')) }}
                     {{ Form::password('password', array('class' => 'form-control')) }}
                 </div>
-                @if(!$roles->isEmpty())
-                    {{ Form::label('name', 'Assign User to Roles') }}<br>
-                    @foreach ($roles as $role)
-                        {{ Form::checkbox('roles[]',  $role->id ) }}
-                        {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+{{--                @if(!$roles->isEmpty())--}}
+{{--                    {{ Form::label('name', 'Assign User to Roles') }}<br>--}}
+{{--                    @foreach ($roles as $role)--}}
+{{--                        {{ Form::checkbox('roles[]',  $role->id ) }}--}}
+{{--                        {{ Form::label($role->name, ucfirst($role->name)) }}<br>--}}
 
-                    @endforeach
-                @endif
+{{--                    @endforeach--}}
+{{--                @endif--}}
                 <br>
                 <button type="submit" class="btn btn-sm btn-success btn-flat">
                     <i class="fa fa-floppy-o"></i> @lang('Submit')
