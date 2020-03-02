@@ -34,7 +34,7 @@ class VideoCollection extends ResourceCollection
         if ($this->collection) {
             foreach ($this->collection as $item) {
                 $video['id'] = $item->id;
-                $video['category'] = ['id' => $item->category->id, 'name' => $item->category->name];
+                $video['category'] = isset( $item->category)?['id' => $item->category->id, 'name' => $item->category->name]: [];
                 $video['thumbnail'] = isset($this->thumbnail) ? url($item->thumbnail) : null;
                 $video['title'] = $item->title;
                 $video['description'] = $item->description;
