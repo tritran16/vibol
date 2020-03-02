@@ -42,12 +42,12 @@
                                     if ($notification->notification_type == 'App\Models\News') {
                                         $link = url('admin/news/' . $notification->notification_id);
                                         $item = \App\Models\News::find($notification->notification_id);
-                                        $item_name =  $item->translate('kh')->title;
+                                        $item_name =  isset($item)?$item->translate('kh')->title:'';
                                     }
                                     elseif ($notification->notification_type == 'App\Models\Video') {
                                         $link = url('admin/videos/' . $notification->notification_id);
                                         $item = \App\Models\Video::find($notification->notification_id);
-                                        $item_name =  $item->title;
+                                        $item_name = isset($item)? $item->title:'';
                                     }
                                     elseif ($notification->notification_type == 'App\Models\Book') {
                                         $link = url('admin/books/' . $notification->notification_id);
