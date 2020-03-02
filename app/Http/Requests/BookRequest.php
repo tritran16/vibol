@@ -24,15 +24,20 @@ class BookRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules =  [
             'name' => 'required|string|max:255',
             'pdf_file' => 'required_without:link|max:8000', // |mimes:pdf
             'link' => 'required_without:pdf_file|nullable|string|max:1000',
             'status' => 'required',
             'description' => 'nullable|string|max:1000',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4000',
             'page_number' => 'required|integer|min:1'
         ];
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000'
+            ];
+        }
+        return $rules;
     }
 
     public function messages()
