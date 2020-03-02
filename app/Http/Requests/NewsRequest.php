@@ -27,11 +27,11 @@ class NewsRequest extends FormRequest
     {
         $rules =  [
             'title_en' => 'required|string|max:255',
-            'short_desc_en' => 'required|string|max:255',
-            'content_en' => 'required|string|max:1000',
+            'short_desc_en' => 'required|string|max:1000',
+            'content_en' => 'required|string',
             'title_kh' => 'required|string|max:255',
-            'short_desc_kh' => 'required|string|max:255',
-            'content_kh' => 'required|string|max:1000',
+            'short_desc_kh' => 'required|string|max:1000',
+            'content_kh' => 'required|string',
             'category_id' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:8000',
             //'published_date' => 'required|date|after:' . Carbon::yesterday()
