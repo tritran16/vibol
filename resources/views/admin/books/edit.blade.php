@@ -47,7 +47,7 @@
 
     <div class="form-group">
         {{ Form::label('page_number',  __('book.page_number')) }}
-        {{ Form::text('page_number', request('page_number', null), array('class' => 'form-control')) }}
+        {{ Form::number('page_number', request('page_number', null), array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">
