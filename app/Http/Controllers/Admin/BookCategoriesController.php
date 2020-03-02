@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookCategoryRequest;
+use App\Models\Book;
 use App\Models\BookCategory;
 use App\Repositories\BookCategoryRepository;
 use Illuminate\Http\Request;
@@ -99,11 +100,15 @@ class BookCategoriesController extends Controller
     {
         $category = BookCategory::find($id);
         if ($category) {
+            $books = Book::where('category_id', $id)->get();
+            if ($books) {
+                return redirect(route('book_categories.index'))->with('error', 'Please delete all book of this category!');
+            }
             BookCategory::where('id', $id)->delete();
-            return redirect(route('books_categories.index'))->with('success', 'Deleted Book Category Successful!');
+            return redirect(route('book_categories.index'))->with('success', 'Deleted Book Category Successful!');
         }
         else {
-            return redirect(route('books_categories.index'))->with('error', 'Not found Book Category!');
+            return redirect(route('book_categories.index'))->with('error', 'Not found Book Category!');
         }
     }
 }

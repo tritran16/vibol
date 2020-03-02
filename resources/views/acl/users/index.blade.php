@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2>Available User</h2>
+                            <h2>{{__('common.users')}}</h2>
                         </div>
                         <div class="pull-right">
                             @can('create user')
@@ -24,17 +24,21 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <td>No</td>
-                            <th>User</th>
-                            <th>Email</th>
-                            <th>Operation</th>
+                            <td>#</td>
+                            <th>{{__('common.username')}}</th>
+                            <th>{{__('common.email')}}</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->name }}
+                                    @if($user->id == auth()->user()->id)
+                                        <label class="label label-primary" >It's me</label>
+                                    @endif
+                                </td>
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     @can('edit user')
@@ -45,10 +49,12 @@
                                     @can('delete user')
                                         @if($user->id != auth()->user()->id)
                                             {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                                                <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this user?')">
+                                                <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_user')}}')">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             {!! Form::close() !!}
+                                        @else
+
                                         @endif
                                     @endcan
                                 </td>

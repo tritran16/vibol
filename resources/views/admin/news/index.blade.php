@@ -68,7 +68,7 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['news.destroy', $item->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this News?')" title="delete">
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_item')}}')" title="delete">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}

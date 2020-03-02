@@ -18,5 +18,5 @@ return [
     'status.active' => 'បានធ្វើឱ្យសកម្ម',
     'update.button' => 'ធ្វើឱ្យទាន់សម័យ',
     'update.header' => 'កែសម្រួលដំបូន្មាន',
-
+    'push_notification.button' => 'ជំរុញការជូនដំណឹង'
 ];

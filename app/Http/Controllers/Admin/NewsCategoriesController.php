@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsCategoryRequest;
+use App\Models\News;
 use App\Models\NewsCategory;
 use App\Repositories\NewsCategoryRepository;
 use App\Repositories\VideoCategoryRepository;
@@ -136,6 +137,10 @@ class NewsCategoriesController extends Controller
     {
         $category = NewsCategory::find($id);
         if ($category) {
+            $news = News::where('category_id', $id)->get();
+            if ($news) {
+                return redirect(route('news_categories.index'))->with('error', 'Please delete all news of this category!');
+            }
             NewsCategory::where('id', $id)->delete();
             return redirect(route('news_categories.index'))->with('success', 'Deleted News Category Successful!');
         }

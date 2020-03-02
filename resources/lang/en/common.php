@@ -34,5 +34,9 @@ return [
     'msg.confirm.delete' => 'Do you want to delete this item?',
     'button.confirm' => 'Confirm',
     'button.back' => 'Back',
-
+    'users' => 'Users',
+    'username' => 'Username',
+    'email' => 'Email',
+    'confirm_delete_user' => 'Do you want remove this user?',
+    'confirm_delete_item' => 'Do you want to delete this item?s'
 ];

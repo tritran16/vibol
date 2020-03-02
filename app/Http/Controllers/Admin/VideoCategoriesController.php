@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoCategoryRequest;
+use App\Models\Video;
 use App\Models\VideoCategory;
 use App\Repositories\VideoCategoryRepository;
 use Illuminate\Http\Request;
@@ -99,6 +100,10 @@ class VideoCategoriesController extends Controller
     {
         $category = VideoCategory::find($id);
         if ($category) {
+            $videos = Video::where('category_id', $id)->get();
+            if ($videos) {
+                return redirect(route('video_categories.index'))->with('error', 'Please delete all videos of this category!');
+            }
             VideoCategory::where('id', $id)->delete();
             return redirect(route('videos_categories.index'))->with('success', 'Deleted Video Category Successful!');
         }

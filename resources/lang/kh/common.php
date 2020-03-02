@@ -39,5 +39,10 @@ return [
 
     'button.confirm' => 'បញ្ជាក់',
     'button.back' => 'បញ្ជាក់',
+    'users' => 'អ្នកប្រើប្រាស់',
+    'username' => 'អ្នកប្រើប្រាស់',
+    'email' => 'Email',
+    'confirm_delete_user' => 'តើអ្នកចង់លុបអ្នកប្រើនេះចេញទេ?',
+    'confirm_delete_item' => 'តើអ្នកចង់លុបធាតុនេះចេញទេ?',
 
 ];

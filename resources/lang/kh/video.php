@@ -23,4 +23,6 @@ return [
     'confirm.delete.msg' =>  'តើអ្នកចង់លុបប្រភេទវីដេអូនេះទេ?',
     'category.listing.header' => 'ប្រភេទវីដេអូ',
 
+    'confirm.publish.msg' =>  'តើអ្នកចង់ផ្សព្វផ្សាយវីដេអូនេះទេ?',
+
 ];

@@ -41,7 +41,7 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['video_categories.destroy', $category->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this Category?')" title="delete">
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_item')}}')" title="delete">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}

@@ -22,9 +22,10 @@ return [
     'category.listing.header' => 'Video Category',
     'category.name' => 'Category ',
     'category.list' => 'Video Categories',
-    'category.name' => 'Category Name',
     'category.description' => 'Description',
     'category.create.header' => 'Create Video Category',
     'category.update.header' => 'Edit Video Category',
+
+    'confirm.publish.msg' =>  'Do you want to publish this video?',
 
 ];

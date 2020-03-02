@@ -58,7 +58,7 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     @if ($item->status != 1)
-                                        <a type="button" class="btn btn-success" href="{{route('admin.videos.active', $item->id)}}" onclick="confirm('Do you want publish this advice?')">
+                                        <a type="button" class="btn btn-success" href="{{route('admin.videos.active', $item->id)}}" onclick="confirm('{{__('video.confirm.publish.msg')}}')">
                                             <i class="fa fa-check"></i>
                                         </a>
                                     @endif
@@ -66,7 +66,7 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['videos.destroy', $item->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm({{__('video.confirm.delete.msg')}})">
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('video.confirm.delete.msg')}}')">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}
