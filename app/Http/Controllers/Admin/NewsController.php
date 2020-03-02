@@ -157,9 +157,11 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
         if ($news) {
-            $news->update($request->only([
+            $post_data = $request->only([
                 'category_id', 'image', 'thumbnail', 'published_date', 'author', 'status', 'is_hot'
-            ]));
+            ]);
+            $post_data['is_hot'] = isset($post_data['is_hot'])?$post_data['is_hot']:0;
+            News::where('id', $id)->update($post_data);
 
             $data = [
                 'en' => [

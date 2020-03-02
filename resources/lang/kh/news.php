@@ -18,6 +18,7 @@ return [
     'category.name' => 'ប្រភេទព័ត៌មាន',
     'is_hot_news' => 'ប្រភេទព័ត៌មាន',
     'author' => 'អ្នកនិពន្ធ',
-    'create.header' => 'បង្កើតព័ត៌មាន'
-
+    'create.header' => 'បង្កើតព័ត៌មាន',
+    'status.publish' => 'ផ្សព្វផ្សាយ',
+    'status.un_publish' => 'មិនផ្សាយ',
 ];

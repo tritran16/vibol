@@ -17,7 +17,9 @@ return [
     'status' => 'Status',
     'author' => 'Author',
     'category.name' => 'Category Name',
-    'is_hot_news' => 'Is Hot News',
+    'is_hot_news' => 'Hot News',
     'news.author' => 'Author',
-    'create.header' => 'Create News'
+    'create.header' => 'Create News',
+    'status.publish' => 'Publish',
+    'status.un_publish' => 'Un-Publish',
 ];
