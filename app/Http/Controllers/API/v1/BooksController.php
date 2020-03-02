@@ -25,7 +25,7 @@ class BooksController extends ApiController
         $device_id = $request->get('device_id');
         $books = Book::select('books.id', 'name', 'books.thumbnail', 'books.category_id' , 'books.filename', 'books.link',
             'books.page_number', 'books.author','books.description', 'books.status', 'books.likes', 'books.views', 'books.is_hot',
-            'books.created_at', 'books.updated_at')
+            'books.created_at', 'books.updated_at', 'like_books.id  AS  like_book_id')
             ->with('category')
             ->leftJoin('like_books', function($join) use ($device_id) {
                 $join->on('like_books.book_id', '=', 'books.id');
