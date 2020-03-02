@@ -19,7 +19,7 @@ class Book extends JsonResource
             return [];
         }
         $data['id'] = $this->id;
-        $data['category'] =  ['id' => $this->category->id, 'name' => $this->category->name ];
+        $data['category'] =  isset( $this->category)?['id' => $this->category->id, 'name' => $this->category->name ]:[];
         $data['status'] =  $this->status;
         $data['name'] =  $this->name;
         $data['description'] =  $this->description;

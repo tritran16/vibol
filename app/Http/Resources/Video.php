@@ -16,7 +16,7 @@ class Video extends JsonResource
     public function toArray($request)
     {
         $data['id'] = $this->id;
-        $data['category'] =  ['id' => $this->category->id, 'name' => $this->category->name ];
+        $data['category'] =  isset($this->category)?['id' => $this->category->id, 'name' => $this->category->name ]: [];
         $data['status'] =  $this->status;
         $data['title'] =  $this->title;
         $data['description'] =  $this->description;
