@@ -45,12 +45,18 @@ class VideoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules =  [
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'link' => 'required|string|max:1000|youtube',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4000',
+            'link' => 'required|string|max:1000|youtube'
         ];
+
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000'
+            ];
+        }
+        return  $rules;
     }
 
     public function messages()

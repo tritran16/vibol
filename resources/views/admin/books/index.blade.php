@@ -42,6 +42,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>{{__('book.thumbnail')}}</th>
                             <th>{{__('book.name')}}</th>
                             <th>{{__('book.link')}}</th>
                             <th>{{__('book.category')}}</th>
@@ -58,12 +59,13 @@
                         @foreach ($books as $item)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td><a href="{{route('books.show', $item->id)}}"><img src="{{asset($item->thumbnail)}}" width="50px"/>  {{ $item->name }}</a></td>
+                                <td><img src="{{asset($item->thumbnail)}}" width="50px"/></td>
+                                <td><a href="{{route('books.show', $item->id)}}">  {{ $item->name }}</a></td>
                                 <td>
                                     <a target="_blank" href="{{$item->link?$item->link:asset('storage/books/pdf/'. $item->id . '/'.  $item->filename)}}">{{ $item->link?$item->link:$item->filename }}</a>
                                 </td>
                                 <td>
-                                    {{$item->category->name}}
+                                    {{isset($item->category)?$item->category->name:''}}
                                 </td>
                                 <td>@if ($item->status == 1)
                                         <label class="label label-primary" href="#">Active</label>
