@@ -74,7 +74,7 @@
 
         {!! Form::file('image', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
         <br />
-        <img src="{{asset($news->image)}}" width="2000px">
+        <img src="{{asset($news->image)}}" width="200px">
     </div>
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
