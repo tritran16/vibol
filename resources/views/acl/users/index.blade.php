@@ -43,7 +43,7 @@
                                         </a>
                                     @endcan
                                     @can('delete user')
-                                        @if(!$user->checkIsAdmin())
+                                        @if($user->id != auth()->user()->id)
                                             {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                                                 <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('Do you want remove this user?')">
                                                     <i class="fa fa-trash"></i>
