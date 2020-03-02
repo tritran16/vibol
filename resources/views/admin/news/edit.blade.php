@@ -66,14 +66,15 @@
     <div class="form-group">
         {{ Form::label('thumbnail', 'Thumbnail Image') }}<span style="color: red">*</span>
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
-        <img src="{{asset( $news->thumbnail)}}" width="50px">
+        <br />
+        <img src="{{asset( $news->thumbnail)}}" width="100px">
     </div>
     <div class="form-group">
         {{ Form::label('image', 'Image') }}
 
         {!! Form::file('image', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
-
-        <img src="{{asset($news->image)}}" width="50px">
+        <br />
+        <img src="{{asset($news->image)}}" width="2000px">
     </div>
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }} <span style="color: red">*</span>
