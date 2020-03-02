@@ -8,6 +8,7 @@ use App\Models\NewsCategory;
 use App\Repositories\NewsCategoryRepository;
 use App\Repositories\VideoCategoryRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsCategoriesController extends Controller
 {
@@ -28,9 +29,19 @@ class NewsCategoriesController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('keyword');
-        if ($keyword)
-            $categories = $this->newsCategoryRepository->findWhere(['name', 'LIKE', $request->get('keyword') ])->paginate(20);
-        else $categories = $this->newsCategoryRepository->paginate(20);
+        if ($keyword) {
+            // $categories = $this->newsCategoryRepository->findWhere(['name', 'LIKE', $request->get('keyword') ])->paginate(20);
+        }
+        else {
+            $categories = NewsCategory::paginate(20);
+//            ->select('news_categories.id', 'news_category_translations.name')
+//            ->join('news_category_translations', 'news_category_translations.news_category_id', '=', 'news_categories.id')
+//            ->groupBy('news_categories.id', 'news_category_translations.name')
+//                ->paginate(20);
+        }
+
+        //dd($categories);
+
         return view('admin.news.categories.index')->with('news_categories', $categories);
     }
 

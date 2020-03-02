@@ -25,7 +25,7 @@ class NewsRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules =  [
             'title_en' => 'required|string|max:255',
             'short_desc_en' => 'required|string|max:255',
             'content_en' => 'required|string|max:1000',
@@ -33,11 +33,16 @@ class NewsRequest extends FormRequest
             'short_desc_kh' => 'required|string|max:255',
             'content_kh' => 'required|string|max:1000',
             'category_id' => 'required|integer',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:8000',
             //'published_date' => 'required|date|after:' . Carbon::yesterday()
 
         ];
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ];
+        }
+        return  $rules;
     }
 
     public function messages()

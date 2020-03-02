@@ -20,19 +20,19 @@
         <div class="card">
             <div class="card-header p-2">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item active"><a class="nav-link active" href="#khmer" data-toggle="tab">Khmer</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="#khmer" data-toggle="tab">Khmer</a></li>
                     <li class="nav-item"><a class="nav-link" href="#english" data-toggle="tab">English</a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
                 <div class="tab-content">
-                    <div class="tab-pane" id="khmer">
+                    <div class="tab-pane active" id="khmer">
                         <div class="form-group">
-                            {{ Form::label('name_kh', __('common.category.name')) }}<span style="color: red">*</span>
+                            {{ Form::label('name_kh',  __('common.category.name')) }}<span style="color: red">*</span>
                             {{ Form::text('name_kh', request('name_kh', $news_category->translate('kh')->name), array('class' => 'form-control')) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('description_kh', __('common.category.description') }}
+                            {{ Form::label('description_kh',  __('common.category.description')) }}
                             {{ Form::textarea('description_kh', request('description_kh', $news_category->translate('kh')->description), array('class' => 'form-control')) }}
                         </div>
                     </div>
