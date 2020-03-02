@@ -77,3 +77,10 @@
     <a class="btn btn-default" href="{{route('news.index')}}"> Cancel</a>
 
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        CKEDITOR.replace( 'content_kh' );
+        CKEDITOR.replace( 'content_en' );
+    </script>
+@endpush
