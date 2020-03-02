@@ -42,17 +42,17 @@
                                     if ($notification->notification_type == 'App\Models\News') {
                                         $link = url('admin/news/' . $notification->notification_id);
                                         $item = \App\Models\News::find($notification->notification_id);
-                                        $item_name =  isset($item)?$item->translate('kh')->title:'';
+                                        $item_name =  isset($item)?$item->translate('kh')->title: 'Deleted';
                                     }
                                     elseif ($notification->notification_type == 'App\Models\Video') {
                                         $link = url('admin/videos/' . $notification->notification_id);
                                         $item = \App\Models\Video::find($notification->notification_id);
-                                        $item_name = isset($item)? $item->title:'';
+                                        $item_name = isset($item)? $item->title:'Deleted';
                                     }
                                     elseif ($notification->notification_type == 'App\Models\Book') {
                                         $link = url('admin/books/' . $notification->notification_id);
                                         $item = \App\Models\Book::find($notification->notification_id);
-                                        $item_name =  isset($item)?$item->name: '';
+                                        $item_name =  isset($item)?$item->name: 'Deleted';
                                     }
                                     else { // Advice
                                          $link = url('admin/daily_advices/');
