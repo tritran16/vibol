@@ -33,11 +33,11 @@
                             <div class="active tab-pane" id="khmer">
                                 <div class="form-group">
                                     {{ Form::label('title_kh', __('news.title_khmer') ) }}<span style="color: red">*</span>
-                                    {{ Form::text('title_kh', request('title_kh', $news->translate('kh')->title), array('class' => 'form-control' )) }}
+                                    {{ Form::text('title_kh', request('title_kh', $news->translate('kh')->title), array('class' => 'form-control', 'maxlength' => 190 )) }}
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('short_desc_kh', __('news.short_description_khmer') ) }}<span style="color: red">*</span>
-                                    {{ Form::text('short_desc_kh', request('short_desc_kh', $news->translate('kh')->short_desc), array('class' => 'form-control')) }}
+                                    {{ Form::text('short_desc_kh', request('short_desc_kh', $news->translate('kh')->short_desc), array('class' => 'form-control', 'maxlength' => 1000)) }}
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('content_kh', __('news.content_khmer')) }}<span style="color: red">*</span>
@@ -47,11 +47,11 @@
                             <div class="tab-pane" id="english">
                                 <div class="form-group">
                                     {{ Form::label('title_en',  __('news.title_en')) }}<span style="color: red">*</span>
-                                    {{ Form::text('title_en', request('title_en', $news->translate('en')->title), array('class' => 'form-control')) }}
+                                    {{ Form::text('title_en', request('title_en', $news->translate('en')->title), array('class' => 'form-control', 'maxlength' => 190)) }}
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('short_desc_en', __('news.short_description_en') ) }}<span style="color: red">*</span>
-                                    {{ Form::text('short_desc_en', request('short_desc_en', $news->translate('en')->short_desc), array('class' => 'form-control')) }}
+                                    {{ Form::text('short_desc_en', request('short_desc_en', $news->translate('en')->short_desc), array('class' => 'form-control', 'maxlength' => 1000)) }}
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('content_en', __('news.content_en')) }}<span style="color: red">*</span>

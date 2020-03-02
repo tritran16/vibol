@@ -25,23 +25,23 @@ class NewsRequest extends FormRequest
      */
     public function rules()
     {
-       return  [
+       $rules = [
             'title_en' => 'required|string|max:255',
-            'short_desc_en' => 'required|string|max:1000',
+            'short_desc_en' => 'required|string',
             'content_en' => 'required|string',
             'title_kh' => 'required|string|max:255',
-            'short_desc_kh' => 'required|string|max:1000',
+            'short_desc_kh' => 'required|string',
             'content_kh' => 'required|string',
             'category_id' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
 
         ];
-//        if ($this->getMethod() == 'POST') {
-//            $rules += [
-//                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-//            ];
-//        }
-//        return  $rules;
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ];
+        }
+        return  $rules;
     }
 
     public function messages()
