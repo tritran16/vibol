@@ -2,6 +2,7 @@
 
 return [
     'list' => 'ព័ត៌មាន',
+    'detail' => 'មើលព័ត៌មានលម្អិត',
     'title' => 'ចំណងជើងព័ត៌មាន',
     'title_en' => 'Title(English)',
     'title_khmer' => 'ចំណងជើងព័ត៌មាន(Khmer)',

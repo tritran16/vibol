@@ -2,6 +2,7 @@
 
 return [
     'list' => 'News Listing',
+    'detail' => 'View News Detail',
     'title' => 'Title',
     'title_en' => 'Title(English)',
     'title_khmer' => 'Title(Khmer)',
@@ -18,5 +19,5 @@ return [
     'category.name' => 'Category Name',
     'is_hot_news' => 'Is Hot News',
     'news.author' => 'Author',
-    'create.header' => 'Create News (EN)'
+    'create.header' => 'Create News'
 ];
