@@ -52,7 +52,7 @@
                                     elseif ($notification->notification_type == 'App\Models\Book') {
                                         $link = url('admin/books/' . $notification->notification_id);
                                         $item = \App\Models\Book::find($notification->notification_id);
-                                        $item_name =  $item->name;
+                                        $item_name =  isset($item)?$item->name: '';
                                     }
                                     else { // Advice
                                          $link = url('admin/daily_advices/');
