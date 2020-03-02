@@ -58,7 +58,7 @@
         {{ Form::label('is_hot',  __('book.is_hot')) }}
         {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
     </div>
-    {{ Form::submit(__('common.create.button'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 
