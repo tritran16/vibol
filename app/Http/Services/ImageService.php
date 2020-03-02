@@ -15,7 +15,7 @@ class ImageService
             return false;
         }
         if(!$font) {
-            $font = storage_path('fonts/arial.ttf');
+            $font = storage_path('fonts/LeelawUI.ttf');
         }
         if (!$color) {
             $color = "#ffffff";
