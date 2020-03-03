@@ -101,7 +101,7 @@ class BookCategoriesController extends Controller
         $category = BookCategory::find($id);
         if ($category) {
             $books = Book::where('category_id', $id)->get();
-            if ($books) {
+            if ($books && count($books) > 0) {
                 return redirect(route('book_categories.index'))->with('error', 'Please delete all book of this category!');
             }
             BookCategory::where('id', $id)->delete();

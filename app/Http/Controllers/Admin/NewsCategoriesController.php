@@ -138,7 +138,7 @@ class NewsCategoriesController extends Controller
         $category = NewsCategory::find($id);
         if ($category) {
             $news = News::where('category_id', $id)->get();
-            if ($news) {
+            if ($news && count($news) > 0) {
                 return redirect(route('news_categories.index'))->with('error', 'Please delete all news of this category!');
             }
             NewsCategory::where('id', $id)->delete();

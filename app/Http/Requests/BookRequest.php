@@ -29,7 +29,8 @@ class BookRequest extends FormRequest
             'pdf_file' => 'required_without:link|max:8000', // |mimes:pdf
             'link' => 'required_without:pdf_file|nullable|string|max:1000',
             'status' => 'required',
-            'description' => 'nullable|string|max:1000',
+            'category_id' => 'required|integer',
+            'description' => 'nullable|string',
             'page_number' => 'required|integer|min:1'
         ];
         if ($this->getMethod() == 'POST') {

@@ -101,7 +101,7 @@ class VideoCategoriesController extends Controller
         $category = VideoCategory::find($id);
         if ($category) {
             $videos = Video::where('category_id', $id)->get();
-            if ($videos) {
+            if ($videos && count($videos) > 0) {
                 return redirect(route('video_categories.index'))->with('error', 'Please delete all videos of this category!');
             }
             VideoCategory::where('id', $id)->delete();
