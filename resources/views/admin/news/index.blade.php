@@ -39,7 +39,9 @@
                         @foreach ($news as $item)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td><a href="{{route('news.show', $item->id)}}"><img src="{{asset($item->thumbnail)}}" width="50px"/> {{ $item->translate('kh')->title }}</a></td>
+                                <td>
+                                    <a href="{{route('news.show', $item->id)}}">
+                                        <img src="{{asset($item->thumbnail)}}" width="50px"/> {{ $item->translate('kh')->title }}</a></td>
                                 <td>{{$item->category->translate('kh')->name}}</td>
                                 <td>@if ($item->status == 1)
                                         <label class="label label-primary" href="#">Publish</label>

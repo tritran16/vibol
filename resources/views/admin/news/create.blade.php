@@ -43,9 +43,13 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="english">
-{{--                            <div class="form-group">--}}
-{{--                                <a class="btn btn-default pull-right" href="#" onclick="copy()"> {{__('Copy From Khmer field')}}</a>--}}
-{{--                            </div>--}}
+                            <div class="form-group">
+                                <a class="btn btn-default pull-right" href="#" onclick="copy()" title="Copy all field From Khmer field">
+                                    <i class="fa fa-clone"></i>
+                                    {{__('Copy')}}
+                                </a>
+                            </div>
+
                             <div class="form-group">
                                 {{ Form::label('title_en',  __('news.title_en')) }}<span style="color: red">*</span>
                                 {{ Form::text('title_en', request('title_en', null), array('class' => 'form-control', 'maxlength' => 190)) }}
@@ -106,6 +110,8 @@
         function copy(){
             $("input[name=title_en]").val($("input[name=title_kh]").val())
             $("input[name=short_desc_en]").val($("input[name=short_desc_kh]").val())
+            var content_kh = CKEDITOR.instances['content_kh'].getData();
+            CKEDITOR.instances['content_en'].setData(content_kh);
         }
     </script>
 @endpush
