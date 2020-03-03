@@ -105,10 +105,10 @@ class VideoCategoriesController extends Controller
                 return redirect(route('video_categories.index'))->with('error', 'Please delete all videos of this category!');
             }
             VideoCategory::where('id', $id)->delete();
-            return redirect(route('videos_categories.index'))->with('success', 'Deleted Video Category Successful!');
+            return redirect(route('video_categories.index'))->with('success', 'Deleted Video Category Successful!');
         }
         else {
-            return redirect(route('videos_categories.index'))->with('error', 'Not found Video Category!');
+            return redirect(route('video_categories.index'))->with('error', 'Not found Video Category!');
         }
     }
 }
