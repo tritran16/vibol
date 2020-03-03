@@ -71,17 +71,27 @@ class NewsController extends Controller
 //
 //        $thumbName = time().'.'. $request->file('thumbnail')->getClientOriginalExtension();
 //        $request->file('thumbnail')->move(public_path('images/thumb/'), $thumbName);
-        $this->validate($request,[
+        $validate = Validator::make(
+            $request->all(), [
 //            'title_en' => 'required|string|max:255',
 //            'short_desc_en' => 'required',
 //            'content_en' => 'required|string',
-            'title_kh' => 'required|string|max:255',
-            'short_desc_kh' => 'required|string',
-            'content_kh' => 'required|string',
+//            'title_kh' => 'required|string|max:255',
+//            'short_desc_kh' => 'required|string',
+//            'content_kh' => 'required|string',
             'category_id' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
         ]);
-        
+        if ($validate->fails()) {
+            return View('admin.news.create')->withErrors($validate);
+        }
+        else {
+            if (!$request->get('title_en') || !$request->get('title_kh')
+                || !$request->get('short_desc_en') || !$request->get('short_desc_kh')) {
+                return View('admin.news.create')->with('errors', ['Not empty content or title of news']);
+            }
+        }
+
         $data = [
             'en' => [
                 'title'       => $request->input('title_en'),
