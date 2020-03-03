@@ -97,15 +97,22 @@ class NewsController extends Controller
         }
         else {
             if (!$request->get('title_en') || !$request->get('title_kh')
-                || !$request->get('short_desc_en') || !$request->get('short_desc_kh')) {
-                if (!$request->get('title_en'))
-                    $validate->getMessageBag()->add('title_en', 'Title English Not empty');
+                || !$request->get('short_desc_en') || !$request->get('short_desc_kh')
+                || !$request->get('content_en') || !$request->get('content_kh')
+            ) {
                 if (!$request->get('title_kh'))
                     $validate->getMessageBag()->add('title_kh', 'Title Khmer Not empty');
-                if (!$request->get('short_desc_en'))
-                    $validate->getMessageBag()->add('short_desc_en', 'Short Desc English Not empty');
                 if (!$request->get('short_desc_kh'))
                     $validate->getMessageBag()->add('short_desc_kh', 'Short Desc Khmer Not empty');
+                if (!$request->get('content_kh'))
+                    $validate->getMessageBag()->add('short_desc_kh', 'Content Khmer of news Not empty');
+                if (!$request->get('title_en'))
+                    $validate->getMessageBag()->add('title_en', 'Title English Not empty');
+
+                if (!$request->get('short_desc_en'))
+                    $validate->getMessageBag()->add('short_desc_en', 'Short Desc English Not empty');
+                if (!$request->get('content_en'))
+                    $validate->getMessageBag()->add('short_desc_kh', 'Content English of news Not empty');
                 return View('admin.news.create')->withErrors($validate)
                     ->with('categories', $categories);
             }
