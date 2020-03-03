@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class NewsController extends Controller
 {
@@ -82,13 +83,27 @@ class NewsController extends Controller
             'category_id' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
         ]);
+        $categories = [];
+        $_categories = NewsCategory::all();
+        $categories[""] = 'Select Category';
+        foreach ($_categories as $category) {
+            $categories[$category->id] = $category->translate('kh')->name;
+
+        }
         if ($validate->fails()) {
-            return View('admin.news.create')->withErrors($validate);
+
+            return View('admin.news.create')->withErrors($validate)
+                ->with('categories', $categories);
         }
         else {
             if (!$request->get('title_en') || !$request->get('title_kh')
                 || !$request->get('short_desc_en') || !$request->get('short_desc_kh')) {
-                return View('admin.news.create')->with('errors', ['Not empty content or title of news']);
+                if (!$request->get('title_en'))$validate->getMessageBag()->add('title_en', 'Title English Not empty');
+                if (!$request->get('title_kh'))$validate->getMessageBag()->add('title_kh', 'Title Khmer Not empty');
+                if (!$request->get('short_desc_en'))$validate->getMessageBag()->add('short_desc_en', 'Short Desc English Not empty');
+                if (!$request->get('short_desc_kh'))$validate->getMessageBag()->add('short_desc_kh', 'Short Desc Khmer Not empty');
+                return View('admin.news.create')->withErrors($validate)
+                    ->with('categories', $categories);
             }
         }
 
