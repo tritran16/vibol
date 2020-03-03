@@ -59,7 +59,7 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return Response
      */
-    public function store(NewsRequest $request)
+    public function store(Request $request)
     {
 //        $news = News::create($request->only('title', 'short_desc', 'category_id', 'author',
 //            'content', 'source', 'status', 'published_date'));
@@ -71,7 +71,16 @@ class NewsController extends Controller
 //
 //        $thumbName = time().'.'. $request->file('thumbnail')->getClientOriginalExtension();
 //        $request->file('thumbnail')->move(public_path('images/thumb/'), $thumbName);
-
+        $this->validate($request,[
+            'title_en' => 'required|string|max:255',
+            'short_desc_en' => 'required',
+            'content_en' => 'required|string',
+            'title_kh' => 'required|string|max:255',
+            'short_desc_kh' => 'required|string',
+            'content_kh' => 'required|string',
+            'category_id' => 'required|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
+        ]);
         $data = [
             'en' => [
                 'title'       => $request->input('title_en'),
