@@ -15,9 +15,8 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->string('title', 255);
-            $table->string('body', 1000);
+            $table->string('title', 1000);
+            $table->text('body')->nullable();
             $table->smallInteger('notification_type')->nullable();
             $table->bigInteger('notification_id')->nullable();
             $table->smallInteger('send_to')->default(0)->comment('0: all; 1 : iOS, 2: Android');
