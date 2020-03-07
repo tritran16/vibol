@@ -33,7 +33,7 @@
 
     <div class="form-group">
         {{ Form::label('title', __('notification.title')) }}<span style="color: red">*</span>
-        {{ Form::text('title', request('title', null), array('class' => 'form-control', 'id' => 'title')) }}
+        {{ Form::text('title', request('title', null), array('class' => 'form-control', 'id' => 'title', 'maxlength' => 1000)) }}
     </div>
 
     <div class="form-group">
