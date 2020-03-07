@@ -67,7 +67,7 @@ class BooksController extends Controller
         $file_name = '';
         if ($request->file('pdf_file')){
             $pdf_file = $request->file('pdf_file');
-            $file_name  = $pdf_file->getClientOriginalName() ;
+            $file_name  = urlencode($pdf_file->getClientOriginalName()) ;
             Storage::disk('public')->put('books/pdf/'. $file_name, File::get($pdf_file));
             $book = Book::create(array_merge($request->only(['name', 'category_id', 'link', 'description', 'status', 'is_hot', 'author', 'page_number']),
                 ['filename' => $file_name, 'link' => env('APP_URL') .'/storage/books/pdf/' . $file_name] ));
@@ -78,7 +78,7 @@ class BooksController extends Controller
 
         if ($request->file('thumbnail')){
             $thumbnail = $request->file('thumbnail');
-            $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+            $thumbnail_name  = urlencode($thumbnail->getClientOriginalName()) ;
             Storage::disk('public')->put('books/thumbnails/'. $book->id . '/'. $thumbnail_name, File::get($thumbnail));
             Book::where('id', $book->id)->update([ 'thumbnail' => 'storage/books/thumbnails/'. $book->id . '/'.$thumbnail_name]);
         }

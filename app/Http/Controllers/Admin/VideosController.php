@@ -52,7 +52,7 @@ class VideosController extends Controller
         $video = Video::create($request->all());
         if ($request->file('thumbnail')){
             $thumbnail = $request->file('thumbnail');
-            $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+            $thumbnail_name  = urlencode($thumbnail->getClientOriginalName()) ;
             Storage::disk('public')->put('videos/thumbnails/'. $video->id . '/'. $thumbnail_name, File::get($thumbnail));
             Video::where('id', $video->id)->update([ 'thumbnail' => 'storage/videos/thumbnails/'. $video->id . '/'.$thumbnail_name]);
         }
@@ -101,7 +101,7 @@ class VideosController extends Controller
             ]));
             if ($request->file('thumbnail')){
                 $thumbnail = $request->file('thumbnail');
-                $thumbnail_name  = $thumbnail->getClientOriginalName() ;
+                $thumbnail_name  = urlencode($thumbnail->getClientOriginalName()) ;
                 Storage::disk('public')->put('videos/thumbnails/'. $video->id . '/'. $thumbnail_name, File::get($thumbnail));
                 Video::where('id', $video->id)->update([ 'thumbnail' => 'storage/videos/thumbnails/'. $video->id . '/'.$thumbnail_name]);
             }

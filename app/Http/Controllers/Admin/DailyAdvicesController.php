@@ -145,7 +145,7 @@ class DailyAdvicesController extends Controller
             }
             if ($request->file('image')){
                 $image = $request->file('image');
-                $file_name  = time(). '_' .$image->getClientOriginalName() ;
+                $file_name  = time(). '_' .urlencode($image->getClientOriginalName()) ;
                 Storage::disk('public')->put('advices/images/'. $file_name, File::get($image));
                 $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status']),
                     ['image' => "storage/advices/images/" . $file_name]
