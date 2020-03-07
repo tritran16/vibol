@@ -20,7 +20,7 @@ class NotificationService
     {
         //
     }
-
+    // https://github.com/davibennun/laravel-push-notification
     public function pushIOS($tokens, $title , $data){
         if (!$tokens) return;
 
@@ -29,6 +29,7 @@ class NotificationService
             'sound' => 'default',
             'custom' => array("data" => $data)
         ));
+
         foreach ($tokens as $token) {
             $device_tokens[] = PushNotification::Device($token, ['badge' => 0]);
 
@@ -43,7 +44,7 @@ class NotificationService
             Log::info($ex->getMessage());
         }
     }
-
+    // https://github.com/brozot/Laravel-FCM
     public function pushToAndroid($tokens, $title, $data, $payload = []){
         if (!$tokens) return;
         $optionBuilder = new OptionsBuilder();

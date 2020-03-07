@@ -25,8 +25,7 @@ class NotificationRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
-            'body' => 'required|string|max:1000',
+            'title' => 'required|string|max:1000',
             'notification_type' => 'required|integer',
             'notification_id' => 'required|integer'
         ];
@@ -35,8 +34,8 @@ class NotificationRequest extends FormRequest
     public function messages()
     {
         return [
-            'advice.required' => 'Advice content is required!',
-            'author.max' => 'Author is length must be less than 100',
+            'title.required' => 'Title of notification is required!',
+            'title.max' => 'Title length must be less than 1000',
         ];
     }
 }

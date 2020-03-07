@@ -89,6 +89,7 @@ class NotificationsController extends Controller
 //                    ->first();
                 $news = News::find($item_id);
                 $image = isset($news->thumbnail)?url($news  ->thumbnail):url('images/no-image.png');
+
                 $notification = new Notification();
                 $notification->title = $title;
                 $notification->body = $body;
