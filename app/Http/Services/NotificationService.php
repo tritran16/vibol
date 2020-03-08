@@ -35,6 +35,7 @@ class NotificationService
 
         }
         $push = new \Davibennun\LaravelPushNotification\PushNotification();
+        Log::info($device_tokens);
         try {
             $push->app('appNameIOS')
                 ->to($device_tokens)
