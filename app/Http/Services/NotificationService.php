@@ -24,8 +24,8 @@ class NotificationService
     public function pushIOS($tokens, $title , $data){
         if (!$tokens) return;
         Log::info('PUSH IOS');
-        Log::info($title);
-        Log::info($data);
+        //Log::info($title);
+        //Log::info($data);
         $message = PushNotification::Message( $title, array(
             'badge' => 0,
             'sound' => 'default',
