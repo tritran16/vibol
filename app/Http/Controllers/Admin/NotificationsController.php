@@ -237,7 +237,7 @@ class NotificationsController extends Controller
 //            ->to($ios_device_tokens)
 //            ->send($message);
 //        dd($collection);
-        $tokens = ['eXBhbCndmNA:APA91bFXawwyQaBp8dmLlHTGT1aS7OwuSU46E2Gkw0s1h5xz3uvXTADdQRhvC7V2hCIN4IwbNwn7wPeuUSktaWSSOEEY7z3pKVWpbxhGJ9XNyTS65p0ntk2QQyV78gZCakmb_hrhaR2V'];
+        $tokens = ['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4', '3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf3'];
         $title = "Test Notification";
         $body = "test test";
         $data =  array(
@@ -245,7 +245,7 @@ class NotificationsController extends Controller
                 'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
             );
         $service = new NotificationService();
-        $service->pushToAndroid($tokens, $title, $data);
+        $service->pushIOS($tokens, $title, $data);
 
 
     }
