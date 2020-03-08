@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AccountRequest;
-use App\Models\AdminAccount;
-use App\Repositories\AdminAccountRepository;
+use App\Http\Requests\PageRequest;
+use App\Models\SystemPage;
+use App\Repositories\SystemPageRepository;
 use Illuminate\Http\Request;
 
 class SystemPagesController extends Controller
 {
     private $systemPageRepository;
 
-    public function __construct(AdminAccountRepository $repository)
+    public function __construct(SystemPageRepository $repository)
     {
         $this->middleware('auth:admin');
         $this->systemPageRepository = $repository;
@@ -24,8 +24,8 @@ class SystemPagesController extends Controller
      */
     public function index()
     {
-        $accounts = $this->systemPageRepository->all();
-        return view('admin.share_pages.index')->with('accounts', $accounts);
+        $pages = $this->systemPageRepository->all();
+        return view('admin.system_pages.index')->with('pages', $pages);
     }
 
     /**
@@ -35,7 +35,7 @@ class SystemPagesController extends Controller
      */
     public function create()
     {
-        return view('admin.share_pages.create');
+        return view('admin.system_pages.create');
     }
 
     /**
@@ -44,11 +44,11 @@ class SystemPagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AccountRequest $request)
+    public function store(PageRequest $request)
     {
-        AdminAccount::create($request->only(['name', 'url',  'status']));
+        SystemPage::create($request->only(['name', 'url',  'status']));
 
-        return redirect(route('share_pages.index'))->with('success', 'Created System Share Page successfully!');//
+        return redirect(route('system_pages.index'))->with('success', 'Created System Share Page successfully!');//
     }
 
     /**
@@ -70,8 +70,8 @@ class SystemPagesController extends Controller
      */
     public function edit($id)
     {
-        $account = AdminAccount::findOrFail($id);
-        return view('admin.share_pages.edit')->with('account', $account);
+        $page = SystemPage::findOrFail($id);
+        return view('admin.system_pages.edit')->with('page', $page);
     }
 
     /**
@@ -81,11 +81,11 @@ class SystemPagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PageRequest $request, $id)
     {
-        $account = AdminAccount::findOrFail($id);
-        AdminAccount::where('id', $id)->update($request->only(['name', 'account_name', 'account_id', 'account_link',  'status']));
-        return redirect(route('share_pages.index'))->with('success', 'Update System Share Page successfully!');
+        $page = SystemPage::findOrFail($id);
+        SystemPage::where('id', $id)->update($request->only(['name', 'url',  'status']));
+        return redirect(route('system_pages.index'))->with('success', 'Update System Share Page successfully!');
     }
 
     /**
@@ -96,7 +96,7 @@ class SystemPagesController extends Controller
      */
     public function destroy($id)
     {
-        AdminAccount::where('id', $id)->delete();
-        return redirect(route('share_pages.index'))->with('success', 'Deleted System Share Page Successful!');
+        SystemPage::where('id', $id)->delete();
+        return redirect(route('system_pages.index'))->with('success', 'Deleted System Share Page Successful!');
     }
 }

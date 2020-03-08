@@ -81,7 +81,7 @@ class AccountsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AccountRequest $request, $id)
     {
         $account = AdminAccount::findOrFail($id);
         AdminAccount::where('id', $id)->update($request->only(['name', 'account_name', 'account_id', 'account_link',  'status']));

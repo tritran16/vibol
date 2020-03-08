@@ -39,3 +39,5 @@ Route::get('advices/dislike/{id}', 'API\v1\AdvicesController@dislike');
 Route::post('devices/register', 'API\v1\SystemsController@register');
 
 Route::get('system/accounts', 'API\v1\SystemsController@accounts');
+
+Route::get('system/shares', 'API\v1\SystemsController@shares');

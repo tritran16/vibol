@@ -93,10 +93,26 @@
         <a href="{{ route('admin.notification.index') }}"><i class="fa fa-bell"></i> <span>{{__('common.menu.notifications')}}</span></a>
     </li>
 
-    <li>
-        <a href="{{ route('admin_accounts.index') }}">
-            <i class="fa fa-id-card-o"></i> {{__('common.admin_account.list')}}
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-cogs"></i> <span>{{__('common.menu.system')}}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="{{ route('admin_accounts.index') }}">
+                    <i class="fa fa-id-card-o"></i> {{__('common.admin_account.list')}}
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('system_pages.index') }}">
+                    <i class="fa fa-pagelines"></i> {{__('common.system_page.list')}}
+                </a>
+            </li>
+        </ul>
+
     </li>
 
 </ul>

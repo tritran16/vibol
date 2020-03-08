@@ -7,6 +7,8 @@ use App\Http\Requests\AdviceRequest;
 use App\Http\Requests\DeviceRequest;
 use App\Models\AdminAccount;
 use App\Models\Device;
+use App\Models\SharePge;
+use App\Models\SystemPage;
 use Illuminate\Http\Request;
 
 class SystemsController extends ApiController
@@ -29,5 +31,10 @@ class SystemsController extends ApiController
     public function accounts(Request $request){
         $accounts = AdminAccount::where('status', 1)->get();
         return $this->successResponse($accounts);
+    }
+
+    public function shares(Request $request){
+        $pages = SystemPage::where('status', 1)->get();
+        return $this->successResponse($pages);
     }
 }
