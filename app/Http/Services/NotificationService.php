@@ -31,7 +31,7 @@ class NotificationService
         ));
         $device_tokens[] = PushNotification::Device('3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4', ['badge' => 0]);
         foreach ($tokens as $token) {
-            //$device_tokens[] = PushNotification::Device($token, ['badge' => 0]);
+            $device_tokens[] = PushNotification::Device($token, ['badge' => 0]);
 
         }
         $push = new \Davibennun\LaravelPushNotification\PushNotification();
