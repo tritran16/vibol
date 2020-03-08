@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>{{__('book.category.update.header')}}</h1>
+<h1>{{__('common.admin_account.update')}}</h1>
 
 <!-- if there are creation errors, they will show here -->
 @if ($errors->any())

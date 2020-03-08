@@ -45,4 +45,13 @@ return [
     'confirm_delete_user' => 'តើអ្នកចង់លុបអ្នកប្រើនេះចេញទេ?',
     'confirm_delete_item' => 'តើអ្នកចង់លុបធាតុនេះចេញទេ?',
 
+    'admin_account.list' => 'System Account',
+    'admin_account.name' => 'Account',
+    'admin_account.account_id' => 'Account ID',
+    'admin_account.account_name' => 'Account Name',
+    'admin_account.account_link' => 'Account Link',
+    'admin_account.account_status' => 'Status',
+    'admin_account.create' => 'Create new System Account',
+    'admin_account.update' => 'Edit System Account',
+
 ];

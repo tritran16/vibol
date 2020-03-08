@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>{{__('book.category.create.header')}}</h1>
+<h1>{{__('common.admin_account.create')}}</h1>
 
 <!-- if there are creation errors, they will show here -->
 

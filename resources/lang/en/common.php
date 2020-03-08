@@ -46,4 +46,6 @@ return [
     'admin_account.account_name' => 'Account Name',
     'admin_account.account_link' => 'Account Link',
     'admin_account.account_status' => 'Status',
+    'admin_account.create' => 'Create new System Account',
+    'admin_account.update' => 'Edit System Account',
 ];
