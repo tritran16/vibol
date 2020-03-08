@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('notifications/load_list_item/{type}',  'NotificationsController@ajax_load_items')->name('ajax.notifications.load_list_item_by_type');
 
     Route::get('notifications/load_content/{id}/{type}',  'NotificationsController@ajaxLoadContentNotification')->name('ajax.notifications.load_content_notification');
+
+    Route::resource('admin_accounts', 'AccountsController');
 });
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\AdviceRequest;
 use App\Http\Requests\DeviceRequest;
+use App\Models\AdminAccount;
 use App\Models\Device;
 use Illuminate\Http\Request;
 
@@ -23,5 +24,10 @@ class SystemsController extends ApiController
         }
 
         return $this->successResponse($device);
+    }
+
+    public function accounts(Request $request){
+        $accounts = AdminAccount::where('status', 1)->get();
+        return $this->successResponse($accounts);
     }
 }

@@ -38,5 +38,12 @@ return [
     'username' => 'Username',
     'email' => 'Email',
     'confirm_delete_user' => 'Do you want remove this user?',
-    'confirm_delete_item' => 'Do you want to delete this item?s'
+    'confirm_delete_item' => 'Do you want to delete this item?',
+
+    'admin_account.list' => 'System Account',
+    'admin_account.name' => 'Account',
+    'admin_account.account_id' => 'Account ID',
+    'admin_account.account_name' => 'Account Name',
+    'admin_account.account_link' => 'Account Link',
+    'admin_account.account_status' => 'Status',
 ];

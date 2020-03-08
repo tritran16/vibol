@@ -93,4 +93,10 @@
         <a href="{{ route('admin.notification.index') }}"><i class="fa fa-bell"></i> <span>{{__('common.menu.notifications')}}</span></a>
     </li>
 
+    <li>
+        <a href="{{ route('admin_accounts.index') }}">
+            <i class="fa fa-id-card-o"></i> {{__('common.admin_account.list')}}
+        </a>
+    </li>
+
 </ul>
