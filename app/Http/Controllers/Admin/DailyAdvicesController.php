@@ -230,7 +230,7 @@ class DailyAdvicesController extends Controller
 //            Log::info($ex->getMessage());
 //        }
         try {
-            $service->pushNotification($tokens, $notification->title,  $data);
+            $service->pushNotification($tokens, $notification->title, $notification->body,  $data);
         }
         catch (\Exception $ex) {
             Log::info($ex->getMessage());

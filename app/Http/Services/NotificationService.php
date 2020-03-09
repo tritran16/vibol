@@ -21,16 +21,17 @@ class NotificationService
         //
     }
 
-    public  function  pushNotification($tokens, $title , $data, $payload = []){
+    public  function  pushNotification($tokens, $title , $description, $data, $payload = []){
         if (!$tokens) return;
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
-        $notificationBuilder->setBody(['data' => $data])
+        $notificationBuilder->setBody($description)
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData(['data' => $data]);
         $dataBuilder->addData($payload);
 
         $option = $optionBuilder->build();

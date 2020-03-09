@@ -162,7 +162,7 @@ class NotificationsController extends Controller
 //                Log::info($ex->getMessage());
 //            }
             try {
-                $service->pushNotification($tokens, $title,  $data);
+                $service->pushNotification($tokens, $title, $body,  $data);
             }
             catch (\Exception $ex) {
                 Log::info($ex->getMessage());
