@@ -132,6 +132,7 @@ class NotificationsController extends Controller
 //            }
             $ios_tokens = Device::where('type', 1)->pluck('device_token')->toArray();
             $android_tokens = Device::where('type', 2)->pluck('device_token')->toArray();
+            $tokens = Device::pluck('device_token')->toArray();
 //            $android_device_tokens = [];
 //            $j = 0;
 //            foreach ($androids as $device){
@@ -147,33 +148,26 @@ class NotificationsController extends Controller
                 'thumbnail' => $image,
                 'created_at' => Carbon::now()->format("d/m/Y")
             );
-//            $message = PushNotification::Message( $title ,array(
-//                'badge' => 0,
-//                'sound' => 'default',
-//                'custom' => array("data" => $data)
-//            ));
-            //$push = new \Davibennun\LaravelPushNotification\PushNotification();
             $service = new NotificationService();
-            try {
-               $service->pushIOS($ios_tokens, $title, $data);
-            }
-            catch (\Exception $ex) {
-                Log::info($ex->getMessage());
-            }
-            try {
-                $service->pushToAndroid($android_tokens, $title,  $data);
-            }
-            catch (\Exception $ex) {
-                Log::info($ex->getMessage());
-            }
-            // get response for each device push
-//            foreach ($collection->pushManager as $push) {
-//                $response = $push->getResponse();
-//
+//            try {
+//               $service->pushIOS($ios_tokens, $title, $data);
 //            }
-// access to adapter for advanced settings
-            //$push = PushNotification::app('appNameAndroid');
-            //$push->adapter->setAdapterParameters(['sslverifypeer' => false]);
+//            catch (\Exception $ex) {
+//                Log::info($ex->getMessage());
+//            }
+//            try {
+//                $service->pushToAndroid($android_tokens, $title,  $data);
+//            }
+//            catch (\Exception $ex) {
+//                Log::info($ex->getMessage());
+//            }
+            try {
+                $service->pushNotification($tokens, $title,  $data);
+            }
+            catch (\Exception $ex) {
+                Log::info($ex->getMessage());
+            }
+
 
             return redirect(route('admin.notification.index'))->with('success', 'Created Notification successfully!');//
         }
