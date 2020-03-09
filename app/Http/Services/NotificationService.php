@@ -25,10 +25,10 @@ class NotificationService
         if (!$tokens) return;
         $optionBuilder = new OptionsBuilder();
         if (strlen($title) > 50) {
-            $title = substr($title, 0, 50);
+            //$title = substr($title, 0, 50);
         }
         if (strlen($description) > 50) {
-            $description = substr($description, 0, 50);
+            //$description = substr($description, 0, 50);
         }
         $optionBuilder->setTimeToLive(60*20);
 
@@ -37,7 +37,7 @@ class NotificationService
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData([$data]);
+        $dataBuilder->addData(['data' => $data]);
        // $dataBuilder->addData($payload);
 
         $option = $optionBuilder->build();
@@ -46,7 +46,7 @@ class NotificationService
 
 
         // You must change it to get your tokens
-        $downstreamResponse = FCM::sendTo($tokens, $option, $notification, null);
+        $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $payload_data);
 
         Log::info("Number Success : ". $downstreamResponse->numberSuccess());
         Log::info("Number Failed : ". $downstreamResponse->numberFailure());
