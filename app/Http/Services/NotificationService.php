@@ -24,6 +24,12 @@ class NotificationService
     public  function  pushNotification($tokens, $title , $description, $data, $payload = []){
         if (!$tokens) return;
         $optionBuilder = new OptionsBuilder();
+        if (strlen($title) > 50) {
+            $title = substr($title, 0, 50);
+        }
+        if (strlen($description) > 50) {
+            $description = substr($description, 0, 50);
+        }
         $optionBuilder->setTimeToLive(60*20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
@@ -31,8 +37,8 @@ class NotificationService
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['data' => $data]);
-        $dataBuilder->addData($payload);
+        $dataBuilder->addData([$data]);
+       // $dataBuilder->addData($payload);
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
