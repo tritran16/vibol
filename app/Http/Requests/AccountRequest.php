@@ -30,7 +30,7 @@ class AccountRequest extends FormRequest
     public function rules()
     {
         $rules =  [
-            'name' => 'required|unique:admin_accounts|string|max:100',
+            'name' => 'required|string|max:100|unique:admin_accounts,name,'. request('id'),
             'account_id' => 'required|string|max:100',
             'account_name' => 'required|string',
             'account_link' => 'required|url'

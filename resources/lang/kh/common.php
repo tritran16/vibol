@@ -54,4 +54,13 @@ return [
     'admin_account.create' => 'Create new System Account',
     'admin_account.update' => 'Edit System Account',
 
+    'menu.system' => 'Systems',
+
+    'system_page.list' => 'System Page Share',
+    'system_page.name' => 'Share Page',
+    'system_page.url' => 'URL',
+    'system_page.status' => 'Status',
+    'system_page.create' => 'Create New Share Page',
+    'system_page.update' => 'Edit Share Page',
+
 ];

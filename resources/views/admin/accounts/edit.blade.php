@@ -14,6 +14,7 @@
     </div>
 @endif
 {{ Form::model($account, array('route' => array('admin_accounts.update', $account->id), 'method' => 'PUT')) }}
+    <input type="hidden" name="id" value="{{$account->id}}"/>
     <div class="form-group">
         {{ Form::label('name', __('common.admin_account.name')) }}<span style="color: red">*</span>
         {{ Form::select('name', [ 'facebook' => 'Facebook', 'viber' => 'Viber', 'telegram' => 'Telegram', 'whatsapp' => 'WhatsApp'], request('name', null), array('class' => 'form-control')) }}
