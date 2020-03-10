@@ -35,6 +35,7 @@ Route::get('advices/all', 'API\v1\AdvicesController@all_advices');
 Route::get('advices/{id}', 'API\v1\AdvicesController@view');
 Route::get('advices/like/{id}', 'API\v1\AdvicesController@like');
 Route::get('advices/dislike/{id}', 'API\v1\AdvicesController@dislike');
+Route::get('advices/unlike/{id}', 'API\v1\AdvicesController@dislike');
 
 Route::post('devices/register', 'API\v1\SystemsController@register');
 
