@@ -45,7 +45,8 @@ return [
     'confirm_delete_user' => 'តើអ្នកចង់លុបអ្នកប្រើនេះចេញទេ?',
     'confirm_delete_item' => 'តើអ្នកចង់លុបធាតុនេះចេញទេ?',
 
-    'admin_account.list' => 'System Account',
+    'admin_account.list' => 'គណនីសង្គម',
+
     'admin_account.name' => 'Account',
     'admin_account.account_id' => 'Account ID',
     'admin_account.account_name' => 'Account Name',
@@ -54,9 +55,9 @@ return [
     'admin_account.create' => 'Create new System Account',
     'admin_account.update' => 'Edit System Account',
 
-    'menu.system' => 'Systems',
+    'menu.system' => 'ប្រព័ន្ធ',
 
-    'system_page.list' => 'System Page Share',
+    'system_page.list' => 'ចែករំលែកតំណ',
     'system_page.name' => 'Share Page',
     'system_page.url' => 'URL',
     'system_page.status' => 'Status',
