@@ -39,12 +39,15 @@ class AdvicesController extends ApiController
             ->first();
         if (isset($like) && $like->status == 1) {
             $advice->like = 1;
+            $advice->is_like = 1;
         }
         elseif (isset($like) && $like->status == 0) {
             $advice->like = -1;
+            $advice->is_like = 0;
         }
         else {
             $advice->like = null;
+            $advice->is_like = 0;
         }
         return $this->successResponse( new AdviceResource($advice));
 
@@ -63,11 +66,14 @@ class AdvicesController extends ApiController
                 ->first();
             if (isset($like) && $like->status == 1) {
                 $advice->like = 1;
+                $advice->is_like = 1;
             }
             elseif (isset($like) && $like->status == 0) {
                 $advice->like = -1;
+                $advice->is_like = 0;
             }
             else {
+                $advice->is_like = 0;
                 $advice->like = null;
             }
             return $this->successResponse( new AdviceResource($advice));
@@ -121,6 +127,7 @@ class AdvicesController extends ApiController
                 DailyAdvice::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
             }
             $advice->like = 1;
+            $advice->is_like = 1;
             return $this->successResponse(new AdviceResource($advice), __('likeAdviceSuccess'));
 
         }
@@ -156,6 +163,7 @@ class AdvicesController extends ApiController
                 DailyAdvice::where('id', $id)->update(['dislikes'=> DB::raw('dislikes + 1'), ]);
             }
             $advice->like = -1;
+            $advice->is_like = 0;
             return $this->successResponse(new AdviceResource($advice), __('dislikeAdviceSuccess'));
 
         }

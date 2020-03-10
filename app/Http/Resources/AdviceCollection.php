@@ -32,19 +32,23 @@ class AdviceCollection extends ResourceCollection
         $data = [];
         foreach ($this->collection as $item) {
             $_item = $item;
+            $is_like = 0;
             if (isset($item['like_advice_status'])) {
                 if ($item['like_advice_status'] == 1) {
                     $like = 1;
+                    $is_like = 1;
                 }
                 else if ($item['like_advice_status'] ==  0){
                     $like = -1;
                 }
+
 
             }
             else {
                 $like = null;
             }
             $_item['like'] = $like;
+            $_item['is_like'] = $is_like;
             unset( $_item['like_advice_id']);
             unset( $_item['like_advice_status']);
             $data[] = $_item;
