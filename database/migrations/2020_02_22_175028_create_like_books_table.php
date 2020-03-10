@@ -17,7 +17,6 @@ class CreateLikeBooksTable extends Migration
             $table->bigIncrements('id');
             $table->integer('book_id');
             $table->integer('device_id');
-            $table->tinyInteger('status')->default(0)->comment('o: dislike, 1: like');
             $table->timestamps();
         });
     }
