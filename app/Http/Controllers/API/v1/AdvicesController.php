@@ -57,7 +57,20 @@ class AdvicesController extends ApiController
     function active(Request $request){
         $advice = DailyAdvice::where('status', 1)->first();
         if ($advice) {
-            return $this->successResponse(new AdviceResource($advice));
+            $device_id = $request->get('device_id');
+            $like = LikeAdvice::where('advice_id', $advice->id)
+                ->where('device_id', $device_id)
+                ->first();
+            if (isset($like) && $like->status == 1) {
+                $advice->like = 1;
+            }
+            elseif (isset($like) && $like->status == 0) {
+                $advice->like = -1;
+            }
+            else {
+                $advice->like = null;
+            }
+            return $this->successResponse( new AdviceResource($advice));
         }
         else return $this->failedResponse([], __('notFoundAdvice'));
     }
