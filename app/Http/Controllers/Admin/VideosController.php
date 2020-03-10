@@ -96,9 +96,11 @@ class VideosController extends Controller
     {
         $video = Video::findOrFail($id);
         if ($video) {
-            Video::where('id', $id)->update($request->only([
+            $data = $request->only([
                 'title', 'category_id', 'thumb', 'description', 'source', 'link', 'status', 'is_hot'
-            ]));
+            ]);
+            $data['is_hot'] = isset($data['is_hot']) ? $data['is_hot'] : 0;
+            Video::where('id', $id)->update($data);
             if ($request->file('thumbnail')){
                 $thumbnail = $request->file('thumbnail');
                 $thumbnail_name  = urlencode($thumbnail->getClientOriginalName()) ;

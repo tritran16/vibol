@@ -36,10 +36,10 @@
         {{ Form::label('description',  __('book.description')) }}
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('link',  __('book.link')) }}
-        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('link',  __('book.link')) }}--}}
+{{--        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}--}}
+{{--    </div>--}}
     <div class="form-group">
         {{ Form::label('pdf_file', __('book.pdf_file')) }}
         {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}

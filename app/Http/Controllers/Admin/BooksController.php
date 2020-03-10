@@ -122,16 +122,21 @@ class BooksController extends Controller
     public function update(BookRequest $request, $id)
     {
         $book = Book::findOrFail($id);
+
         if ($request->file('pdf_file')){
             $pdf_file = $request->file('pdf_file');
             $file_name  = $pdf_file->getClientOriginalName() ;
             Storage::disk('public')->put('books/pdf/'. $book->id . '/'. $file_name, File::get($pdf_file));
-            $book->update(array_merge($request->only(['name',  'category_id', 'link', 'description', 'status', 'is_hot', 'page_number', 'author']),
+            $data = array_merge($request->only(['name',  'category_id', 'link', 'description', 'status', 'is_hot', 'page_number', 'author']),
                 ['filename' => $file_name, 'link' => env('APP_URL') .'storage/books/pdf/' . $book->id . '/'.  $file_name]
-            ));
+            );
+            $data['is_hot'] = isset($data['is_hot'])?$data['is_hot']:0;
+            $book->update($data);
         }
         else {
-            $book->update($request->only(['name', 'category_id', 'link', 'description', 'status', 'is_hot', 'author', 'page_number']));
+            $data = $request->only(['name', 'category_id', 'link', 'description', 'status', 'is_hot', 'author', 'page_number']);
+            $data['is_hot'] = isset($data['is_hot'])?$data['is_hot']:0;
+            $book->update($data);
         }
         if ($request->file('thumbnail')){
             $thumbnail = $request->file('thumbnail');

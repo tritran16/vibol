@@ -26,8 +26,9 @@ class BookRequest extends FormRequest
     {
         $rules =  [
             'name' => 'required|string|max:255',
-            'pdf_file' => 'required_without:link|max:8000', // |mimes:pdf
-            'link' => 'required_without:pdf_file|nullable|string|max:1000',
+            //'pdf_file' => 'required_without:link|max:8000', // |mimes:pdf
+            //'link' => 'required_without:pdf_file|nullable|string|max:1000',
+
             'status' => 'required',
             'category_id' => 'required|integer',
             'description' => 'nullable|string',
@@ -35,7 +36,8 @@ class BookRequest extends FormRequest
         ];
         if ($this->getMethod() == 'POST') {
             $rules += [
-                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000'
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000',
+                'pdf_file' => 'required|max:8000|mimes:pdf',
             ];
         }
         return $rules;

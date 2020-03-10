@@ -39,7 +39,7 @@
             </li>
             <li >
                 <a href="{{ route('books.index') }}">
-                    <i class="fa fa-list"></i> {{__('common.menu.books.list_book')}}
+                    <i class="fa fa-file-pdf-o"></i> {{__('common.menu.books.list_book')}}
                 </a>
             </li>
 
@@ -61,7 +61,7 @@
             </li>
             <li>
                 <a href="{{ route('videos.index') }}">
-                    <i class="fa fa-list"></i> {{__('common.menu.videos.list_video')}}
+                    <i class="fa fa-play-circle-o"></i> {{__('common.menu.videos.list_video')}}
                 </a>
             </li>
 
@@ -83,7 +83,7 @@
             </li>
             <li>
                 <a href="{{ route('news.index') }}">
-                    <i class="fa fa-location-arrow"></i> {{__('common.menu.news.list_news')}}
+                    <i class="fa fa-newspaper-o"></i> {{__('common.menu.news.list_news')}}
                 </a>
             </li>
         </ul>
@@ -108,7 +108,7 @@
             </li>
             <li>
                 <a href="{{ route('system_pages.index') }}">
-                    <i class="fa fa-pagelines"></i> {{__('common.system_page.list')}}
+                    <i class="fa fa-share-alt"></i> {{__('common.system_page.list')}}
                 </a>
             </li>
         </ul>

@@ -36,13 +36,18 @@
         {{ Form::label('description',  __('book.description')) }}
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('link',  __('book.link')) }}
-        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('link',  __('book.link')) }}--}}
+{{--        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}--}}
+{{--    </div>--}}
     <div class="form-group">
         {{ Form::label('pdf_file', __('book.pdf_file')) }}
         {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}
+
+        @if ($book->filename)
+            <br><span> File : </span>
+            <a target="_blank" href="{{asset('storage/books/pdf/'. $book->id . '/'.  $book->filename)}}">{{ $book->filename }}</a>
+        @endif
     </div>
 
     <div class="form-group">
@@ -56,7 +61,7 @@
     </div>
     <div class="form-group">
         {{ Form::label('is_hot',  __('book.is_hot')) }}
-        {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
+        {{ Form::checkbox('is_hot', '1', request('is_hot', $book->is_hot)) }}
     </div>
     {{ Form::submit(__('common.button.update'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('books.index')}}"> Cancel</a>
