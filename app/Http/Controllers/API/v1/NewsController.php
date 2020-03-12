@@ -41,7 +41,7 @@ class NewsController extends ApiController
                 $join->on('like_news.device_id', '=', DB::raw($device_id));
             })
             ->where('news.status', 1)
-            ->whereNotNull('news.deleted_at');
+            ->whereNull('news.deleted_at');
             //->where('like_news.device_id', $device_id);
         if ($keyword) {
             $news = $news->where('news_translations.title', 'LIKE', "%$keyword%");
