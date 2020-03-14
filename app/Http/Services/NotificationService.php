@@ -37,19 +37,17 @@ class NotificationService
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['data' => $data]);
+        $dataBuilder->addData($data);
+
        // $dataBuilder->addData($payload);
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
         $payload_data = $dataBuilder->build();
 
-
         // You must change it to get your tokens
         $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $payload_data);
 
-        Log::info("Number Success : ". $downstreamResponse->numberSuccess());
-        Log::info("Number Failed : ". $downstreamResponse->numberFailure());
         $downstreamResponse->numberModification();
 
         // return Array - you must remove all this tokens in your database
@@ -112,9 +110,6 @@ class NotificationService
 
         // You must change it to get your tokens
         $downstreamResponse = FCM::sendTo($tokens, $option, $notification, null);
-
-        Log::info("Number Success : ". $downstreamResponse->numberSuccess());
-        Log::info("Number Failed : ". $downstreamResponse->numberFailure());
         $downstreamResponse->numberModification();
 
         // return Array - you must remove all this tokens in your database

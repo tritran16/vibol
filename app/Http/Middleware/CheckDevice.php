@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Device;
 use Closure;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckDevice
@@ -26,7 +27,12 @@ class CheckDevice
                 ->where('type', $device_type_id)
                 ->first();
             if (!$device) {
-                $device = Device::create(['device_token' => $device_token, 'type' => $device_type_id ]);
+                try {
+                    $device = Device::create(['device_token' => $device_token, 'type' => $device_type_id]);
+                }
+                catch (\Exception $exception) {
+                    Log::info("Duplicate Token " . $device_token);
+                }
             }
             $request->attributes->set('device_id', $device->id);
             return $next($request);
