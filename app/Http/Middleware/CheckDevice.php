@@ -24,7 +24,8 @@ class CheckDevice
         if ($device_token && in_array($device_type, $device_types)) {
             $device_type_id =  $device_type == 'Android' ? 2 : 1;
             $device = Device::where('device_token', $device_token)
-                ->first();
+                ->get();
+            Log::info($device);
             if (!$device) {
                 try {
                     $device = Device::create(['device_token' => $device_token, 'type' => $device_type_id]);
