@@ -132,7 +132,7 @@ class NotificationsController extends Controller
 //            }
             $ios_tokens = Device::where('type', 1)->pluck('device_token')->toArray();
             $android_tokens = Device::where('type', 2)->pluck('device_token')->toArray();
-            $tokens = Device::pluck('device_token')->toArray();
+            $tokens = Device::groupBy('device_token')->pluck('device_token')->toArray();
 //            $android_device_tokens = [];
 //            $j = 0;
 //            foreach ($androids as $device){

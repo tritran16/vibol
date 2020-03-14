@@ -26,7 +26,6 @@ class CheckDevice
             $device = Device::where('device_token', $device_token)
                 ->first();
             if (!$device) {
-
                 $device = Device::create(['device_token' => $device_token, 'type' => $device_type_id]);
 
             }
