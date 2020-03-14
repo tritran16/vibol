@@ -29,12 +29,13 @@ class CheckDevice
             if (!$device) {
                 try {
                     $device = Device::create(['device_token' => $device_token, 'type' => $device_type_id]);
+                    $request->attributes->set('device_id', $device->id);
                 }
                 catch (\Exception $exception) {
                     Log::info("Duplicate Token " . $device_token);
                 }
             }
-            $request->attributes->set('device_id', $device->id);
+
             return $next($request);
         }
         else {
