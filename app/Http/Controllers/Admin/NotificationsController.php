@@ -235,14 +235,38 @@ class NotificationsController extends Controller
         //$tokens = ['3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf4', '3b2531bd2cac6d993bb22b5890ff941748674541410c1a81d8026433f8d3cbf3'];
         $tokens = Device::groupBy('device_token')->where('type', 2)->pluck('device_token')->toArray();
 
-        $title = "Test Notification";
-        $body = "test test";
-        $data =  array(
-                'title' => "Push Notification Title", 'description' => "Push notification description",
-                'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
-            );
-        $service = new NotificationService();
-        $service->pushToAndroid($tokens, $title, $data);
+//        $title = "Test Notification";
+//        $body = "test test";
+//        $data =  array(
+//                'title' => "Push Notification Title", 'description' => "Push notification description",
+//                'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
+//            );
+//        $service = new NotificationService();
+//        $service->pushToAndroid($tokens, $title, $data);
+
+            $url = "https://fcm.googleapis.com/fcm/send";
+
+            $serverKey = env('FCM_SERVER_KEY');
+            foreach ($tokens as $token) {
+                $title = "Vibol App";
+                $body = "hello Tung!!";
+                $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                $arrayToSend = array('to' => $token, 'data' => $notification, 'priority' => 'high');
+                $json = json_encode($arrayToSend);
+                $headers = array();
+                $headers[] = 'Content-Type: application/json';
+                $headers[] = 'Authorization: key=' . $serverKey;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                //Send the request
+                $response = curl_exec($ch);
+                curl_close($ch);
+                Log::info($response);
+            }
+            dd("Push notification success"); 
 
 
     }
