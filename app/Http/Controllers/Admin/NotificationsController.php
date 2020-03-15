@@ -272,7 +272,6 @@ class NotificationsController extends Controller
                 $result = curl_exec($ch);
 
                 curl_close($ch);
-                Log::info($token);
                 Log::info($result);
            // }
             dd("Push notification success");
