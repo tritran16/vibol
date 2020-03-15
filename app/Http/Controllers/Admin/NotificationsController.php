@@ -246,11 +246,9 @@ class NotificationsController extends Controller
 
             $url = "https://fcm.googleapis.com/fcm/send";
             $serverKey = env('FCM_SERVER_KEY');
-            foreach ($tokens as $token) {
+           // foreach ($tokens as $token) {
                 $fields = array (
-                    'registration_ids' => array (
-                        $token
-                    ),
+                    'registration_ids' => $tokens,
                     'data' => array (
                         'title' => "Push Notification Title", 'description' => "Push notification description",
                         'item_type' => "News", 'item_id' => "1", 'created_at' => Carbon::now()->format("Y/m/d")
@@ -276,7 +274,7 @@ class NotificationsController extends Controller
                 curl_close($ch);
                 Log::info($token);
                 Log::info($result);
-            }
+           // }
             dd("Push notification success");
 
 
