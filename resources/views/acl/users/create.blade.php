@@ -43,7 +43,7 @@
 {{--                @endif--}}
                 <br>
                 <button type="submit" class="btn btn-sm btn-success btn-flat">
-                    <i class="fa fa-floppy-o"></i> @lang('Submit')
+                    <i class="fa fa-floppy-o"></i> {{__('common.button.save')}}
                 </button>
 
                 {{ Form::close() }}

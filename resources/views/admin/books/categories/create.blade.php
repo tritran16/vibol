@@ -25,7 +25,7 @@
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
     </div>
 
-    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news_categories.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 
