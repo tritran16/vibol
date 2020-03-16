@@ -47,7 +47,6 @@ class VideoRequest extends FormRequest
     {
         $rules =  [
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
             'category_id' => 'required|integer',
             'link' => 'required|string|max:1000|youtube'
         ];
@@ -63,8 +62,6 @@ class VideoRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Name is required!',
-            'description.max' => 'Content is length must be less than 1000',
         ];
     }
 }

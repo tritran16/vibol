@@ -26,7 +26,6 @@ class AdvicesController extends ApiController
             })
             ->orderBy('updated_at', 'DESC')
             ->paginate();
-        return $this->successResponse(1111);
         return $this->successResponse(new AdviceCollection($advices));
 
     }
