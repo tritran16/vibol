@@ -69,7 +69,7 @@
         {{ Form::select('status', [0 =>  __('advice.status.new'), 1 =>  __('advice.status.active')], request('status', null), array('class' => 'form-control')) }}
     </div>
 
-    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('daily_advices.index')}}"> {{__('common.button.cancel')}}</a>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

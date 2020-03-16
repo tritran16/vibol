@@ -52,7 +52,7 @@
     </div>
 </div>
 
-    {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
 <button class="btn btn-secondary" onclick="history.back()">Cancel</button>
 {{ Form::close() }}
 

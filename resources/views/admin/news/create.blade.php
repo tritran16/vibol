@@ -93,7 +93,7 @@
         {{ Form::label('is_hot', __('news.is_hot_news')) }}
         {{ Form::checkbox('is_hot', '1', request('is_hot', false)) }}
     </div>
-    {{ Form::submit( __('common.button.create'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit( __('common.button.save'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 

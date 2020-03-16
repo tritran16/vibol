@@ -10,6 +10,7 @@ return [
     'button.add_new' => 'បន្ថែម​ថ្មី',
     'button.create' => 'បង្កើត​ថ្មី',
     'button.update' => 'ធ្វើបច្ចុប្បន្នភាព',
+    'button.save' => 'រក្សាទុក',
     'button.cancel' => 'បោះបង់',
     'button.delete' => 'លុប',
     'button.edit' => 'កែប្រែ',

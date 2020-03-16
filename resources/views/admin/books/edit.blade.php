@@ -63,7 +63,7 @@
         {{ Form::label('is_hot',  __('book.is_hot')) }}
         {{ Form::checkbox('is_hot', '1', request('is_hot', $book->is_hot)) }}
     </div>
-    {{ Form::submit(__('common.button.update'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('books.index')}}"> Cancel</a>
     {{ Form::close() }}
 
