@@ -28,7 +28,7 @@
         {{ Form::label('status',  __('common.system_page.status')) }}
         {{ Form::select('status', [ 0 => 'Un-Active', 1 => 'Active'], request('status', null), array('class' => 'form-control')) }}
     </div>
-    {{ Form::submit(__('common.button.create'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('system_pages.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 

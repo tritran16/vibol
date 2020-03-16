@@ -29,7 +29,7 @@
         {{ Form::select('status', [ 0 => 'Un-Active', 1 => 'Active'], request('status', null), array('class' => 'form-control')) }}
     </div>
 
-    {{ Form::submit(__('common.button.update'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
 <button class="btn btn-secondary" onclick="history.back()">{{__('common.button.cancel')}}</button>
 {{ Form::close() }}
 
