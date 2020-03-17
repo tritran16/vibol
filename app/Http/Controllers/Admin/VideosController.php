@@ -50,7 +50,9 @@ class VideosController extends Controller
     public function store(VideoRequest $request)
     {
         if (!$request->hasFile('thumbnail')) {
-            dd(11111);
+            return redirect('/admin/videos/create')
+                ->withErrors(['Thumbnail File is required'])
+                ->withInput();
         }
         $video = Video::create($request->all());
 
