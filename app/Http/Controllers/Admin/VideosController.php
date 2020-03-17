@@ -49,7 +49,11 @@ class VideosController extends Controller
      */
     public function store(VideoRequest $request)
     {
+        if (!$request->hasFile('thumbnail')) {
+            dd(11111);
+        }
         $video = Video::create($request->all());
+
         if ($request->file('thumbnail')){
             $thumbnail = $request->file('thumbnail');
             $thumbnail_name  = urlencode($thumbnail->getClientOriginalName()) ;
