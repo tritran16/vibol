@@ -47,6 +47,7 @@ class VideoRequest extends FormRequest
     {
         $rules =  [
             'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:2000',
             'category_id' => 'required|integer',
             'link' => 'required|string|max:1000|youtube'
         ];
