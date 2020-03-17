@@ -51,13 +51,12 @@ class VideoRequest extends FormRequest
             'category_id' => 'required|integer',
             'link' => 'required|string|max:1000|youtube'
         ];
-        Log::info($this->getMethod());
+        Log::info($this->request());
         if ($this->getMethod() == 'POST') {
             $rules += [
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000'
             ];
         }
-        Log::info($rules);
         return  $rules;
     }
 
