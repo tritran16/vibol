@@ -202,10 +202,14 @@ class DailyAdvicesController extends Controller
         }
     }
 
+    /**
+     * Push Notification to app Mobile - Android & iOS
+     * @param $advice
+     */
     private function sendNotification($advice){
-        $ios_tokens = Device::where('type', 1)->pluck('device_token')->toArray();
-        $android_tokens = Device::where('type', 2)->pluck('device_token')->toArray();
-        $tokens = Device::groupBy('device_token')->pluck('device_token')->toArray();
+        $ios_tokens = Device::where('type', 1)->groupBy('device_token')->pluck('device_token')->toArray();
+        $android_tokens = Device::where('type', 2)->groupBy('device_token')->pluck('device_token')->toArray();
+        //$tokens = Device::groupBy('device_token')->pluck('device_token')->toArray();
         $notification = Notification::create(['title' => $advice->advice, 'body' => $advice->advice, 'notification_type' => 'App\Models\DailyAdvice', 'notification_id' => $advice->id]);
 
         $notification_id = isset($notification)?$notification->id: time();
@@ -217,20 +221,14 @@ class DailyAdvicesController extends Controller
             'created_at' => Carbon::now()->format("d/m/Y")
         );
         $service = new NotificationService();
-//        try {
-//            $service->pushIOS($ios_tokens, $notification->title, $data);
-//        }
-//        catch (\Exception $ex) {
-//            Log::info($ex->getMessage());
-//        }
-//        try {
-//            $service->pushToAndroid($android_tokens, $notification->title,  $data);
-//        }
-//        catch (\Exception $ex) {
-//            Log::info($ex->getMessage());
-//        }
         try {
-            $service->pushNotification($tokens,  $data);
+            $service->pushNotificationIOS($ios_tokens, $notification->title, $notification->body, $data);
+        }
+        catch (\Exception $ex) {
+            Log::info($ex->getMessage());
+        }
+        try {
+            $service->pushNotificationAndroid($android_tokens,  $data);
         }
         catch (\Exception $ex) {
             Log::info($ex->getMessage());

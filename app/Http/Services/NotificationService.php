@@ -21,7 +21,12 @@ class NotificationService
         //
     }
 
-    public function  pushNotification($tokens, $data){
+    /**
+     * Push Notification to Android- use fcm
+     * @param $tokens
+     * @param $data
+     */
+    public function  pushNotificationAndroid($tokens, $data){
         $url = "https://fcm.googleapis.com/fcm/send";
         $serverKey = env('FCM_SERVER_KEY');
         $fields = array (
@@ -44,10 +49,19 @@ class NotificationService
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
         $result = curl_exec($ch);
-        Log::info($result);
         curl_close($ch);
     }
-    public  function  pushNotification1($tokens, $title , $description, $data, $payload = []){
+
+    /**
+     * Push Notification to iOS- use fcm
+     * @param $tokens
+     * @param $title
+     * @param $description
+     * @param $data
+     * @param array $payload
+     * @throws \LaravelFCM\Message\Exceptions\InvalidOptionsException
+     */
+    public  function  pushNotificationIOS($tokens, $title , $description, $data, $payload = []){
         if (!$tokens) return;
         $optionBuilder = new OptionsBuilder();
         if (strlen($title) > 50) {
@@ -89,6 +103,13 @@ class NotificationService
         $downstreamResponse->tokensWithError();
     }
     // https://github.com/davibennun/laravel-push-notification
+
+    /**
+     * Push Notification to iOS- use apn
+     * @param $tokens
+     * @param $title
+     * @param $data
+     */
     public function pushIOS($tokens, $title , $data){
         if (!$tokens) return;
         Log::info('PUSH IOS');

@@ -23,6 +23,7 @@ class NewsController extends ApiController
         $lang = $request->header('location','kh');
         $device_id = $request->get('device_id');
         $keyword = $request->get('keyword');
+        $isHot =  $request->get('is_hot');
         $data = [];
         $news = DB::table('news')
             ->select('news.id', 'news.category_id', 'news.thumbnail', 'news.image', 'news.status',
@@ -45,6 +46,9 @@ class NewsController extends ApiController
             //->where('like_news.device_id', $device_id);
         if ($keyword) {
             $news = $news->where('news_translations.title', 'LIKE', "%$keyword%");
+        }
+        if ($isHot) {
+            $news = $news->where('news.is_hot', '=', $isHot);
         }
 
         if ( $category_id = $request->get('category_id')){

@@ -130,8 +130,8 @@ class NotificationsController extends Controller
 //                    $ios_device_tokens[] = PushNotification::Device($device->device_token, ['badge' => 0]);
 //
 //            }
-            $ios_tokens = Device::where('type', 1)->pluck('device_token')->toArray();
-            $android_tokens = Device::where('type', 2)->pluck('device_token')->toArray();
+            $ios_tokens = Device::where('type', 1)->groupBy('device_token')->pluck('device_token')->toArray();
+            $android_tokens = Device::where('type', 2)->groupBy('device_token')->pluck('device_token')->toArray();
             $tokens = Device::groupBy('device_token')->pluck('device_token')->toArray();
 //            $android_device_tokens = [];
 //            $j = 0;
@@ -149,24 +149,19 @@ class NotificationsController extends Controller
                 'created_at' => Carbon::now()->format("d/m/Y")
             );
             $service = new NotificationService();
-//            try {
-//               $service->pushIOS($ios_tokens, $title, $data);
-//            }
-//            catch (\Exception $ex) {
-//                Log::info($ex->getMessage());
-//            }
-//            try {
-//                $service->pushToAndroid($android_tokens, $title,  $data);
-//            }
-//            catch (\Exception $ex) {
-//                Log::info($ex->getMessage());
-//            }
             try {
-                $service->pushNotification($tokens, $data);
+               $service->pushNotificationIOS($ios_tokens, $title, $body, $data);
             }
             catch (\Exception $ex) {
                 Log::info($ex->getMessage());
             }
+            try {
+                $service->pushNotificationAndroid($android_tokens,  $data);
+            }
+            catch (\Exception $ex) {
+                Log::info($ex->getMessage());
+            }
+
 
 
             return redirect(route('admin.notification.index'))->with('success', 'Created Notification successfully!');//
