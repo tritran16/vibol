@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Factory as ValidationFactory;
 
 class VideoRequest extends FormRequest
@@ -50,7 +51,7 @@ class VideoRequest extends FormRequest
             'category_id' => 'required|integer',
             'link' => 'required|string|max:1000|youtube'
         ];
-
+        Log::info($this->getMethod());
         if ($this->getMethod() == 'POST') {
             $rules += [
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000'
