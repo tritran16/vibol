@@ -77,7 +77,7 @@ class NotificationService
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData($data);
+        $dataBuilder->addData(["data" => $data]);
 
        // $dataBuilder->addData($payload);
 
