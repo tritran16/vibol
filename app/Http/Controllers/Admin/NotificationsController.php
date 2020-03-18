@@ -56,7 +56,9 @@ class NotificationsController extends Controller
             ->select('news.id', 'news_translations.title')
             ->leftJoin('news_translations', 'news_translations.news_id', '=', 'news.id')
             ->where('news_translations.locale', $lang)
+            ->whereNull('deleted_at')
             ->groupBy('news.id', 'news_translations.title')
+
             ->get();
         return view('admin.notifications.create')->with('types', $types)->with('news', $news);
 
@@ -178,6 +180,7 @@ class NotificationsController extends Controller
                 ->where('news_translations.locale', $lang)
                 ->whereNull('deleted_at')
                 ->groupBy('news.id', 'news_translations.title')
+                ->whereNull('deleted_at')
                 ->get();
         }
         elseif($type == 3) {
