@@ -42,3 +42,7 @@ Route::post('devices/register', 'API\v1\SystemsController@register');
 Route::get('system/accounts', 'API\v1\SystemsController@accounts');
 
 Route::get('system/shares', 'API\v1\SystemsController@shares');
+
+Route::get('banners', 'API\v1\SystemsController@banners');
+Route::get('sponsors', 'API\v1\SystemsController@sponsors');
+Route::get('about_us', 'API\v1\SystemsController@aboutUs');

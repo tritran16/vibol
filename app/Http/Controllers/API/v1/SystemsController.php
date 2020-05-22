@@ -6,8 +6,11 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\AdviceRequest;
 use App\Http\Requests\DeviceRequest;
 use App\Models\AdminAccount;
+use App\Models\Banner;
 use App\Models\Device;
 use App\Models\SharePge;
+use App\Models\Sponsor;
+use App\Models\StaticPage;
 use App\Models\SystemPage;
 use Illuminate\Http\Request;
 
@@ -36,5 +39,21 @@ class SystemsController extends ApiController
     public function shares(Request $request){
         $pages = SystemPage::where('status', 1)->get();
         return $this->successResponse($pages);
+    }
+
+    public function banners(Request $request){
+        $banners = [];
+        $banners = Banner::all();
+        return $this->successResponse($banners);
+    }
+    public function sponsors(Request $request){
+        $sponsors = [];
+        $sponsors = Sponsor::all();
+        return $this->successResponse($sponsors);
+    }
+
+    public function aboutUs(Request $request){
+        $page = StaticPage::select(['content'])->where('key', 'ABOUT_US')->first();
+        return $this->successResponse($page);
     }
 }

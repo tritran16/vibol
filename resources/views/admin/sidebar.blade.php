@@ -111,6 +111,17 @@
                     <i class="fa fa-share-alt"></i> {{__('common.system_page.list')}}
                 </a>
             </li>
+            <li>
+                <a href="{{ route('banners.index') }}">
+                    <i class="fa fa-image"></i> {{__('common.banner.list')}}
+                </a>
+                <a href="{{ route('sponsors.index') }}">
+                    <i class="fa fa-heart-o"></i> {{__('common.sponsor.list')}}
+                </a>
+                <a href="{{ route('page.about_us') }}">
+                    <i class="fa fa-pagelines"></i> {{__('common.page.about_us')}}
+                </a>
+            </li>
         </ul>
 
     </li>
