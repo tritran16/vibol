@@ -17,7 +17,7 @@
 {{ Form::open(array('action' => ['Admin\AccountsController@store'], 'method' => 'POST')) }}
     <div class="form-group">
         {{ Form::label('name', __('common.admin_account.name')) }}<span style="color: red">*</span>
-        {{ Form::select('name',  [ 'facebook' => 'Facebook', 'viber' => 'Viber', 'telegram' => 'Telegram', 'whatsapp' => 'WhatsApp'],
+        {{ Form::select('name',  $account_names,
                 request('name', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
