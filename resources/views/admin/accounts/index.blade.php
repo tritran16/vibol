@@ -53,11 +53,11 @@
                                     <a class="btn btn-sm btn-primary btn-flat" href="{{ route('admin_accounts.edit', $account->id) }}">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    {!! Form::open(['method' => 'DELETE','route' => ['admin_accounts.destroy', $account->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_item')}}')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                    {!! Form::close() !!}
+{{--                                    {!! Form::open(['method' => 'DELETE','route' => ['admin_accounts.destroy', $account->id],'style'=>'display:inline']) !!}--}}
+{{--                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_item')}}')">--}}
+{{--                                        <i class="fa fa-trash"></i>--}}
+{{--                                    </button>--}}
+{{--                                    {!! Form::close() !!}--}}
                                 </td>
                             </tr>
                         @endforeach
