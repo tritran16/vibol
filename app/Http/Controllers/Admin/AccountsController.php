@@ -36,7 +36,7 @@ class AccountsController extends Controller
     public function create()
     {
         $account_names = [ 'facebook' => 'Facebook', 'viber' => 'Viber', 'telegram' => 'Telegram', 'whatsapp' => 'WhatsApp',
-            'youtube' => 'Youtube',  'tiktok' => 'Toktok', 'linkedIn' => 'LinkedIn',  'line' => 'Line', 'twitter' => 'Twitter',
+            'youtube' => 'Youtube',  'tiktok' => 'Tiktok', 'linkedIn' => 'LinkedIn',  'line' => 'Line', 'twitter' => 'Twitter',
             'fb_messenger' => 'FB Messenger', 'instagram' => 'Instagram'
             ];
         return view('admin.accounts.create')->with('account_names', $account_names);
@@ -76,7 +76,7 @@ class AccountsController extends Controller
     {
         $account = AdminAccount::findOrFail($id);
         $account_names = [ 'facebook' => 'Facebook', 'viber' => 'Viber', 'telegram' => 'Telegram', 'whatsapp' => 'WhatsApp',
-            'youtube' => 'Youtube',  'tiktok' => 'Toktok', 'linkedIn' => 'LinkedIn',  'line' => 'Line', 'twitter' => 'Twitter',
+            'youtube' => 'Youtube',  'tiktok' => 'Tiktok', 'linkedIn' => 'LinkedIn',  'line' => 'Line', 'twitter' => 'Twitter',
             'fb_messenger' => 'FB Messenger', 'instagram' => 'Instagram'
         ];
         return view('admin.accounts.edit')->with('account', $account)->with('account_name', $account_names);
