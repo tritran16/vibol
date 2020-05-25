@@ -41,7 +41,7 @@ class BannersController extends Controller
      */
     public function create()
     {
-        $types = ['ADVICE'  => 'ADVICE', 'VIDEO' => 'VIDEO', 'NEWS' => 'NEWS', 'BOOK'  => 'BOOK'];
+        $types = ['ADVICE'  => 'ADVICE', 'VIDEO' => 'VIDEO', 'NEWS' => 'NEWS', 'BOOK'  => 'BOOK', 'ABOUT_US'=> 'ABOUT US'];
         return view('admin.banners.create')->with('types', $types);
 
     }
@@ -93,7 +93,7 @@ class BannersController extends Controller
     public function edit($id)
     {
         $banner = Banner::findOrFail($id);
-        $types = ['ADVICE'  => 'ADVICE', 'VIDEO' => 'VIDEO', 'NEWS' => 'NEWS', 'BOOK'  => 'BOOK'];
+        $types = ['ADVICE'  => 'ADVICE', 'VIDEO' => 'VIDEO', 'NEWS' => 'NEWS', 'BOOK'  => 'BOOK', 'ABOUT_US'=> 'ABOUT US'];
         return view('admin.banners.edit')->with('banner', $banner)->with('types', $types);
     }
 
