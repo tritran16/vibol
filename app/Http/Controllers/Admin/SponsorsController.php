@@ -53,7 +53,7 @@ class SponsorsController extends Controller
      */
     public function store(SponsorRequest $request)
     {
-        $sponsor = Sponsor::create($request->only(['name', 'description']));
+        $sponsor = Sponsor::create($request->only(['name', 'description', 'link']));
 
         if ($request->file('image')){
             $image = $request->file('image');
@@ -102,7 +102,7 @@ class SponsorsController extends Controller
     {
         $sponsor = Sponsor::findOrFail($id);
 
-        Sponsor::where('id', $id)->update($request->only([ 'name', 'description']));
+        Sponsor::where('id', $id)->update($request->only([ 'name', 'description', 'link']));
         if ($request->file('image')){
             $image = $request->file('image');
             $img_name  = urlencode($image->getClientOriginalName()) ;

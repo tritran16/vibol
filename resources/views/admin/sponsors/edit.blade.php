@@ -34,6 +34,10 @@
         {{ Form::label('description', __('sponsor.description')) }}
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
     </div>
+    <div class="form-group">
+        {{ Form::label('link', __('sponsor.link')) }}
+        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}
+    </div>
 
     {{ Form::submit(__('common.button.update'), array('class' => 'btn btn-primary')) }}
     <button  type="button" class="btn btn-secondary" onclick="javascript:window.location.href = '{{route('sponsors.index')}}';">{{__('common.button.cancel')}}</button>

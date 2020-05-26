@@ -30,6 +30,10 @@
         {{ Form::label('description', __('sponsor.description')) }}
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
     </div>
+    <div class="form-group">
+        {{ Form::label('link', __('sponsor.link')) }}
+        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}
+    </div>
 
     {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news_categories.index')}}"> {{__('common.button.cancel')}}</a>

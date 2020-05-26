@@ -6,6 +6,7 @@ return [
     'image' => 'Image',
     'name' => 'Name',
     'description' => 'Description',
+    'link' => 'Link (URL)',
     'update.header' => 'Update Sponsor',
 
 ];
