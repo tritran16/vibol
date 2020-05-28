@@ -27,6 +27,7 @@ class NotificationService
      * @param $data
      */
     public function  pushNotificationAndroid($tokens, $data){
+        $data = array_merge($data, ["click_action" => "FLUTTER_NOTIFICATION_CLICK"]);
         $url = "https://fcm.googleapis.com/fcm/send";
         $serverKey = env('FCM_SERVER_KEY');
         $fields = array (
@@ -77,6 +78,7 @@ class NotificationService
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
+        $data = array_merge($data, ["click_action" => "FLUTTER_NOTIFICATION_CLICK"]);
         $dataBuilder->addData(["data" => $data]);
 
        // $dataBuilder->addData($payload);
