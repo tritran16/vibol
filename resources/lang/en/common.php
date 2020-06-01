@@ -60,5 +60,6 @@ return [
     'system_page.update' => 'Edit Share Page',
     'sponsor.list' => 'Sponsors',
     'banner.list' => 'Banner',
-    'page.about_us' => 'About Us'
+    'page.about_us' => 'About Us',
+    'page.about_us_content' => 'Content'
 ];

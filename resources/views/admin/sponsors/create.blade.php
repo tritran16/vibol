@@ -36,7 +36,7 @@
     </div>
 
     {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}
-    <a class="btn btn-default" href="{{route('news_categories.index')}}"> {{__('common.button.cancel')}}</a>
+    <a class="btn btn-default" href="{{route('sponsors.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 
 @endsection

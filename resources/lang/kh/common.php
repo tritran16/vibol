@@ -48,21 +48,25 @@ return [
 
     'admin_account.list' => 'គណនីសង្គម',
 
-    'admin_account.name' => 'Account',
-    'admin_account.account_id' => 'Account ID',
-    'admin_account.account_name' => 'Account Name',
-    'admin_account.account_link' => 'Account Link',
-    'admin_account.account_status' => 'Status',
-    'admin_account.create' => 'Create new System Account',
-    'admin_account.update' => 'Edit System Account',
+    'admin_account.name' => 'កែទំព័រថ្មី',
+    'admin_account.account_id' => 'លេខសម្គាល់គណនី',
+    'admin_account.account_name' => 'កែទំព័រថ្មី',
+    'admin_account.account_link' => 'តំណគណនី',
+    'admin_account.account_status' => 'តំណគណនី',
+    'admin_account.create' => 'បង្កើត​គណនី​ថ្មី',
+    'admin_account.update' => 'កែគណនី',
 
     'menu.system' => 'ប្រព័ន្ធ',
 
     'system_page.list' => 'ចែករំលែកតំណ',
-    'system_page.name' => 'Share Page',
+    'system_page.name' => 'អ្នកឧបត្ថម្ភ',
     'system_page.url' => 'URL',
-    'system_page.status' => 'Status',
-    'system_page.create' => 'Create New Share Page',
-    'system_page.update' => 'Edit Share Page',
+    'system_page.status' => 'ស្ថានភាព',
+    'system_page.create' => 'ស្ថានភាព',
+    'system_page.update' => 'កែទំព័រថ្មី',
+    'sponsor.list' => 'អ្នកឧបត្ថម្ភ',
+    'banner.list' => 'បដា',
+    'page.about_us' => 'អ្នកឧបត្ថម្ភ',
+    'page.about_us_content' => 'អំពីយើង'
 
 ];

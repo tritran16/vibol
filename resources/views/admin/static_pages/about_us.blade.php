@@ -7,7 +7,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>{{__('About Us')}}</h2>
+                        <h2>{{__('common.page.about_us')}}</h2>
                     </div>
                 </div>
                 @include('admin.elements.flash')
@@ -18,7 +18,7 @@
 
                         <div class="row">
                             <div class="col-md-2 col-xs-12 col-sm-12">
-                                <strong>@lang('Content')</strong>
+                                <strong>{{__('common.page.about_us_content')}}</strong>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-10">
                                 <div class="form-group">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-10">
                                 <a class="btn btn-primary " href="{{ route('page.about_us.edit') }}">
-                                    <i class="fa fa-pencil"></i> Edit
+                                    <i class="fa fa-pencil"></i> {{__('common.button.edit')}}
                                 </a>
                             </div>
                         </div>

@@ -7,7 +7,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Edit Page - {{__('About Us')}}</h2>
+                        <h2>{{__('common.page.about_us')}} - {{__('common.button.edit')}}</h2>
                     </div>
                 </div>
 
@@ -19,7 +19,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-2 col-xs-12 col-sm-12">
-                                    <strong>@lang('Content')</strong>
+                                    <strong>{{__('common.page.about_us_content')}}</strong>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-10">
                                     <div class="form-group">
