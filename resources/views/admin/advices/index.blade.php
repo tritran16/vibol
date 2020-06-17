@@ -69,11 +69,11 @@
                                 </td>
                                 <td>{{ $advice->updated_at }}</td>
                                 <td>
-                                    @if ($advice->status != 1)
-                                        <a type="button" class="btn btn-success" href="{{route('admin.daily_advices.active', $advice->id)}}" onclick="return confirm('Do you want active this advice?')">
-                                            <i class="fa fa-check"></i> {{__('advice.push_notification.button')}}
-                                        </a>
-                                    @endif
+{{--                                    @if ($advice->status != 1)--}}
+{{--                                        <a type="button" class="btn btn-success" href="{{route('admin.daily_advices.active', $advice->id)}}" onclick="return confirm('Do you want active this advice?')">--}}
+{{--                                            <i class="fa fa-check"></i> {{__('advice.push_notification.button')}}--}}
+{{--                                        </a>--}}
+{{--                                    @endif--}}
 {{--                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('daily_advices.edit', $advice->id) }}">--}}
 {{--                                        <i class="fa fa-pencil"></i>--}}
 {{--                                    </a>--}}

@@ -37,7 +37,8 @@ class AccountsController extends Controller
     {
         $account_names = [ 'facebook' => 'Facebook', 'viber' => 'Viber', 'telegram' => 'Telegram', 'whatsapp' => 'WhatsApp',
             'youtube' => 'Youtube',  'tiktok' => 'Tiktok', 'linkedIn' => 'LinkedIn',  'line' => 'Line', 'twitter' => 'Twitter',
-            'fb_messenger' => 'FB Messenger', 'instagram' => 'Instagram'
+            'fb_messenger' => 'FB Messenger', 'instagram' => 'Instagram',
+            'Metfone' => 'Metfone', 'CellCard' => 'CellCard' , 'Smart' => 'Smart'
             ];
         return view('admin.accounts.create')->with('account_names', $account_names);
     }
@@ -77,7 +78,8 @@ class AccountsController extends Controller
         $account = AdminAccount::findOrFail($id);
         $account_names = [ 'facebook' => 'Facebook', 'viber' => 'Viber', 'telegram' => 'Telegram', 'whatsapp' => 'WhatsApp',
             'youtube' => 'Youtube',  'tiktok' => 'Tiktok', 'linkedIn' => 'LinkedIn',  'line' => 'Line', 'twitter' => 'Twitter',
-            'fb_messenger' => 'FB Messenger', 'instagram' => 'Instagram'
+            'fb_messenger' => 'FB Messenger', 'instagram' => 'Instagram',
+            'Metfone' => 'Metfone', 'CellCard' => 'CellCard' , 'Smart' => 'Smart'
         ];
         return view('admin.accounts.edit')->with('account', $account)->with('account_name', $account_names);
     }

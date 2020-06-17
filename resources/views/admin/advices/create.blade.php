@@ -20,39 +20,70 @@
         {{ Form::label('author', __('advice.author')) }}
         {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}
     </div>
-
+    <div class="form-group">
+        {{ Form::label('type', __('advice.type')) }}
+        {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control', 'onchange' => 'changeType(this)')) }}
+    </div>
+    <script type="text/javascript">
+        function changeType(item) {
+            console.log($(item).val());
+            if ($(item).val() == 1) {
+               $('#sec-video').hide();
+               $('#sec-img').show();
+            }
+            else {
+                $('#sec-video').show();
+                $('#sec-img').hide();;
+            }
+        }
+    </script>
     <div class="form-group">
         {{ Form::label('advice', __('advice.advice')) }}
         {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
     </div>
+
+    <div class="form-group" id="sec-video" {{request('type') != 2  && old('type') != 2 ? 'style=display:none': ''}}>
+        {{ Form::label('video', __('advice.video')) }}
+        {{ Form::file('video', ['id' => 'video', 'accept' => "video/mp4,video/x-m4v,video/*"]) }}
+        <span class="error">(Only video file)</span>
+
+    </div>
+    <section  id="sec-img" {{(request('type') == 2 || old('type') == 2 )? 'style=display:none': ''}}>
     <div class="form-group">
         {{ Form::label('image', __('advice.image')) }}
         {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
         <span class="error">(Only file type : jpg)</span>
 
     </div>
+
+
     <div class="container">
         <img id="previewImage" src="#" alt="" style="width:100px; display: none" />
         <div class="top" id="textAdvice"></div>
     </div>
 
-    <div class="form-group">
-        {{ Form::label('text_size', __('advice.text_size')) }}
-        {{ Form::select('text_size', [
-            8 => '8', 10 => '10', 12 => '12', 14 => '14', 16 => '16', 18 => '18', 20 => '20', 22 => '22', 24 => '24',
-            26 => '26', 28 =>'28', 30 => '30', 32 => '32', 36 => '36', 40 => '40'
-        ],request('text_size', 12), array('class' => 'form-control', 'id' => 'text-size')) }}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('text_size', __('advice.text_size')) }}--}}
+{{--        {{ Form::select('text_size', [--}}
+{{--            8 => '8', 10 => '10', 12 => '12', 14 => '14', 16 => '16', 18 => '18', 20 => '20', 22 => '22', 24 => '24',--}}
+{{--            26 => '26', 28 =>'28', 30 => '30', 32 => '32', 36 => '36', 40 => '40'--}}
+{{--        ],request('text_size', 12), array('class' => 'form-control', 'id' => 'text-size')) }}--}}
+{{--    </div><div class="form-group">--}}
+{{--        {{ Form::label('text_size', __('advice.text_size')) }}--}}
+{{--        {{ Form::select('text_size', [--}}
+{{--            8 => '8', 10 => '10', 12 => '12', 14 => '14', 16 => '16', 18 => '18', 20 => '20', 22 => '22', 24 => '24',--}}
+{{--            26 => '26', 28 =>'28', 30 => '30', 32 => '32', 36 => '36', 40 => '40'--}}
+{{--        ],request('text_size', 12), array('class' => 'form-control', 'id' => 'text-size')) }}--}}
+{{--    </div>--}}
 
-    <div class="form-group">
-        {{ Form::label('text_color', __('advice.text_color')) }}
-        <div class="input-group">
-            <span class="input-group-addon">#</span>
-            {{ Form::text('text_color', request('text_color', null), array('class' => 'form-control', 'id' => 'text-color', 'autocomplete'=>"off")) }}
-        </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('text_color', __('advice.text_color')) }}--}}
+{{--        <div class="input-group">--}}
+{{--            <span class="input-group-addon">#</span>--}}
+{{--            {{ Form::text('text_color', request('text_color', null), array('class' => 'form-control', 'id' => 'text-color', 'autocomplete'=>"off")) }}--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-
-    </div>
     <div class="row">
         <div class="col-lg-10 col-md-10 text-center">
             <span id="text-advice" class="border"> </span>
@@ -62,8 +93,14 @@
 
     <div class="form-group">
         {{ Form::label('text_position', __('advice.text_position')) }}
-        {{ Form::select('text_position', [1 => 'Top', 2 => 'Middle', 3 => 'Bottom'], request('text_position', null), array('class' => 'form-control')) }}
+        {{ Form::select('text_position',
+            [1 => 'Top Left', 2 => 'Top Center', 3 => 'Top Right',
+             4 => 'Middle Left', 5 => 'Middle Center', 6 => 'Middle Right',
+             7 => 'Bottom Left', 8 => 'Bottom Center', 9 => 'Bottom Right'
+            ],
+             request('text_position', null), array('class' => 'form-control')) }}
     </div>
+    </section>
     <div class="form-group">
         {{ Form::label('status', __('advice.status')) }}
         {{ Form::select('status', [0 =>  __('advice.status.new'), 1 =>  __('advice.status.active')], request('status', null), array('class' => 'form-control')) }}

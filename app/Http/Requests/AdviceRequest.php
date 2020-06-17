@@ -25,9 +25,10 @@ class AdviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'advice' => 'required|string|max:1000',
+            'advice' => 'required_if:type,==,1|string|max:1000',
             'author' => 'nullable|string|max:100',
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:8000',
+            'image' => 'required_if:type,==,1|mimes:jpeg,png,jpg,gif,svg|max:8000',
+            'video' => 'required_if:type,==,2|mimes:mp4|max:16000',
         ];
     }
 

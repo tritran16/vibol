@@ -14,10 +14,36 @@
         <input type="hidden" value="{{$advice['author']}}">
     </div>
     <div class="form-group">
+        {{ Form::label('advice', __('advice.advice')) }}
+        {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice', 'disabled' => true)) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('type', __('advice.type')) }}
+        {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control', 'disabled' => true)) }}
+    </div>
+    @if ($advice['type'] == 1)
+    <div class="form-group">
         {{ Form::label('image', __('advice.image')) }}
         <img class="img-bordered" style="width: 200px" src="{{asset($advice['image'])}}">
         <input type="hidden" name="image" value="{{$advice['image']}}">
     </div>
+    <div class="form-group">
+        {{ Form::label('text_position', __('advice.text_position')) }}
+        {{ Form::select('text_position',
+            [1 => 'Top Left', 2 => 'Top Center', 3 => 'Top Right',
+             4 => 'Middle Left', 5 => 'Middle Center', 6 => 'Middle Right',
+             7 => 'Bottom Left', 8 => 'Bottom Center', 9 => 'Bottom Right'
+            ],
+             request('text_position', null), array('class' => 'form-control', 'disabled' => true)) }}
+    </div>
+    @endif
+    @if ($advice['type'] == 2)
+        <video width="320" height="240" controls>
+            <source src="{{$advice['video']}}" type="video/mp4">
+        </video>
+
+    @endif
+
     <div class="form-group">
         {{ Form::label('status', __('advice.status')) }}
         {{ Form::select('status', [0 =>  __('advice.status.new'), 1 =>  __('advice.status.active')], $advice['status'], array('class' => 'form-control', 'disabled' => true)) }}

@@ -57,19 +57,37 @@ class DailyAdvicesController extends Controller
     }
     public function store(AdviceRequest $request)
     {
-        $image = $request->file('image');
-        $file_name  = time() . '_' .$image->getClientOriginalName() ;
+
+        if ($request->type == 1) {
+            $image = $request->file('image');
+            $file_name  = time() . '_' .$image->getClientOriginalName() ;
+            Storage::disk('public')->put('advices/images/' . $file_name, File::get($image));
+            $path = Storage::disk('public')->path('advices/images/' . $file_name);
+            $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type']),
+                ['image' => "storage/advices/images/" . $file_name]
+            );
+        }
+        else {
+            $video = $request->file('video');
+            $file_name  = time() . '_' .$video->getClientOriginalName() ;
+            Storage::disk('public')->put('advices/videos/' . $file_name, File::get($video));
+            $path = Storage::disk('public')->path('advices/videos/' . $file_name);
+            $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type']),
+                ['video' => "storage/advices/video/" . $file_name]
+            );
+        }
+        /*
         Storage::disk('public')->put('advices/images/tmp/'. $file_name, File::get($image));
         $path = Storage::disk('public')->path('advices/images/tmp/'. $file_name);
+
         $img = ImageService::addTextToImage($path, $request->get('advice'),null, $request->get('text_size'), $request->get('text_color'), $request->get('text_position'));
 
         //header('Content-type: image/jpeg');
         imagejpeg($img,  Storage::disk('public')->path('advices/images/'. $file_name));
 
         imagedestroy($img);
-        $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status']),
-            ['image' => "storage/advices/images/" . $file_name]
-        );
+        */
+
 
         return view('admin.advices.preview')->with('advice', $_advice);
 
