@@ -28,6 +28,7 @@ return [
     'menu.users.roles' => 'Roles User',
     'menu.users.list_user' => 'Users',
     'menu.notifications' => 'Notifications',
+    'menu.about' => 'About Me',
     'menu.poetry' => 'Poetry',
     'button.login' => 'Login',
     'button.logout' => 'Logout',

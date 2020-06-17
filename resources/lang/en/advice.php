@@ -18,6 +18,7 @@ return [
     'status.active' => 'Active',
     'update.button' => 'Update',
     'update.header' => 'Edit Advice',
-    'push_notification.button' => 'Push Notification'
+    'push_notification.button' => 'Push Notification',
+     'active.button' => 'Active'
 
 ];
