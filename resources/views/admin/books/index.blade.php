@@ -44,7 +44,8 @@
                             <th>#</th>
                             <th>{{__('book.thumbnail')}}</th>
                             <th>{{__('book.name')}}</th>
-                            <th>{{__('book.link')}}</th>
+{{--                            <th>{{__('book.video_link')}}</th>--}}
+{{--                            <th>{{__('book.file_link')}}</th>--}}
                             <th>{{__('book.category')}}</th>
                             <th>{{__('book.status')}}</th>
                             <th>{{__('book.is_hot')}}</th>
@@ -61,9 +62,13 @@
                                 <td>{{ $i++ }}</td>
                                 <td><img src="{{asset($item->thumbnail)}}" width="50px"/></td>
                                 <td><a href="{{route('books.show', $item->id)}}">  {{ $item->name }}</a></td>
-                                <td>
-                                    <a target="_blank" href="{{$item->link?$item->link:asset('storage/books/pdf/'. $item->id . '/'.  $item->filename)}}">{{ $item->link?$item->link:$item->filename }}</a>
-                                </td>
+{{--                                <td>--}}
+{{--                                    <a target="_blank" href="{{$item->video}}">{{ $item->link?$item->link:$item->filename }}</a>--}}
+{{--                                </td>--}}
+{{--                                <td>--}}
+{{--                                    <a target="_blank" href="{{$item->link?$item->file_link:asset('storage/books/pdf/'. $item->id . '/'.  $item->filename)}}">{{ $item->link?$item->file_link:$item->filename }}</a>--}}
+{{--                                </td>--}}
+
                                 <td>
                                     {{isset($item->category)?$item->category->name:''}}
                                 </td>

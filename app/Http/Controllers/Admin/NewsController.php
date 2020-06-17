@@ -81,7 +81,8 @@ class NewsController extends Controller
 //            'short_desc_kh' => 'required|string',
 //            'content_kh' => 'required|string',
             'category_id' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000',
+            'video_link' => 'nullable|active_url'
         ]);
         $categories = [];
         $_categories = NewsCategory::all();
@@ -204,7 +205,7 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         if ($news) {
             $post_data = $request->only([
-                'category_id', 'image', 'thumbnail', 'published_date', 'author', 'status', 'is_hot'
+                'category_id', 'image', 'thumbnail', 'video_link', 'published_date', 'author', 'status', 'is_hot'
             ]);
             $post_data['is_hot'] = isset($post_data['is_hot'])?$post_data['is_hot']:0;
             News::where('id', $id)->update($post_data);

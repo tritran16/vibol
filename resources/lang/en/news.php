@@ -12,6 +12,7 @@ return [
     'content_en' => 'Content',
     'image' => 'Image',
     'thumbnail' => 'Thumbnail',
+    'video_link'=> 'Video Link',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
     'status' => 'Status',

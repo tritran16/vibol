@@ -33,7 +33,8 @@ class NewsRequest extends FormRequest
             'short_desc_kh' => 'required|string',
             'content_kh' => 'required|string',
             'category_id' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000',
+            'video_link' => 'nullable|active_url'
 
         ];
         if ($this->getMethod() == 'POST') {

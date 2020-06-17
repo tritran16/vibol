@@ -68,6 +68,24 @@
         </ul>
     </li>
 
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-heart"></i> <span>{{__('common.menu.poetry')}}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+
+            <li>
+                <a href="{{ route('poetrys.index') }}">
+                    <i class="fa fa-heart-o"></i> {{__('common.menu.poetry')}}
+                </a>
+            </li>
+
+        </ul>
+    </li>
+
     <li  class="treeview">
         <a href="#">
             <i class="fa fa-list"></i> <span>{{__('common.menu.news')}}</span>
@@ -90,8 +108,12 @@
     </li>
 
     <li>
-        <a href="{{ route('admin.notification.index') }}"><i class="fa fa-bell"></i> <span>{{__('common.menu.notifications')}}</span></a>
+        <a href="{{ route('abouts.index') }}"><i class="fa fa-user-circle-o"></i> <span>{{__('common.menu.about')}}</span></a>
     </li>
+
+{{--    <li>--}}
+{{--        <a href="{{ route('admin.notification.index') }}"><i class="fa fa-bell"></i> <span>{{__('common.menu.notifications')}}</span></a>--}}
+{{--    </li>--}}
 
     <li class="treeview">
         <a href="#">
@@ -118,9 +140,9 @@
                 <a href="{{ route('sponsors.index') }}">
                     <i class="fa fa-heart-o"></i> {{__('common.sponsor.list')}}
                 </a>
-                <a href="{{ route('page.about_us') }}">
-                    <i class="fa fa-pagelines"></i> {{__('common.page.about_us')}}
-                </a>
+{{--                <a href="{{ route('page.about_us') }}">--}}
+{{--                    <i class="fa fa-pagelines"></i> {{__('common.page.about_us')}}--}}
+{{--                </a>--}}
             </li>
         </ul>
 

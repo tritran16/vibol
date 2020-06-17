@@ -38,7 +38,7 @@
     </div>
     <div class="form-group">
         {{ Form::label('source', __('video.source')) }}
-        {{ Form::select('source', ['youtube' => 'Youtube'], request('status', null), array('class' => 'form-control')) }}
+        {{ Form::select('source', ['youtube' => 'Youtube', 'other' => 'Other'], request('status', null), array('class' => 'form-control')) }}
         <p class="text-danger"><i class="fa fa-warning"></i> Only support youtube link!</p>
     </div>
     <div class="form-group">

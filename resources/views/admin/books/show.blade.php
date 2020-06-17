@@ -25,11 +25,18 @@
         {{ Form::label('description',  __('book.description')) }}
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control', 'disabled' =>true)) }}
     </div>
+    @if ($book->video_link)
     <div class="form-group">
-        {{ Form::label('link',  __('book.link')) }}
-        {{ Form::text('link', request('link', null), array('class' => 'form-control', 'disabled' =>true)) }}
+        {{ Form::label('video_link',  __('book.video_link')) }}
+        {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control', 'disabled' =>true)) }}
     </div>
-
+    @endif
+    @if ($book->file_link)
+    <div class="form-group">
+        {{ Form::label('file_link',  __('book.file_link')) }}
+        {{ Form::text('file_link', request('file_link', null), array('class' => 'form-control', 'disabled' =>true)) }}
+    </div>
+    @endif
     <div class="form-group">
         {{ Form::label('page_number',  __('book.page_number')) }}
         {{ Form::text('page_number', request('page_number', null), array('class' => 'form-control')) }}

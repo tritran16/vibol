@@ -29,6 +29,11 @@ Route::get('videos/like/{id}', 'API\v1\VideosController@like');
 Route::get('videos/unlike/{id}', 'API\v1\VideosController@unlike');
 Route::get('videos/categories/all', 'API\v1\VideosController@categories');
 
+Route::get('poetry', 'API\v1\PoetryController@index');
+Route::get('poetry/{id}', 'API\v1\PoetryController@view');
+Route::get('poetry/like/{id}', 'API\v1\PoetryController@like');
+Route::get('poetry/unlike/{id}', 'API\v1\PoetryController@unlike');
+
 Route::get('advices/today', 'API\v1\AdvicesController@active');
 Route::get('advices/', 'API\v1\AdvicesController@all_advices');
 Route::get('advices/all', 'API\v1\AdvicesController@all_advices');
@@ -45,4 +50,4 @@ Route::get('system/shares', 'API\v1\SystemsController@shares');
 
 Route::get('banners', 'API\v1\SystemsController@banners');
 Route::get('sponsors', 'API\v1\SystemsController@sponsors');
-Route::get('about_us', 'API\v1\SystemsController@aboutUs');
+Route::get('about_us', 'API\v1\AboutController@index');

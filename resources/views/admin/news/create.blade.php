@@ -82,6 +82,10 @@
         {{ Form::select('category_id',$categories, request('category_id', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
+        {{ Form::label('video_link',  __('news.video_link')) }}
+        {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control')) }}
+    </div>
+    <div class="form-group">
         {{ Form::label('author',  __('news.author')) }}
         {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}
     </div>

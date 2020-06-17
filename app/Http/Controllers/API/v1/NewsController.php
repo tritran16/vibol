@@ -27,7 +27,7 @@ class NewsController extends ApiController
         $data = [];
         $news = DB::table('news')
             ->select('news.id', 'news.category_id', 'news.thumbnail', 'news.image', 'news.status',
-                'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at',
+                'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at', 'news.video_link',
                 'news_categories.id as category_id', 'news_category_translations.name as category_name',
                 'news_translations.title', 'news_translations.short_desc', 'news_translations.content',
                 'like_news.id as like_news_id'
@@ -58,7 +58,7 @@ class NewsController extends ApiController
         $news = $news->where('news_category_translations.locale', '=', $lang);
         $news = $news->orderBy('news.created_at', 'desc')
             ->groupBy('news.id', 'news.category_id', 'news.thumbnail', 'news.image', 'news.status',
-                'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at',
+                'news.author', 'news.is_hot', 'news.likes', 'news.views', 'news.created_at', 'news.updated_at', 'news.video_link',
                 'news_category_translations.name', 'news_categories.id',
                 'news_translations.title', 'news_translations.short_desc', 'news_translations.content','like_news.id'
                 )

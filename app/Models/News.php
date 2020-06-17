@@ -11,7 +11,7 @@ class News extends Model
     use SoftDeletes, Translatable;
     protected $table = 'news';
     public $timestamps = true;
-    protected $fillable = ['id', 'title', 'short_desc', 'image', 'category_id', 'thumbnail', 'author',
+    protected $fillable = ['id', 'title', 'short_desc', 'image', 'category_id', 'thumbnail', 'video_link', 'author',
         'content', 'source', 'status', 'likes', 'views', 'is_hot','created_at', 'updated_at'];
     protected $hidden = ['deleted_at'];
     public $translatedAttributes = ['title', 'short_desc', 'content'];

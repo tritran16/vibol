@@ -86,6 +86,12 @@
         {{ Form::label('category_id', __('news.category.name')) }} <span style="color: red">*</span>
         {{ Form::select('category_id', $categories, request('category_id', $news->category_id), array('class' => 'form-control')) }}
     </div>
+
+    <div class="form-group">
+        {{ Form::label('video_link',  __('news.video_link')) }}
+        {{ Form::text('video_link', request('video_link', $news->video_link), array('class' => 'form-control')) }}
+    </div>
+
     <div class="form-group">
         {{ Form::label('author', __('news.author')) }}
         {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}

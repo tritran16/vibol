@@ -21,7 +21,7 @@
         {{ Form::text('name', request('name', null), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('thumbnail',  __('book.thumbnail')) }}
+        {{ Form::label('thumbnail',  __('book.thumbnail')) }}<span style="color: red">*</span>
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
     </div>
     <div class="form-group">
@@ -36,10 +36,10 @@
         {{ Form::label('description',  __('book.description')) }}
         {{ Form::textarea('description', request('description', null), array('class' => 'form-control')) }}
     </div>
-{{--    <div class="form-group">--}}
-{{--        {{ Form::label('link',  __('book.link')) }}--}}
-{{--        {{ Form::text('link', request('link', null), array('class' => 'form-control')) }}--}}
-{{--    </div>--}}
+    <div class="form-group">
+        {{ Form::label('video_link',  __('book.video_link')) }}
+        {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control')) }}
+    </div>
     <div class="form-group">
         {{ Form::label('pdf_file', __('book.pdf_file')) }}
         {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Factory as ValidationFactory;
 
-class VideoRequest extends FormRequest
+class PoetryRequest extends FormRequest
 {
     public function __construct(ValidationFactory $validationFactory)
     {
@@ -48,8 +48,8 @@ class VideoRequest extends FormRequest
     {
         $rules =  [
             'title' => 'required|string|max:255',
-            'category_id' => 'required|integer',
-            'link' => 'required|string|max:1000|active_url'
+            'video_link' => 'nullable|active_url',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4000'
         ];
 
 //        if ($this->getMethod() == 'POST') {

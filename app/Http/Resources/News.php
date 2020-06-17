@@ -27,6 +27,7 @@ class News extends JsonResource
         $data['content'] =  $this->translate($lang)->content;
         $data['image'] =  isset($this->image)?url($this->image):null;
         $data['thumbnail'] =  isset($this->thumbnail)?url($this->thumbnail):null;
+        $data['video_link'] =  $this->video_link;
         $data['author'] =  $this->author;
         $data['source'] =  $this->source;
         $data['created_at'] =  Carbon::parse($this->created_at)->format('d/m/Y');

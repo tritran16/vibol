@@ -22,6 +22,7 @@ class CreateNewsTable extends Migration
             $table->string('author', 50)->nullable();
             $table->string('short_desc', 1000)->nullable();
             $table->text('content')->nullable();
+            $table->string('video_link', 1000)->nullable();
             $table->string('source', 255)->nullable();
             $table->date('published_date')->nullable();
             $table->text('comment')->nullable();

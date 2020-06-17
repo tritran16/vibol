@@ -35,6 +35,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('video_categories', 'VideoCategoriesController');
     Route::get('videos/active/{id}', 'VideosController@active')->name('admin.videos.active');
 
+    Route::resource('poetrys', 'PoetryController');
+
+    Route::resource('abouts', 'AboutController');
+
     Route::resource('news', 'NewsController');
     Route::resource('news_categories', 'NewsCategoriesController');
     Route::get('/news/categories', 'NewsCategoriesController@index')->name('news.categories.index');
