@@ -18,7 +18,7 @@ class CreatePoetryTable extends Migration
             $table->string('title', 255);
             $table->string('author', 100)->nullable();
             $table->string('thumbnail', 255)->nullable();
-            $table->string('link_video', 1000)->nullable();
+            $table->string('video_link', 1000)->nullable();
             $table->text('content')->nullable();
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);

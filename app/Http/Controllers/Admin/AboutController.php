@@ -23,7 +23,7 @@ class AboutController extends Controller
     public function index()
     {
         $about = About::first();
-
+        if (!$about)return route('abouts.create');
         return view('admin.abouts.index', ['about' => $about]);
     }
     /**
@@ -53,7 +53,7 @@ class AboutController extends Controller
             //About::where('id', $about->id)->update([ ]);
         }
 
-        return redirect(route('system_pages.index'))->with('success', 'Created System Share Page successfully!');//
+        return redirect(route('abouts.index'))->with('success', 'Created About Me Page successfully!');//
     }
     /**
      * Display the specified resource.
