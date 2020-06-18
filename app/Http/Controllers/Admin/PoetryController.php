@@ -60,8 +60,8 @@ class PoetryController extends Controller
         if ($request->file('thumbnail')){
             $thumbnail = $request->file('thumbnail');
             $thumbnail_name  = urlencode($thumbnail->getClientOriginalName()) ;
-            Storage::disk('public')->put('poetry/thumbnails/'. $poetry->id . '/'. $thumbnail_name, File::get($thumbnail));
-            Poetry::where('id', $poetry->id)->update([ 'thumbnail' => 'storage/poetry/thumbnails/'. $poetry->id . '/'.$thumbnail_name]);
+            Storage::disk('public')->put('poetry/images/'. $poetry->id . '/'. $thumbnail_name, File::get($thumbnail));
+            Poetry::where('id', $poetry->id)->update([ 'thumbnail' => 'storage/poetry/imagees/'. $poetry->id . '/'.$thumbnail_name]);
         }
         return redirect(route('poetrys.index'))->with('success', 'Created Poetry successfully!');
     }
