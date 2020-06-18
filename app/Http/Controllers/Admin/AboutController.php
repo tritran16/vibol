@@ -22,8 +22,11 @@ class AboutController extends Controller
      */
     public function index()
     {
+
         $about = About::first();
-        if (!$about)return route('abouts.create');
+        if (!$about) {
+            return redirect(route('abouts.create'));
+        }
         return view('admin.abouts.index', ['about' => $about]);
     }
     /**
