@@ -8,7 +8,7 @@
                 @include('admin.elements.flash')
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>{{__('common.page.about_us')}}</h2>
+                        <h2>{{__('about.header')}}</h2>
                         <a class="btn btn-primary " href="{{ route('abouts.edit', $about->id) }}">
                             <i class="fa fa-pencil"></i> {{__('common.button.edit')}}
                         </a>
