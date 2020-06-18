@@ -46,7 +46,7 @@
         <video width="320" height="240" controls>
             <source src="{{url($advice['video'])}}" type="video/mp4">
         </video>
-        <input type="hidden" name="video" value="{{$advice['video']}}">
+        <input type="hidden" name="video" value="{{url($advice['video'])}}">
     @endif
 
     <div class="form-group">
