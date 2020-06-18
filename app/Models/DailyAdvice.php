@@ -11,7 +11,7 @@ class DailyAdvice extends Model
     protected $table = 'daily_advices';
     public $timestamps = true;
 
-    protected $fillable = ['author', 'advice', 'content', 'type', 'video_link', 'image' ,'text_position', 'status', 'likes', 'dislikes'];
+    protected $fillable = ['author', 'advice', 'content', 'type', 'video', 'image' ,'text_position', 'status', 'likes', 'dislikes'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
 
