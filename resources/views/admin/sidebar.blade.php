@@ -70,7 +70,7 @@
 
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-heart"></i> <span>{{__('common.menu.poetry')}}</span>
+            <i class="fa fa-star"></i> <span>{{__('common.menu.poetry')}}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -79,7 +79,7 @@
 
             <li>
                 <a href="{{ route('poetrys.index') }}">
-                    <i class="fa fa-heart-o"></i> {{__('common.menu.poetry')}}
+                    <i class="fa fa-star-o"></i> {{__('common.menu.poetry')}}
                 </a>
             </li>
 
