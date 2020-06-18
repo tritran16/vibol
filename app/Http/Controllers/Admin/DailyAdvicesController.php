@@ -73,7 +73,7 @@ class DailyAdvicesController extends Controller
             Storage::disk('public')->put('advices/videos/' . $file_name, File::get($video));
             $path = Storage::disk('public')->path('advices/videos/' . $file_name);
             $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type']),
-                ['video' => "storage/advices/video/" . $file_name]
+                ['video' => "storage/advices/videos/" . $file_name]
             );
         }
         /*
