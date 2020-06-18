@@ -93,7 +93,7 @@ class AboutController extends Controller
             $image = $request->file('image');
             $image_name  = urlencode($image->getClientOriginalName()) ;
             Storage::disk('public')->put('about/image/'.  $image_name, File::get($image));
-            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/about/image'. $image_name]);
+            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/about/image/'. $image_name]);
             $about = About::where('id', $id)->update($data);
             //About::where('id', $about->id)->update([ ]);
         }
