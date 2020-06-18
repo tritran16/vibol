@@ -102,12 +102,13 @@ class DailyAdvicesController extends Controller
      */
     public function save(Request $request)
     {
-        $_advice = $request->only(['advice', 'image', 'author', 'text_position', 'status']);
+        $_advice = $request->only(['advice', 'type', 'image', 'author', 'text_position', 'status']);
 
         $advice = DailyAdvice::create($_advice);
-        //dd($_advice);
         if($request->get('status') == 1) {
-           $this->sendNotification($advice);
+           //$this->sendNotification($advice);
+            DailyAdvice::where('id', '<>', $advice->id)->where('status', 1)->update(['status' => 0] );
+            //DailyAdvice::where('id', '<>', $advice->id)->update(['status' => 1] );
         }
         return redirect(route('daily_advices.index'))->with('success', 'Created Advice successfully!');
 
@@ -175,7 +176,7 @@ class DailyAdvicesController extends Controller
             DailyAdvice::where('id', $id)->update($_advice);
             if($request->get('status') == 1) {
                 // Send Notification
-                $this->sendNotification($advice);
+               // $this->sendNotification($advice);
             }
             return redirect(route('daily_advices.index'))->with('success', 'Update Daily Advice successfully!');
         }
@@ -210,9 +211,9 @@ class DailyAdvicesController extends Controller
     public  function active($id){
         $advice = DailyAdvice::find($id);
         if ($advice) {
-            DailyAdvice::where('status', 1)->update(['status' => 2] );
+            DailyAdvice::where('status', 1)->update(['status' => 0] );
             DailyAdvice::where('id', $id)->update(['status' => 1] );
-            $this->sendNotification($advice);
+            //$this->sendNotification($advice);
             return redirect(route('daily_advices.index'))->with('success', 'Active Advice Successful!');
         }
         else {

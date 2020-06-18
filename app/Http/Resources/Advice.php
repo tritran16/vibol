@@ -14,6 +14,26 @@ class Advice extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+
+        if (!$this->resource) {
+            return [];
+        }
+        $data['id'] = $this->id;
+        $data['author'] = $this->author;
+        $data['content'] = $this->content;
+
+        $data['type'] = $this->type;
+        if ($this->type == 1) {
+            $data['image'] = $this->image;
+            $data['position'] = $this->position;
+
+        }
+        else {
+            $data['video'] = $this->video;
+        }
+        $data['created_at'] = $this->created_at;
+        $data['updated_at'] = $this->updated_at;
+        return $data;
+
     }
 }

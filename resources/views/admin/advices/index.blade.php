@@ -25,7 +25,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{__('advice.advice')}}</th>
-                            <th>{{__('advice.image')}}</th>
+                            <th>{{__('advice.type')}}</th>
                             <th>{{__('advice.author')}}</th>
                             <th>{{__('advice.status')}}</th>
                             <th>{{__('advice.created_at')}} </th>
@@ -39,7 +39,7 @@
                         <tr style="background-color: #00d6b2">
                             <td></td>
                             <td>{{ $today_advice->advice }}</td>
-                            <td><img src="{{asset( $today_advice->image)}}" class="img-bordered" style="width: 40px"></td>
+                            <td>{{$today_advice->type == 1? 'Image' : 'Video'}}</td>
                             <td>{{ $today_advice->author }}</td>
                             <td>Active</td>
                             <td>{{ $today_advice->updated_at }}</td>
@@ -56,7 +56,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $advice->advice }}</td>
-                                <td><img src="{{asset( $advice->image)}}" class="img-bordered" style="width: 40px"></td>
+                                <td>{{$today_advice->type == 1? 'Image' : 'Video'}}</td>
                                 <td>{{ $advice->author }}</td>
                                 <td>@if ($advice->status == 1)
                                         <label class="label label-primary" href="#">Active</label>

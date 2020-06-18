@@ -24,7 +24,7 @@ class CreateDailyAdvicesTable extends Migration
             $table->smallInteger('text_position')
                 ->comment('1: top; 2: middle, 3: bottom');
             $table->string('author', 50)->nullable();
-            $table->smallInteger('status')->nullable()->comment('1: new; 2: active; 3 un-active');
+            $table->smallInteger('status')->nullable()->comment('0: new; 1: active; 2 un-active');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
             $table->timestamps();
