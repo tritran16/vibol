@@ -25,12 +25,13 @@ class Advice extends JsonResource
         $data['type'] = $this->type;
         if ($this->type == 1) {
             $data['image'] = $this->image;
-            $data['position'] = $this->position;
+            $data['text_position'] = $this->text_position;
 
         }
         else {
             $data['video'] = $this->video;
         }
+        $data['status'] = $this->status;
         $data['created_at'] = $this->created_at;
         $data['updated_at'] = $this->updated_at;
         return $data;
