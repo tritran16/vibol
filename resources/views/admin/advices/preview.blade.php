@@ -44,7 +44,7 @@
     @endif
     @if ($advice['type'] == 2)
         <video width="320" height="240" controls>
-            <source src="{{$advice['video']}}" type="video/mp4">
+            <source src="{{url($advice['video'])}}" type="video/mp4">
         </video>
         <input type="hidden" name="video" value="{{$advice['video']}}">
     @endif
