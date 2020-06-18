@@ -102,7 +102,7 @@ class DailyAdvicesController extends Controller
      */
     public function save(Request $request)
     {
-        $_advice = $request->only(['advice', 'type', 'image', 'author', 'text_position', 'status']);
+        $_advice = $request->only(['advice', 'type', 'video','image', 'author', 'text_position', 'status']);
 
         $advice = DailyAdvice::create($_advice);
         if($request->get('status') == 1) {
