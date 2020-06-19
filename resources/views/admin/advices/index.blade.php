@@ -56,7 +56,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $advice->advice }}</td>
-                                <td>{{$today_advice->type == 1? 'Image' : 'Video'}}</td>
+                                <td>{{$advice->type == 1? 'Image' : 'Video'}} </td>
                                 <td>{{ $advice->author }}</td>
                                 <td>@if ($advice->status == 1)
                                         <label class="label label-primary" href="#">Active</label>
