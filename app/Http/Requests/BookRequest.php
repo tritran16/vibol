@@ -32,7 +32,7 @@ class BookRequest extends FormRequest
             'status' => 'required',
             'category_id' => 'required|integer',
             'description' => 'nullable|string',
-            'page_number' => 'required|integer|min:1',
+            //'page_number' => 'required|integer|min:1',
 
         ];
         if ($this->getMethod() == 'POST') {
