@@ -45,6 +45,7 @@ class BookRequest extends FormRequest
         }
         if ($this->getMethod() == 'PUT') {
             $rules += [
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4000',
                 'pdf_file' => 'max:8000|mimes:pdf|required_without:video_link',
                 'video_link' => 'active_url|required_without:pdf_file'
 

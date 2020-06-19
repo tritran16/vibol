@@ -42,6 +42,11 @@ class NewsRequest extends FormRequest
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
             ];
         }
+        else if ($this->getMethod() == 'PUT') {
+            $rules += [
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ];
+        }
         return  $rules;
     }
 

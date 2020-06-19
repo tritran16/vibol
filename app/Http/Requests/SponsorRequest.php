@@ -24,12 +24,24 @@ class SponsorRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000',
+
             'description' => 'nullable|string|max:1000',
             'link' => 'nullable|string|max:255|url'
         ];
+
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000',
+            ];
+        }
+        else if ($this->getMethod() == 'PUT') {
+            $rules += [
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000',
+            ];
+        }
+        return $rules;
     }
 
     public function messages()

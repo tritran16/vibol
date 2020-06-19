@@ -24,12 +24,18 @@ class AdviceRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'advice' => 'required_if:type,==,1|string|max:1000',
             'author' => 'nullable|string|max:100',
-            'image' => 'required_if:type,==,1|mimes:jpeg,png,jpg,gif,svg|max:8000',
+            //'image' => 'required_if:type,==,1|mimes:jpeg,png,jpg,gif,svg|max:8000',
             'video' => 'required_if:type,==,2|mimes:mp4|max:16000',
         ];
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'image' => 'required_if:type,==,1|mimes:jpeg,png,jpg,gif,svg|max:8000',
+            ];
+        }
+        return $rules;
     }
 
     public function messages()

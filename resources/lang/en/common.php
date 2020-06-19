@@ -60,7 +60,7 @@ return [
     'system_page.status' => 'Status',
     'system_page.create' => 'Create New Share Page',
     'system_page.update' => 'Edit Share Page',
-    'sponsor.list' => 'Sponsors',
+    'sponsor.list' => 'Partners',
     'banner.list' => 'Banner',
     'page.about_us' => 'About Us',
     'page.about_us_content' => 'Content'

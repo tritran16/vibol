@@ -52,11 +52,17 @@ class VideoRequest extends FormRequest
             'link' => 'required|string|max:1000|active_url'
         ];
 
-//        if ($this->getMethod() == 'POST') {
-//            $rules += [
-//                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:4000'
-//            ];
-//        }
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000'
+            ];
+        }
+        else if ($this->getMethod() == 'PUT') {
+            $rules += [
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
+            ];
+
+        }
         return  $rules;
     }
 

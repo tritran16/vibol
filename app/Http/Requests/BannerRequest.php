@@ -24,12 +24,24 @@ class BannerRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'type' => 'required|unique:banners,type,' . request('id'),
             'title' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:8000',
+           // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:8000',
             'content' => 'nullable|string|max:1000',
         ];
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000'
+            ];
+        }
+        else if ($this->getMethod() == 'PUT') {
+            $rules += [
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000'
+            ];
+
+        }
+        return $rules;
     }
 
     public function messages()
