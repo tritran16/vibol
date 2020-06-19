@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Resources\Video as VideoResource;
 
 if (!defined('API_PAGE_LIMITED'))
-    define('API_PAGE_LIMITED', 10);
+    define('API_PAGE_LIMITED', 5);
 
 class VideosController extends ApiController
 {

@@ -13,7 +13,7 @@ use App\Http\Resources\Book as BookResource;
 use App\Http\Resources\BookCategory as BookCategoryResource;
 
 if (!defined('API_PAGE_LIMITED'))
-    define('API_PAGE_LIMITED', 10);
+    define('API_PAGE_LIMITED', 5);
 class BooksController extends ApiController
 {
     /**

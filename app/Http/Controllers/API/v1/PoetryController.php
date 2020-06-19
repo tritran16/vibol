@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Resources\Poetry as PoetryResource;
 
 if (!defined('API_PAGE_LIMITED'))
-    define('API_PAGE_LIMITED', 10);
+    define('API_PAGE_LIMITED', 5);
 
 class PoetryController extends ApiController
 {
