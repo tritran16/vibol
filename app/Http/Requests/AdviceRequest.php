@@ -25,10 +25,11 @@ class AdviceRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'advice' => 'required_if:type,==,1|string|max:1000',
+            'advice' => 'nullable|required_if:type,==,1|string|max:1000',
             'author' => 'nullable|string|max:100',
             //'image' => 'required_if:type,==,1|mimes:jpeg,png,jpg,gif,svg|max:8000',
-            'video' => 'required_if:type,==,2|mimes:mp4|max:16000',
+            'video_file' => 'nullable|mimes:mp4|max:16000',
+            'video' => 'nullable|active_url',
         ];
         if ($this->getMethod() == 'POST') {
             $rules += [

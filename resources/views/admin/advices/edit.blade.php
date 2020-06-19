@@ -24,20 +24,55 @@
     {{ Form::label('type', __('advice.type')) }}
     {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control')) }}
 </div>
-<div class="form-group">
-    {{ Form::label('advice', __('advice.advice')) }}
-    {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
-</div>
-<div class="form-group">
-    {{ Form::label('image', __('advice.image')) }}
-    {{ Form::file('image', ['id' => 'img', 'accept' => "image/png, image/jpeg;"]) }}
-    <span class="error">(Only file type : image/png or image/jpeg;)</span>
+<section id="sec-video" {{$advice->type != 2   && old('type') != 2 ? 'style=display:none': ''}}>
+    <div class="form-group" >
+        {{ Form::label('video_file', __('advice.video_file')) }}
+        {{ Form::file('video_file', ['id' => 'video', 'accept' => "video/mp4,video/x-m4v,video/*"]) }}
+        <span class="error">(Only video file)</span>
 
-</div>
-<div class="container">
-    <img id="previewImage" src="{{asset($advice->image)}}" alt="" style="width:100px;" />
-    <div class="top" id="textAdvice"></div>
-</div>
+    </div>
+    <span> -- OR -- </span>
+    <div class="form-group">
+        {{ Form::label('video_link', __('advice.video_link')) }}
+        {{ Form::text('video_link', request('video', null), array('class' => 'form-control')) }}
+    </div>
+
+</section>
+<section  id="sec-img" {{($advice->type == 2  || old('type') == 2 )? 'style=display:none': ''}}>
+    <div class="form-group">
+        {{ Form::label('advice', __('advice.advice')) }}
+        {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('image', __('advice.image')) }}
+        {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
+        <span class="error">(Only file type : jpg)</span>
+
+    </div>
+
+
+    <div class="container">
+        <img id="previewImage" src="#" alt="" style="width:100px; display: none" />
+        <div class="top" id="textAdvice"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 col-md-10 text-center">
+            <span id="text-advice" class="border"> </span>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('text_position', __('advice.text_position')) }}
+        {{ Form::select('text_position',
+            [1 => 'Top Left', 2 => 'Top Center', 3 => 'Top Right',
+             4 => 'Middle Left', 5 => 'Middle Center', 6 => 'Middle Right',
+             7 => 'Bottom Left', 8 => 'Bottom Center', 9 => 'Bottom Right'
+            ],
+             request('text_position', null), array('class' => 'form-control')) }}
+    </div>
+</section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <style>
     .container {

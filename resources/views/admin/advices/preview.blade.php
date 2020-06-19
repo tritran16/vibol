@@ -10,36 +10,37 @@
     <input type="hidden" name="status" value="{{$advice['status']}}">
     <div class="form-group">
         {{ Form::label('author', __('advice.author')) }}
-        {{ Form::text('author', $advice['author']?$advice['author']:'N/A', array('class' => 'form-control', 'disabled' => true)) }}
+        {{ Form::text('author', $advice['author']?$advice['author']:'', array('class' => 'form-control', 'disabled' => true)) }}
         <input type="hidden" name='author' value="{{$advice['author']}}">
     </div>
-    <div class="form-group">
-        {{ Form::label('advice', __('advice.advice')) }}
-        {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice', 'disabled' => true)) }}
-        <input type="hidden" name='advice' value="{{$advice['advice']}}">
-    </div>
+
     <div class="form-group">
         {{ Form::label('type', __('advice.type')) }}
         {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control', 'disabled' => true)) }}
     </div>
 <input type="hidden" name="type" value="{{$advice['type']}}">
     @if ($advice['type'] == 1)
-    <div class="form-group">
-        {{ Form::label('image', __('advice.image')) }}
-        <img class="img-bordered" style="width: 200px" src="{{asset($advice['image'])}}">
-        <input type="hidden" name="image" value="{{$advice['image']}}">
-    </div>
-    <div class="form-group">
-        {{ Form::label('text_position', __('advice.text_position')) }}
-        {{ Form::select('text_position',
-            [1 => 'Top Left', 2 => 'Top Center', 3 => 'Top Right',
-             4 => 'Middle Left', 5 => 'Middle Center', 6 => 'Middle Right',
-             7 => 'Bottom Left', 8 => 'Bottom Center', 9 => 'Bottom Right'
-            ],
-             request('text_position', null), array('class' => 'form-control', 'disabled' => true)) }}
+        <div class="form-group">
+            {{ Form::label('advice', __('advice.advice')) }}
+            {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice', 'disabled' => true)) }}
+            <input type="hidden" name='advice' value="{{$advice['advice']}}">
+        </div>
+        <div class="form-group">
+            {{ Form::label('image', __('advice.image')) }}
+            <img class="img-bordered" style="width: 200px" src="{{asset($advice['image'])}}">
+            <input type="hidden" name="image" value="{{$advice['image']}}">
+        </div>
+        <div class="form-group">
+            {{ Form::label('text_position', __('advice.text_position')) }}
+            {{ Form::select('text_position',
+                [1 => 'Top Left', 2 => 'Top Center', 3 => 'Top Right',
+                 4 => 'Middle Left', 5 => 'Middle Center', 6 => 'Middle Right',
+                 7 => 'Bottom Left', 8 => 'Bottom Center', 9 => 'Bottom Right'
+                ],
+                 request('text_position', null), array('class' => 'form-control', 'disabled' => true)) }}
 
-        <input type="hidden" name="text_position" value="{{$advice['text_position']}}">
-    </div>
+            <input type="hidden" name="text_position" value="{{$advice['text_position']}}">
+        </div>
 
     @endif
     @if ($advice['type'] == 2)

@@ -15,7 +15,7 @@ class CreateDailyAdvicesTable extends Migration
     {
         Schema::create('daily_advices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('advice', 1000);
+            $table->string('advice', 1000)->nullable();
             $table->integer('type')->default(1)->comment('1: image, 2 : video');
 
             $table->string('image', 1000)->nullable();

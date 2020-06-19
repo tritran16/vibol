@@ -4,6 +4,8 @@ return [
     'author' => 'Author',
     'advice' => 'Advice',
     'image' => 'Image',
+    'video_file' => 'Upload Video File',
+    'video_link' => 'Video link',
     'text_position' => 'Text Position',
     'text_size' => 'Text Size',
     'text_color' => 'Text Color',

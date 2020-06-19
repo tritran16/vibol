@@ -31,16 +31,16 @@
         {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control', 'disabled' =>true)) }}
     </div>
     @endif
-    @if ($book->file_link)
-    <div class="form-group">
-        {{ Form::label('file_link',  __('book.file_link')) }}
-        {{ Form::text('file_link', request('file_link', null), array('class' => 'form-control', 'disabled' =>true)) }}
-    </div>
-    @endif
-    <div class="form-group">
-        {{ Form::label('page_number',  __('book.page_number')) }}
-        {{ Form::text('page_number', request('page_number', null), array('class' => 'form-control')) }}
-    </div>
+{{--    @if ($book->file_link)--}}
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('file_link',  __('book.file_link')) }}--}}
+{{--        {{ Form::text('file_link', request('file_link', null), array('class' => 'form-control', 'disabled' =>true)) }}--}}
+{{--    </div>--}}
+{{--    @endif--}}
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('page_number',  __('book.page_number')) }}--}}
+{{--        {{ Form::text('page_number', request('page_number', null), array('class' => 'form-control')) }}--}}
+{{--    </div>--}}
 
     <div class="form-group">
         {{ Form::label('status',  __('book.status')) }}

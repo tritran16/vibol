@@ -40,15 +40,15 @@
         {{ Form::label('video_link',  __('book.video_link')) }}
         {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control')) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('pdf_file', __('book.pdf_file')) }}
-        {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('pdf_file', __('book.pdf_file')) }}--}}
+{{--        {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}--}}
+{{--    </div>--}}
 
-    <div class="form-group">
-        {{ Form::label('page_number',  __('book.page_number')) }}
-        {{ Form::number('page_number', request('page_number', 1), array('class' => 'form-control')) }}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('page_number',  __('book.page_number')) }}--}}
+{{--        {{ Form::number('page_number', request('page_number', 1), array('class' => 'form-control')) }}--}}
+{{--    </div>--}}
 
     <div class="form-group">
         {{ Form::label('status',  __('book.status')) }}

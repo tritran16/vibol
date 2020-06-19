@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
         {{ Form::label('type', __('advice.type')) }}
-        {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control', 'onchange' => 'changeType(this)')) }}
+        {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', session('type')), array('class' => 'form-control', 'onchange' => 'changeType(this)')) }}
     </div>
     <script type="text/javascript">
         function changeType(item) {
@@ -37,30 +37,26 @@
             }
         }
     </script>
-    <div class="form-group">
-        {{ Form::label('advice', __('advice.advice')) }}
-        {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
-    </div>
-
-    <div class="form-group" id="sec-video" {{request('type') != 2  && old('type') != 2 ? 'style=display:none': ''}}>
-        {{ Form::label('video', __('advice.video')) }}
-        {{ Form::file('video', ['id' => 'video', 'accept' => "video/mp4,video/x-m4v,video/*"]) }}
-        <span class="error">(Only video file)</span>
-
-    </div>
-    <section  id="sec-img" {{(request('type') == 2 || old('type') == 2 )? 'style=display:none': ''}}>
-    <div class="form-group">
-        {{ Form::label('image', __('advice.image')) }}
-        {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
-        <span class="error">(Only file type : jpg)</span>
-
-    </div>
 
 
-    <div class="container">
-        <img id="previewImage" src="#" alt="" style="width:100px; display: none" />
-        <div class="top" id="textAdvice"></div>
-    </div>
+    <section  id="sec-img" {{request('type') == 2  || old('type') == 2 || (session('type') == 2)   ? 'style=display:none': ''}}>
+
+        <div class="form-group">
+            {{ Form::label('advice', __('advice.advice')) }}
+            {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
+        </div>
+        <div class="form-group">
+            {{ Form::label('image', __('advice.image')) }}
+            {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
+            <span class="error">(Only file type : jpg)</span>
+
+        </div>
+
+
+        <div class="container">
+            <img id="previewImage" src="#" alt="" style="width:100px; display: none" />
+            <div class="top" id="textAdvice"></div>
+        </div>
 
 {{--    <div class="form-group">--}}
 {{--        {{ Form::label('text_size', __('advice.text_size')) }}--}}
@@ -100,6 +96,21 @@
             ],
              request('text_position', null), array('class' => 'form-control')) }}
     </div>
+    </section>
+
+    <section id="sec-video" {{request('type') == 1  || old('type') == 1 || (session('type') != 2)  ? 'style=display:none': ''}}>
+        <div class="form-group" >
+            {{ Form::label('video', __('advice.video_file')) }}
+            {{ Form::file('video_file', ['id' => 'video', 'accept' => "video/mp4,video/x-m4v,video/*"]) }}
+            <span class="error">(Only video file)</span>
+
+        </div>
+        <span> -- OR -- </span>
+        <div class="form-group">
+            {{ Form::label('video_link', __('advice.video_link')) }}
+            {{ Form::text('video', request('video', null), array('class' => 'form-control')) }}
+        </div>
+
     </section>
     <div class="form-group">
         {{ Form::label('status', __('advice.status')) }}

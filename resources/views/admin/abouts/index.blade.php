@@ -19,9 +19,13 @@
                 <div class="box box-primary" style="margin-top: 15px">
                     <!-- Messages -->
                     <div class="tab-content" style="margin-top: 15px">
+{{--                        <div class="form-group">--}}
+{{--                            {{ Form::label('image',  __('about.image')) }}--}}
+{{--                            <img class="img-rounded" src="{{asset($about->image)}}" width="200px"/>--}}
+{{--                        </div>--}}
                         <div class="form-group">
-                            {{ Form::label('image',  __('about.image')) }}
-                            <img class="img-rounded" src="{{asset($about->image)}}" width="200px"/>
+                            {{ Form::label('video_link',  __('about.video_link')) }}
+                            {{ Form::text('video_link', $about->video_link, array('class' => 'form-control')) }}
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-xs-12 col-sm-12">
@@ -36,10 +40,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            {{ Form::label('video_link',  __('about.video_link')) }}
-                            {{ Form::text('video_link', $about->video_link, array('class' => 'form-control')) }}
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            {{ Form::label('video_link',  __('about.video_link')) }}--}}
+{{--                            {{ Form::text('video_link', $about->video_link, array('class' => 'form-control')) }}--}}
+{{--                        </div>--}}
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-10">

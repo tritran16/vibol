@@ -40,19 +40,19 @@
         {{ Form::label('video_link',  __('book.video_link')) }}
         {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control')) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('file_link',  __('book.file_link')) }}
-        {{ Form::text('file_link', $book->file_link, array('class' => 'form-control' , 'disabled' => true)) }}
-    </div>
-    <div class="form-group">
-        {{ Form::label('pdf_file', __('book.pdf_file')) }}
-        {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('file_link',  __('book.file_link')) }}--}}
+{{--        {{ Form::text('file_link', $book->file_link, array('class' => 'form-control' , 'disabled' => true)) }}--}}
+{{--    </div>--}}
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('pdf_file', __('book.pdf_file')) }}--}}
+{{--        {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}--}}
 
-        @if ($book->filename)
-            <br><span> File : </span>
-            <a target="_blank" href="{{asset('storage/books/pdf/'. $book->id . '/'.  $book->filename)}}">{{ $book->filename }}</a>
-        @endif
-    </div>
+{{--        @if ($book->filename)--}}
+{{--            <br><span> File : </span>--}}
+{{--            <a target="_blank" href="{{asset('storage/books/pdf/'. $book->id . '/'.  $book->filename)}}">{{ $book->filename }}</a>--}}
+{{--        @endif--}}
+{{--    </div>--}}
 
     <div class="form-group">
         {{ Form::label('page_number',  __('book.page_number')) }}

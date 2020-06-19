@@ -68,13 +68,23 @@ class DailyAdvicesController extends Controller
             );
         }
         else {
-            $video = $request->file('video');
-            $file_name  = time() . '_' .$video->getClientOriginalName() ;
-            Storage::disk('public')->put('advices/videos/' . $file_name, File::get($video));
-            $path = Storage::disk('public')->path('advices/videos/' . $file_name);
-            $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type']),
-                ['video' => "storage/advices/videos/" . $file_name]
-            );
+            $video = $request->file('video_file');
+            $link =  $request->get('video');
+            if (!$video && !$link) {
+                return redirect()->back()->withErrors('Please upload file or  input link!')->with('type', 2);
+            }
+            $video = $request->file('video_file');
+            if ($video) {
+                $file_name = time() . '_' . $video->getClientOriginalName();
+                Storage::disk('public')->put('advices/videos/' . $file_name, File::get($video));
+                $path = Storage::disk('public')->path('advices/videos/' . $file_name);
+                $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type']),
+                    ['video' => "storage/advices/videos/" . $file_name]
+                );
+            }
+            else {
+                $_advice = $request->only(['author', 'advice', 'text_position', 'status', 'type', 'video']);
+            }
         }
         /*
         Storage::disk('public')->put('advices/images/tmp/'. $file_name, File::get($image));
