@@ -25,7 +25,7 @@ class AdvicesController extends ApiController
                 $join->on('like_advices.device_id', '=', DB::raw($device_id));
             })
             ->orderBy('updated_at', 'DESC')
-            ->paginate();
+            ->paginate(5);
         return $this->successResponse(new AdviceCollection($advices));
 
     }
