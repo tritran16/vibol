@@ -9,49 +9,46 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2>{{__('about.header')}}</h2>
-                        <a class="btn btn-primary " href="{{ route('abouts.edit', $about->id) }}">
-                            <i class="fa fa-pencil"></i> {{__('common.button.edit')}}
+                    </div>
+                    <div class="pull-right">
+
+                        <a class="btn btn-success btn-flat" href="{{ route('abouts.create') }}">
+                            <i class="fa fa-plus"></i> {{__('about.create.button')}}
                         </a>
                     </div>
                 </div>
 
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{__('about.video_link')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php
+                            $i = 1;
+                        @endphp
+                        @foreach ($abouts as $about)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td><a href="{{$about->video_link}}" target="_blank">{{ $about->video_link }}</a></td>
 
-                <div class="box box-primary" style="margin-top: 15px">
-                    <!-- Messages -->
-                    <div class="tab-content" style="margin-top: 15px">
-{{--                        <div class="form-group">--}}
-{{--                            {{ Form::label('image',  __('about.image')) }}--}}
-{{--                            <img class="img-rounded" src="{{asset($about->image)}}" width="200px"/>--}}
-{{--                        </div>--}}
-                        <div class="form-group">
-                            {{ Form::label('video_link',  __('about.video_link')) }}
-                            {{ Form::text('video_link', $about->video_link, array('class' => 'form-control')) }}
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-xs-12 col-sm-12">
-                                <strong>{{__('common.page.about_us_content')}}</strong>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        {{ Form::textarea('content', request('content', $about->content), array('class' => 'form-control textarea disable', 'disabled' => true,'id' => 'content', 'rows' => 10)) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-{{--                        <div class="form-group">--}}
-{{--                            {{ Form::label('video_link',  __('about.video_link')) }}--}}
-{{--                            {{ Form::text('video_link', $about->video_link, array('class' => 'form-control')) }}--}}
-{{--                        </div>--}}
-
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-10">
-
-                            </div>
-                        </div>
-
-                    </div>
+                                <td>
+                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('abouts.edit', $about->id) }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    {!! Form::open(['method' => 'DELETE','route' => ['abouts.destroy', $about->id],'style'=>'display:inline']) !!}
+                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_item')}}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

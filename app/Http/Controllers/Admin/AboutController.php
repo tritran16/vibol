@@ -10,6 +10,7 @@ use App\Models\SystemPage;
 use DemeterChain\A;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,11 +24,8 @@ class AboutController extends Controller
     public function index()
     {
 
-        $about = About::first();
-        if (!$about) {
-            return redirect(route('abouts.create'));
-        }
-        return view('admin.abouts.index', ['about' => $about]);
+        $abouts = About::all();
+        return view('admin.abouts.index', ['abouts' => $abouts]);
     }
     /**
      * Show the form for creating a new resource.
@@ -47,14 +45,10 @@ class AboutController extends Controller
      */
     public function store(AboutRequest $request)
     {
-        if ($request->file('image')){
-            $image = $request->file('image');
-            $image_name  = urlencode($image->getClientOriginalName()) ;
-            Storage::disk('public')->put('about/image/'.  $image_name, File::get($image));
-            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/about/image/'. $image_name]);
-            $about = About::create($data);
-            //About::where('id', $about->id)->update([ ]);
-        }
+        $data = $request->all();
+
+        $about = About::create($request->all());
+
 
         return redirect(route('abouts.index'))->with('success', 'Created About Me Page successfully!');//
     }
@@ -78,7 +72,7 @@ class AboutController extends Controller
      */
     public function edit($id)
     {
-        $about = About::first();
+        $about = About::findOrFail($id);
 
         return view('admin.abouts.edit', ['about' => $about]);
     }
@@ -92,19 +86,36 @@ class AboutController extends Controller
      */
     public function update(AboutRequest $request, $id)
     {
-        if ($request->file('image')){
-            $image = $request->file('image');
-            $image_name  = urlencode($image->getClientOriginalName()) ;
-            Storage::disk('public')->put('about/image/'.  $image_name, File::get($image));
-            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/about/image/'. $image_name]);
-            $about = About::where('id', $id)->update($data);
-            //About::where('id', $about->id)->update([ ]);
-        }
-        else {
+//        if ($request->file('image')){
+//            $image = $request->file('image');
+//            $image_name  = urlencode($image->getClientOriginalName()) ;
+//            Storage::disk('public')->put('about/image/'.  $image_name, File::get($image));
+//            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/about/image/'. $image_name]);
+//            $about = About::where('id', $id)->update($data);
+//            //About::where('id', $about->id)->update([ ]);
+//        }
+//        else {
             About::where('id', $id)->update($request->only(['content', 'video_link']));
-        }
+        //}
 
         return redirect(route('abouts.index'))->with('success', 'Update About Information successfully!');//
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        // delete
+        $about = About::find($id);
+        $about->delete();
+
+
+        return redirect(route('abouts.index'))->with('success', 'Deleted About Me item successfully!');
     }
 
 

@@ -32,14 +32,9 @@ class AboutRequest extends FormRequest
         $rules =  [
 
             'content' => 'required|max:80000',
-            'video_link' => 'nullable|active_url'
+            'video_link' => 'required|active_url'
         ];
 
-        if ($this->getMethod() == 'POST') {
-            $rules += [
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000',
-            ];
-        }
 
         return  $rules;
     }

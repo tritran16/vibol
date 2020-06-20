@@ -7,5 +7,6 @@ return [
     'description' => 'Description',
     'image' => 'Image',
     'video_link' => 'Video Link',
+    'create.button' => 'Add About Item'
 
 ];
