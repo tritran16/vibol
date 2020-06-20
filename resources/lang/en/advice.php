@@ -20,6 +20,7 @@ return [
     'no_advice_today' => 'No have Advice Today',
     'status.new' => 'New',
     'status.active' => 'Active',
+    'status.unactive' => 'Un-Active',
     'update.button' => 'Update',
     'update.header' => 'Edit Advice',
     'push_notification.button' => 'Push Notification',

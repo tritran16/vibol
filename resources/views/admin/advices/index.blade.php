@@ -33,25 +33,8 @@
                         </thead>
                         <tbody>
                         @php
-                            $i = 1;
+                        $i = 1;
                         @endphp
-                        @if ($today_advice)
-                        <tr style="background-color: #00d6b2">
-                            <td></td>
-                            <td>{{ $today_advice->advice }}</td>
-                            <td>{{$today_advice->type == 1? 'Image' : 'Video'}}</td>
-                            <td>{{ $today_advice->author }}</td>
-                            <td>Active</td>
-                            <td>{{ $today_advice->updated_at }}</td>
-                            <td></td>
-                        </tr>
-                        @else
-                            <tr>
-                                <td colspan="6">
-                                    <span class="center-block">{{__('advice.no_advice_today')}}</span>
-                                </td>
-                            </tr>
-                        @endif
                         @foreach ($advices as $advice)
                             <tr>
                                 <td>{{ $i++ }}</td>
@@ -59,21 +42,19 @@
                                 <td>{{$advice->type == 1? 'Image' : 'Video'}} </td>
                                 <td>{{ $advice->author }}</td>
                                 <td>@if ($advice->status == 1)
-                                        <label class="label label-primary" href="#">Active</label>
-                                    @elseif ($advice->status == 2)
-                                        <label class="label label-default" href="#">Un-Active</label>
+                                        <label class="label label-info" href="#">Active</label>
                                     @else
-                                        <label class="label label-info" href="#">New</label>
+                                        <label class="label label-default" href="#">Un-active</label>
                                     @endif
 
                                 </td>
                                 <td>{{ $advice->updated_at }}</td>
                                 <td>
-                                    @if ($advice->status != 1)
-                                        <a type="button" class="btn btn-success" href="{{route('admin.daily_advices.active', $advice->id)}}" onclick="return confirm('Do you want active this advice?')">
-                                            <i class="fa fa-check"></i> {{__('advice.active.button')}}
-                                        </a>
-                                    @endif
+{{--                                    @if ($advice->status != 1)--}}
+{{--                                        <a type="button" class="btn btn-success" href="{{route('admin.daily_advices.active', $advice->id)}}" onclick="return confirm('Do you want active this advice?')">--}}
+{{--                                            <i class="fa fa-check"></i> {{__('advice.active.button')}}--}}
+{{--                                        </a>--}}
+{{--                                    @endif--}}
 {{--                                    <a class="btn btn-sm btn-primary btn-flat" href="{{ route('daily_advices.edit', $advice->id) }}">--}}
 {{--                                        <i class="fa fa-pencil"></i>--}}
 {{--                                    </a>--}}

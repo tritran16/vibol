@@ -16,10 +16,7 @@
 {{ Form::model($advice, array('route' => array('daily_advices.update', $advice->id), 'method' => 'PUT', 'enctype' => 'multipart/form-data')) }}
 
 <input type="hidden" name="token" value="{{ csrf_token() }}" />
-<div class="form-group">
-    {{ Form::label('author', __('advice.author')) }}
-    {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}
-</div>
+
 <div class="form-group">
     {{ Form::label('type', __('advice.type')) }}
     {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control')) }}
@@ -132,7 +129,7 @@
 </div>
 <div class="form-group">
     {{ Form::label('status',  __('advice.status')) }}
-    {{ Form::select('status', [0 =>  __('advice.status.new'), 1 =>  __('advice.status.active')], request('status', null), array('class' => 'form-control')) }}
+    {{ Form::select('status', [1 =>  __('advice.status.active'), 0 =>  __('advice.status.unactive')], request('status', null), array('class' => 'form-control')) }}
 </div>
 
 {{ Form::submit(__('common.button.save'), array('class' => 'btn btn-primary')) }}

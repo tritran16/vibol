@@ -19,21 +19,24 @@ class Advice extends JsonResource
             return [];
         }
         $data['id'] = $this->id;
-        $data['author'] = $this->author;
-        $data['content'] = $this->content;
+//        $data['author'] = $this->author;
+
 
         $data['type'] = $this->type;
         if ($this->type == 1) {
-            $data['image'] = $this->image;
+            $data['image'] = url($this->image);
             $data['text_position'] = $this->text_position;
+            $data['content'] = $this->content;
 
         }
         else {
             $data['video'] = $this->video;
         }
-        $data['status'] = $this->status;
-        $data['created_at'] = $this->created_at;
-        $data['updated_at'] = $this->updated_at;
+        //$data['status'] = $this->status;
+        //$data['created_at'] = $this->created_at;
+        //$data['updated_at'] = $this->updated_at;
+
+        //$data['lịke'] = $this->like_advice_status;
         return $data;
 
     }

@@ -18,8 +18,8 @@ class AdvicesController extends ApiController
      */
     public function index(Request $request){
         $device_id = $request->get('device_id');
-        $advices = DailyAdvice::select('daily_advices.*', 'like_advices.id  AS  like_advice_id',  'like_advices.status  AS  like_advice_sttus')
-            ->where('status', '>=', 1)
+        $advices = DailyAdvice::select('daily_advices.*', 'like_advices.id  AS  like_advice_id',  'like_advices.status  AS  like_advice_status')
+            ->where('status', '=', 1)
             ->leftJoin('like_advices', function($join) use ($device_id) {
                 $join->on('like_advices.advice_id', '=', 'daily_advices.id');
                 $join->on('like_advices.device_id', '=', DB::raw($device_id));

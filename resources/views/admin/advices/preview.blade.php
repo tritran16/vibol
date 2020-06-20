@@ -8,11 +8,7 @@
     <input type="hidden" name="advice" value="{{$advice['advice']}}">
     <input type="hidden" name="text_position" value="{{$advice['text_position']}}">
     <input type="hidden" name="status" value="{{$advice['status']}}">
-    <div class="form-group">
-        {{ Form::label('author', __('advice.author')) }}
-        {{ Form::text('author', $advice['author']?$advice['author']:'', array('class' => 'form-control', 'disabled' => true)) }}
-        <input type="hidden" name='author' value="{{$advice['author']}}">
-    </div>
+
 
     <div class="form-group">
         {{ Form::label('type', __('advice.type')) }}
