@@ -40,7 +40,7 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $advice->advice }}</td>
                                 <td>{{$advice->type == 1? 'Image' : 'Video'}} </td>
-                                <td><img src="{{$advice->image}}" style="width: 200px" /></td>
+                                <td><img src="{{asset($advice->image)}}" style="width: 50px" /></td>
                                 <td>@if ($advice->status == 1)
                                         <label class="label label-info" href="#">Active</label>
                                     @else

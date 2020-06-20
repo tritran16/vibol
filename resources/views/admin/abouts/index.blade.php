@@ -35,7 +35,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>
-                                    <img src="{{url($about->image)}}" style="width: 200px" />
+                                    <img src="{{asset($about->image)}}" style="width: 50px" />
                                 </td>
                                 <td><a href="{{$about->video_link}}" target="_blank">{{ $about->video_link }}</a></td>
 
