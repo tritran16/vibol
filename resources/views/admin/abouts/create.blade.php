@@ -22,7 +22,10 @@
         {{ Form::label('video_link', __('about.video_link')) }}<span style="color: red">*</span>
         {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control')) }}
     </div>
-    <input type="hidden" name="image" value="null">
+    <div class="form-group">
+        {{ Form::label('image',  __('about.image')) }}
+        {!! Form::file('image', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
+    </div>
     <div class="form-group">
         {{ Form::label('description', __('about.content')) }}<span style="color: red">*</span>
         {{ Form::textarea('content', request('content', null), array('class' => 'form-control textarea', 'id' => 'content', 'rows' => 10)) }}

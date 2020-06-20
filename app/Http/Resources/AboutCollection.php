@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class AdviceCollection extends ResourceCollection
+class AboutCollection extends ResourceCollection
 {
     private $pagination;
 
@@ -33,22 +33,13 @@ class AdviceCollection extends ResourceCollection
         foreach ($this->collection as $item) {
             $_item = [];
             $_item['id'] = $item->id;
-            $_item['type'] = $item->type;
-            if ($item->type == 1) {
-                $_item['image'] = isset($item->image) ? url($item->image) : null;
-                $_item['text_position'] = $item->text_position;
-                $_item['content'] = $item->content;
-            }
-            else {
-                $_item['video'] = isset($item->video) ? url($item->video) : null;
-            }
-            $_item['likes'] = $item->likes;
-            $_item['like'] = isset($item->like_advice_id) ? 1 : 0;
-
+            $_item['image'] = isset( $item->image)? url( $item->image): '';
+            $_item['video_link'] = $item->video_link;
+            $_item['content'] = $item->content;
             $data[] = $_item;
         }
         return [
-            'advices' => $data,
+            'about' => $data,
             'total' => $this->pagination['total'],
             'per_page' => $this->pagination['perPage'],
             'current_page' => $this->pagination['currentPage'],

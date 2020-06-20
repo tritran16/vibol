@@ -36,13 +36,9 @@ class AdvicesController extends ApiController
         $like = LikeAdvice::where('advice_id', $id)
             ->where('device_id', $device_id)
             ->first();
-        if (isset($like) && $like->status == 1) {
+        if (isset($like)) {
             $advice->like = 1;
             $advice->is_like = 1;
-        }
-        elseif (isset($like) && $like->status == 0) {
-            $advice->like = -1;
-            $advice->is_like = 0;
         }
         else {
             $advice->like = null;
@@ -110,16 +106,7 @@ class AdvicesController extends ApiController
                 ->where('device_id', $device_id)
                 ->first();
             if ($like) {
-                if ($like->status == 0) {
-                    LikeAdvice::where('device_id', $device_id)->where('advice_id', $id)->update(['status' => 1]);
-                    $advice->likes += 1;
-                    $advice->dislikes -= 1;
-                    DailyAdvice::where('id', $id)->update(['likes'=> DB::raw('likes + 1'),
-                        'dislikes' => DB::raw('GREATEST(dislikes - 1, 0)')]);
-                }
-                else {
-                    // TODO:
-                }
+                return $this->failedResponse([], __('cannotLikeAdvice'));
             } else {
                 LikeAdvice::create(['device_id' => $device_id, 'advice_id' => $id, 'status' => 1]);
                 $advice->likes += 1;
@@ -146,24 +133,16 @@ class AdvicesController extends ApiController
                 ->where('device_id', $device_id)
                 ->first();
             if ($like) {
-                if ($like->status == 1) {
-                    LikeAdvice::where('device_id', $device_id)->where('advice_id', $id)->update(['status' => 0]);
-                    $advice->likes -= 1;
-                    $advice->dislikes += 1;
-                    DailyAdvice::where('id', $id)->update(['dislikes'=> DB::raw('dislikes + 1'),
-                        'likes' => DB::raw('GREATEST(likes - 1, 0)')]);
-                }
-                else {
-                    // TODO:
-                }
+                $like = LikeAdvice::where('advice_id', $id)
+                    ->where('device_id', $device_id)->delete();
+                DailyAdvice::where('id', $id)->update(['likes' => DB::raw('GREATEST(likes - 1, 0)')]);
+                $advice = DailyAdvice::findOrFail($id);
+                return $this->successResponse(new AdviceResource($advice), __('dislikeAdviceSuccess'));
+
             } else {
-                LikeAdvice::create(['device_id' => $device_id, 'advice_id' => $id, 'status' => 0]);
-                $advice->dislikes += 1;
-                DailyAdvice::where('id', $id)->update(['dislikes'=> DB::raw('dislikes + 1'), ]);
+                return $this->failedResponse([], __('dislikeAdviceFaile'));
             }
-            $advice->like = -1;
-            $advice->is_like = 0;
-            return $this->successResponse(new AdviceResource($advice), __('dislikeAdviceSuccess'));
+
 
         }
         else return $this->failedResponse([], __('notFoundAdvice'));

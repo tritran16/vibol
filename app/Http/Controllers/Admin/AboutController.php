@@ -46,8 +46,18 @@ class AboutController extends Controller
     public function store(AboutRequest $request)
     {
         $data = $request->all();
+        if ($request->file('image')){
+            $image = $request->file('image');
+            $image_name  = urlencode($image->getClientOriginalName()) ;
+            Storage::disk('public')->put('abouts/images/'.  $image_name, File::get($image));
+            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/abouts/images/'. $image_name]);
+            $about = About::create($data);
+        }
+        else {
+            $about = About::create($request->all());
+        }
 
-        $about = About::create($request->all());
+
 
 
         return redirect(route('abouts.index'))->with('success', 'Created About Me Page successfully!');//
@@ -86,17 +96,16 @@ class AboutController extends Controller
      */
     public function update(AboutRequest $request, $id)
     {
-//        if ($request->file('image')){
-//            $image = $request->file('image');
-//            $image_name  = urlencode($image->getClientOriginalName()) ;
-//            Storage::disk('public')->put('about/image/'.  $image_name, File::get($image));
-//            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/about/image/'. $image_name]);
-//            $about = About::where('id', $id)->update($data);
-//            //About::where('id', $about->id)->update([ ]);
-//        }
-//        else {
+        if ($request->file('image')){
+            $image = $request->file('image');
+            $image_name  = urlencode($image->getClientOriginalName()) ;
+            Storage::disk('public')->put('about/image/'.  $image_name, File::get($image));
+            $data = array_merge($request->only(['content', 'video_link']), ['image' => 'storage/about/image/'. $image_name]);
+            $about = About::where('id', $id)->update($data);
+        }
+        else {
             About::where('id', $id)->update($request->only(['content', 'video_link']));
-        //}
+        }
 
         return redirect(route('abouts.index'))->with('success', 'Update About Information successfully!');//
     }
