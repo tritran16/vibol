@@ -51,3 +51,5 @@ Route::get('system/shares', 'API\v1\SystemsController@shares');
 Route::get('banners', 'API\v1\SystemsController@banners');
 Route::get('sponsors', 'API\v1\SystemsController@sponsors');
 Route::get('abouts', 'API\v1\AboutController@index');
+Route::get('abouts/like/{id}', 'API\v1\AboutController@like');
+Route::get('abouts/unlike/{id}', 'API\v1\AboutController@unlike');

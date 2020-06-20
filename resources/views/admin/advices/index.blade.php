@@ -26,7 +26,7 @@
                             <th>#</th>
                             <th>{{__('advice.advice')}}</th>
                             <th>{{__('advice.type')}}</th>
-                            <th>{{__('advice.author')}}</th>
+                            <th>{{__('advice.image')}}</th>
                             <th>{{__('advice.status')}}</th>
                             <th>{{__('advice.created_at')}} </th>
                         </tr>
@@ -40,7 +40,7 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $advice->advice }}</td>
                                 <td>{{$advice->type == 1? 'Image' : 'Video'}} </td>
-                                <td>{{ $advice->author }}</td>
+                                <td><img src="{{$advice->image}}" style="width: 200px" /></td>
                                 <td>@if ($advice->status == 1)
                                         <label class="label label-info" href="#">Active</label>
                                     @else

@@ -36,6 +36,8 @@ class AboutCollection extends ResourceCollection
             $_item['image'] = isset( $item->image)? url( $item->image): '';
             $_item['video_link'] = $item->video_link;
             $_item['content'] = $item->content;
+            $_item['likes'] = $item->likes;
+            $_item['like'] = isset($item->like_about_id) ? 1 : 0;
             $data[] = $_item;
         }
         return [

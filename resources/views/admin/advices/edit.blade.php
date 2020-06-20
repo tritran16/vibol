@@ -21,6 +21,12 @@
     {{ Form::label('type', __('advice.type')) }}
     {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control')) }}
 </div>
+<div class="form-group">
+    {{ Form::label('image', __('advice.image')) }}
+    {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
+    <span class="error">(Only file type : jpg)</span>
+
+</div>
 <section id="sec-video" {{$advice->type != 2   && old('type') != 2 ? 'style=display:none': ''}}>
     <div class="form-group" >
         {{ Form::label('video_file', __('advice.video_file')) }}
@@ -40,12 +46,7 @@
         {{ Form::label('advice', __('advice.advice')) }}
         {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('image', __('advice.image')) }}
-        {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
-        <span class="error">(Only file type : jpg)</span>
 
-    </div>
 
 
     <div class="container">

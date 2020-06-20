@@ -56,14 +56,18 @@ class DailyAdvicesController extends Controller
     }
     public function store(AdviceRequest $request)
     {
+        $image_name = '';
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $image_name  = time() . '_' .$image->getClientOriginalName() ;
+            Storage::disk('public')->put('advices/images/' . $image_name, File::get($image));
+        }
+
 
         if ($request->type == 1) {
-            $image = $request->file('image');
-            $file_name  = time() . '_' .$image->getClientOriginalName() ;
-            Storage::disk('public')->put('advices/images/' . $file_name, File::get($image));
-            $path = Storage::disk('public')->path('advices/images/' . $file_name);
-            $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type']),
-                ['image' => "storage/advices/images/" . $file_name]
+
+            $_advice = array_merge($request->only(['image', 'advice', 'text_position', 'status', 'type']),
+                ['image' => "storage/advices/images/" . $image_name]
             );
         }
         else {
@@ -77,12 +81,14 @@ class DailyAdvicesController extends Controller
                 $file_name = time() . '_' . $video->getClientOriginalName();
                 Storage::disk('public')->put('advices/videos/' . $file_name, File::get($video));
                 $path = Storage::disk('public')->path('advices/videos/' . $file_name);
-                $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type']),
-                    ['video' => "storage/advices/videos/" . $file_name]
+                $_advice = array_merge($request->only(['author', 'status', 'type']),
+                    ['video' => "storage/advices/videos/" . $file_name, 'image' => "storage/advices/images/" . $image_name]
                 );
             }
             else {
-                $_advice = $request->only(['author', 'advice', 'text_position', 'status', 'type', 'video']);
+                $_advice = array_merge($request->only(['author', 'advice', 'text_position', 'status', 'type', 'video']),
+                    ['image' => "storage/advices/images/" . $image_name]
+                );
             }
         }
         /*

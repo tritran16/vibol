@@ -35,47 +35,25 @@
         }
     </script>
 
+    <div class="form-group">
+        {{ Form::label('image', __('advice.image')) }}
+        {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
+        <span class="error">(Only file type : jpg)</span>
 
+    </div>
     <section  id="sec-img" {{request('type') == 2  || old('type') == 2 || (session('type') == 2)   ? 'style=display:none': ''}}>
 
         <div class="form-group">
             {{ Form::label('advice', __('advice.advice')) }}
             {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice')) }}
         </div>
-        <div class="form-group">
-            {{ Form::label('image', __('advice.image')) }}
-            {{ Form::file('image', ['id' => 'img', 'accept' => "image/jpeg"]) }}
-            <span class="error">(Only file type : jpg)</span>
 
-        </div>
 
 
         <div class="container">
             <img id="previewImage" src="#" alt="" style="width:100px; display: none" />
             <div class="top" id="textAdvice"></div>
         </div>
-
-{{--    <div class="form-group">--}}
-{{--        {{ Form::label('text_size', __('advice.text_size')) }}--}}
-{{--        {{ Form::select('text_size', [--}}
-{{--            8 => '8', 10 => '10', 12 => '12', 14 => '14', 16 => '16', 18 => '18', 20 => '20', 22 => '22', 24 => '24',--}}
-{{--            26 => '26', 28 =>'28', 30 => '30', 32 => '32', 36 => '36', 40 => '40'--}}
-{{--        ],request('text_size', 12), array('class' => 'form-control', 'id' => 'text-size')) }}--}}
-{{--    </div><div class="form-group">--}}
-{{--        {{ Form::label('text_size', __('advice.text_size')) }}--}}
-{{--        {{ Form::select('text_size', [--}}
-{{--            8 => '8', 10 => '10', 12 => '12', 14 => '14', 16 => '16', 18 => '18', 20 => '20', 22 => '22', 24 => '24',--}}
-{{--            26 => '26', 28 =>'28', 30 => '30', 32 => '32', 36 => '36', 40 => '40'--}}
-{{--        ],request('text_size', 12), array('class' => 'form-control', 'id' => 'text-size')) }}--}}
-{{--    </div>--}}
-
-{{--    <div class="form-group">--}}
-{{--        {{ Form::label('text_color', __('advice.text_color')) }}--}}
-{{--        <div class="input-group">--}}
-{{--            <span class="input-group-addon">#</span>--}}
-{{--            {{ Form::text('text_color', request('text_color', null), array('class' => 'form-control', 'id' => 'text-color', 'autocomplete'=>"off")) }}--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
     <div class="row">
         <div class="col-lg-10 col-md-10 text-center">

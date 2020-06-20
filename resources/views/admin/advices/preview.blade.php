@@ -14,6 +14,11 @@
         {{ Form::label('type', __('advice.type')) }}
         {{ Form::select('type', [ 1 => 'Image & Text', 2 => 'Video'], request('type', null), array('class' => 'form-control', 'disabled' => true)) }}
     </div>
+    <div class="form-group">
+        {{ Form::label('image', __('advice.image')) }}
+        <img class="img-bordered" style="width: 200px" src="{{asset($advice['image'])}}">
+        <input type="hidden" name="image" value="{{$advice['image']}}">
+    </div>
 <input type="hidden" name="type" value="{{$advice['type']}}">
     @if ($advice['type'] == 1)
         <div class="form-group">
@@ -21,11 +26,7 @@
             {{ Form::textarea('advice', request('advice', null), array('class' => 'form-control', 'id' => 'txtAdvice', 'disabled' => true)) }}
             <input type="hidden" name='advice' value="{{$advice['advice']}}">
         </div>
-        <div class="form-group">
-            {{ Form::label('image', __('advice.image')) }}
-            <img class="img-bordered" style="width: 200px" src="{{asset($advice['image'])}}">
-            <input type="hidden" name="image" value="{{$advice['image']}}">
-        </div>
+
         <div class="form-group">
             {{ Form::label('text_position', __('advice.text_position')) }}
             {{ Form::select('text_position',

@@ -20,9 +20,10 @@ class About extends JsonResource
         }
         $data['id'] = $this->id;
 
-
+        $data['content'] = $this->content;
         $data['image'] = $this->image;
         $data['video_link'] = $this->video_link;
+        $data['likes'] = $this->likes;
         return $data;
 
     }
