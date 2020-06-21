@@ -38,7 +38,11 @@
                         @foreach ($advices as $advice)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $advice->advice }}</td>
+                                @if ($advice->type == 1)
+                                 <td>{{ $advice->advice }}</td>
+                                @else
+                                    <td><a href="{{$advice->video}}" target="_blank">{{ __('advice.video_link') }}</a></td>
+                                @endif
                                 <td>{{$advice->type == 1? 'Image' : 'Video'}} </td>
                                 <td><img src="{{asset($advice->image)}}" style="width: 50px" /></td>
                                 <td>@if ($advice->status == 1)
