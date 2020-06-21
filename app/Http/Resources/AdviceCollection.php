@@ -37,7 +37,7 @@ class AdviceCollection extends ResourceCollection
             if ($item->type == 1) {
                 $_item['image'] = isset($item->image) ? url($item->image) : null;
                 $_item['text_position'] = $item->text_position;
-                $_item['content'] = $item->content;
+                $_item['content'] = $item->advice;
             }
             else {
                 $_item['video'] = isset($item->video) ? url($item->video) : null;
