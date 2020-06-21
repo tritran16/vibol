@@ -5,10 +5,6 @@
 
 {{ Form::open(array('action' => ['Admin\DailyAdvicesController@save'], 'method' => 'POST', 'enctype' => 'multipart/form-data')) }}
     <input type="hidden" name="token" value="{{ csrf_token() }}" />
-    <input type="hidden" name="advice" value="{{$advice['advice']}}">
-    <input type="hidden" name="text_position" value="{{$advice['text_position']}}">
-    <input type="hidden" name="status" value="{{$advice['status']}}">
-
 
     <div class="form-group">
         {{ Form::label('type', __('advice.type')) }}
@@ -45,6 +41,7 @@
             <source src="{{url($advice['video'])}}" type="video/mp4">
         </video>
         <input type="hidden" name="video" value="{{url($advice['video'])}}">
+        <input type="hidden" name="text_position" value="1">
     @endif
 
     <div class="form-group">
