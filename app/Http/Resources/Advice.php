@@ -37,7 +37,7 @@ class Advice extends JsonResource
         //$data['created_at'] = $this->created_at;
         //$data['updated_at'] = $this->updated_at;
         $data['likes'] = $this->likes;
-        $data['lịke'] = isset($this->like) ? $this->like : 0;
+        $data['like'] = isset($this->like) ? $this->like : 0;
         return $data;
 
     }
