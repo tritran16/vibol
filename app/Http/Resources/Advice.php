@@ -23,8 +23,9 @@ class Advice extends JsonResource
 
 
         $data['type'] = $this->type;
+        $data['image'] = url($this->image);
         if ($this->type == 1) {
-            $data['image'] = url($this->image);
+
             $data['text_position'] = $this->text_position;
             $data['content'] = $this->advice;
 
