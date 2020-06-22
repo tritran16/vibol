@@ -25,13 +25,13 @@
         {!! Form::file('image', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
     </div>
     <div class="form-group">
-        {{ Form::label('title', __('banner.title')) }}<span style="color: red">*</span>
+        {{ Form::label('title', __('banner.title_en')) }}<span style="color: red">*</span>
         {{ Form::text('title', request('title', null), array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">
-        {{ Form::label('content', __('banner.content')) }}
-        {{ Form::textarea('content', request('content', null), array('class' => 'form-control')) }}
+        {{ Form::label('content', __('banner.title_khmer')) }}
+        {{ Form::text('content', request('content', null), array('class' => 'form-control')) }}
     </div>
 
     {{ Form::submit(__('common.button.update'), array('class' => 'btn btn-primary')) }}

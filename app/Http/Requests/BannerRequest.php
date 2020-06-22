@@ -28,7 +28,7 @@ class BannerRequest extends FormRequest
             'type' => 'required|unique:banners,type,' . request('id'),
             'title' => 'required',
            // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:8000',
-            'content' => 'nullable|string|max:1000',
+            'content' => 'required',
         ];
         if ($this->getMethod() == 'POST') {
             $rules += [
@@ -47,8 +47,8 @@ class BannerRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Name is required!',
-            'description.max' => 'Content is length must be less than 1000',
+            'title.required' => 'Title English is required!',
+            'content.required' => 'Title Khmer is required',
         ];
     }
 }

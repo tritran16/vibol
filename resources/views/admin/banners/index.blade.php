@@ -26,6 +26,7 @@
                             <th>#</th>
                             <th>{{__('banner.type')}}</th>
                             <th>{{__('banner.title')}}</th>
+
                             <th>{{__('banner.image')}}</th>
                         </tr>
                         </thead>
@@ -37,7 +38,9 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $banner->type }}</td>
-                                <td>{{ $banner->title }}</td>
+                                <td>{{ $banner->title }} <br>
+                                    {{ $banner->content }}
+                                </td>
                                 <td><img src="{{ asset($banner->image) }}" style="width: 200px" /></td>
                                 <td>
                                     <a class="btn btn-sm btn-primary btn-flat" href="{{ route('banners.edit', $banner->id) }}">

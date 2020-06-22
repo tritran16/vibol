@@ -44,7 +44,17 @@ class SystemsController extends ApiController
     public function banners(Request $request){
         $banners = [];
         $banners = Banner::all();
-        return $this->successResponse($banners);
+        $_banners = [];
+        foreach ($banners as $banner) {
+            $_banner = [];
+            $_banner['id'] = $banner->id;
+            $_banner['type'] = $banner->type;
+            $_banner['image'] = $banner->image;
+            $_banner['title_en'] = $banner->title;
+            $_banner['title_kh'] = $banner->content;
+            $_banners[] = $_banner;
+        }
+        return $this->successResponse($_banners);
     }
     public function sponsors(Request $request){
         $sponsors = [];
