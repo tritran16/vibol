@@ -41,6 +41,7 @@ class AboutController extends ApiController
                 LikeAbout::create(['device_id' => $device_id, 'about_id' => $id]);
 
                 About::where('id', $id)->update(['likes'=> DB::raw('likes + 1'), ]);
+                $about->like = 1;
                 $about->likes +=1;
 
                 return $this->successResponse(new AboutResource($about), __('likeAboutSuccess'));
@@ -70,6 +71,7 @@ class AboutController extends ApiController
                 LikeAbout::where('device_id' , $device_id)->where('about_id', $id)->delete();
 
                 About::where('id', $id)->update(['likes'=> DB::raw('GREATEST(likes - 1, 0)'), ]);
+                $about->like = 0;
                 $about->likes = $about->likes> 0? $about->likes-1: 0;
 
                 return $this->successResponse(new AboutResource($about), __('unlikeAboutSuccess'));

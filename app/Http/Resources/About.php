@@ -24,6 +24,7 @@ class About extends JsonResource
         $data['image'] = $this->image ? url($this->image) : '';
         $data['video_link'] = $this->video_link;
         $data['likes'] = $this->likes;
+        $data['like'] = isset($this->like) ? $this->like : 0;
         return $data;
 
     }
