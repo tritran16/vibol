@@ -205,7 +205,7 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         if ($news) {
             $post_data = $request->only([
-                'category_id', 'image', 'thumbnail', 'video_link', 'published_date', 'author', 'status', 'is_hot'
+                'category_id', 'video_link', 'published_date', 'author', 'status', 'is_hot'
             ]);
             $post_data['is_hot'] = isset($post_data['is_hot'])?$post_data['is_hot']:0;
             News::where('id', $id)->update($post_data);
@@ -224,12 +224,12 @@ class NewsController extends Controller
             ];
             $news = $news->update($data);
 
-            if ($request->file('image')) {
-                $image = $request->file('image');
-                $file_name  = urlencode($image->getClientOriginalName()) ;
-                Storage::disk('public')->put('news/images/'. $id . '/'. $file_name, File::get($image));
-                News::where('id', $id)->update(['image' => 'storage/news/images/'. $id . '/'.$file_name]);
-            }
+//            if ($request->file('image')) {
+//                $image = $request->file('image');
+//                $file_name  = urlencode($image->getClientOriginalName()) ;
+//                Storage::disk('public')->put('news/images/'. $id . '/'. $file_name, File::get($image));
+//                News::where('id', $id)->update(['image' => 'storage/news/images/'. $id . '/'.$file_name]);
+//            }
 
             if ($request->file('thumbnail')){
                 $thumbnail = $request->file('thumbnail');
@@ -241,7 +241,7 @@ class NewsController extends Controller
             return redirect(route('news.index'))->with('success', 'Update News successfully!');
         }
         else {
-            return redirect(route('news.index'))->with('error', 'Not found News ID!');
+            return redirect(route('news.index'))->with('error', 'Not found News!');
         }
     }
 
