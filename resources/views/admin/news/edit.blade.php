@@ -129,8 +129,8 @@
             dateFormat: 'yy/mm/dd',
             minDate: 0,
         });
-        // CKEDITOR.replace( 'content_kh' );
-        // CKEDITOR.replace( 'content_en' );
+        CKEDITOR.replace( 'content_kh' );
+        CKEDITOR.replace( 'content_en' );
         function copy(){
             $("input[name=title_en]").val($("input[name=title_kh]").val())
             $("input[name=short_desc_en]").val($("input[name=short_desc_kh]").val())
