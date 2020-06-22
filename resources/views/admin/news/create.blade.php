@@ -108,8 +108,11 @@
             dateFormat: 'yy/mm/dd',
             minDate: 0,
         });
-        CKEDITOR.replace( 'content_kh' );
-        CKEDITOR.replace( 'content_en' );
+        // CKEDITOR.replace( 'content_kh' );
+        // CKEDITOR.replace( 'content_en' );
+        // CKEDITOR.instances.content_kh.updateElement();
+        // CKEDITOR.instances.content_en.updateElement();
+
 
         function copy(){
             $("input[name=title_en]").val($("input[name=title_kh]").val())

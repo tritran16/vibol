@@ -14,4 +14,4 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test', 'Admin\NotificationsController@test')->name('test');
+Route::get('/news/view/{id}', 'NewsController@view')->name('news.view');

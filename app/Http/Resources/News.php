@@ -36,6 +36,7 @@ class News extends JsonResource
         $data['likes'] =  $this->likes;
         $data['is_hot'] = $this->is_hot;
         $data['is_like'] = isset($this->is_like)?$this->is_like:0;
+        $data['content_url'] = url('news/view/' . $this->id ."?lang=$lang");
         return $data;//parent::toArray($request);
     }
 }

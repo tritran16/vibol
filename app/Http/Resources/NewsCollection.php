@@ -47,7 +47,7 @@ class NewsCollection extends ResourceCollection
             $_news['is_like'] = isset($item->like_news_id)?1:0;
             $_news['created_at'] = Carbon::parse($item->created_at)->format('d/m/Y');
             $_news['updated_at'] =  Carbon::parse($item->updated_at)->format('d/m/Y');
-
+            $_news['content_url'] = url('news/view/' . $item->id ."?lang=$lang");
             $data[] = $_news;
         }
         return [
