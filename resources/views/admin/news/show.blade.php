@@ -51,26 +51,26 @@
         {{ Form::label('thumbnail', __('news.thumbnail')) }}
         <img src="{{asset( $news->thumbnail)}}" width="50px">
     </div>
-    <div class="form-group">
-        {{ Form::label('image', __('news.image')) }}
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('image', __('news.image')) }}--}}
 
-        <img src="{{asset($news->image)}}" width="100px">
-    </div>
+{{--        <img src="{{asset($news->image)}}" width="100px">--}}
+{{--    </div>--}}
     <div class="form-group">
         {{ Form::label('thumbnail', __('news.category.name')) }}
         {{ Form::select('category_id', $categories, request('category_id', $news->category_id), array('class' => 'form-control', 'disabled' => true)) }}
     </div>
     <div class="form-group">
-        {{ Form::label('thumbnail', __('news.author')) }}
+        {{ Form::label('author', __('news.author')) }}
         {{ Form::text('author', request('author', null), array('class' => 'form-control', 'disabled' => true)) }}
     </div>
 
     <div class="form-group">
-        {{ Form::label('thumbnail', __('news.status')) }}
+        {{ Form::label('status', __('news.status')) }}
         {{ Form::select('status', [1 => __('news.status.publish'), 2 => __('news.status.un_publish')], request('status', null), array('class' => 'form-control', 'disabled' => true)) }}
     </div>
     <div class="form-group">
-        {{ Form::label('thumbnail', __('news.is_hot_news')) }}
+        {{ Form::label('is_hot', __('news.is_hot_news')) }}
         {{ Form::checkbox('is_hot', '1', request('is_hot', false), ['class' => 'form-control', 'disabled' => true]) }}
     </div>
     <a class="btn btn-primary" href="{{route('news.update', $news->id)}}"> {{__('common.button.edit')}}</a>

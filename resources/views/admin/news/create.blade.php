@@ -73,18 +73,18 @@
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
     </div>
 
-    <div class="form-group">
-        {{ Form::label('image',  __('news.image')) }}
-        {!! Form::file('image', ['accept' => "image/png, image/jpg, image/jpeg"]) !!}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('image',  __('news.image')) }}--}}
+{{--        {!! Form::file('image', ['accept' => "image/png, image/jpg, image/jpeg"]) !!}--}}
+{{--    </div>--}}
     <div class="form-group">
         {{ Form::label('category_id',  __('news.category.name')) }} <span style="color: red">*</span>
         {{ Form::select('category_id',$categories, request('category_id', null), array('class' => 'form-control')) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('video_link',  __('news.video_link')) }}
-        {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control')) }}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        {{ Form::label('video_link',  __('news.video_link')) }}--}}
+{{--        {{ Form::text('video_link', request('video_link', null), array('class' => 'form-control')) }}--}}
+{{--    </div>--}}
     <div class="form-group">
         {{ Form::label('author',  __('news.author')) }}
         {{ Form::text('author', request('author', null), array('class' => 'form-control')) }}

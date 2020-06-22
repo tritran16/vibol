@@ -36,10 +36,10 @@ class NewsCollection extends ResourceCollection
             $_news['id'] = $item->id;
             $_news['category'] = ['id' => $item->category_id, 'name' => $item->category_name];
             $_news['thumbnail'] = $item->thumbnail?url($item->thumbnail):'';
-            $_news['image'] = $item->image?url($item->image):'';
+//            $_news['image'] = $item->image?url($item->image):'';
             $_news['title'] = $item->title;
             $_news['short_desc'] = $item->short_desc;
-            $_news['video_link'] = $item->video_link;
+//            $_news['video_link'] = $item->video_link;
             $_news['status'] = $item->status;
             $_news['is_hot'] = $item->is_hot;
             $_news['views'] = $item->views;
