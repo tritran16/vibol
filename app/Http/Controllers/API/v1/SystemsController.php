@@ -49,7 +49,7 @@ class SystemsController extends ApiController
             $_banner = [];
             $_banner['id'] = $banner->id;
             $_banner['type'] = $banner->type;
-            $_banner['image'] = $banner->image;
+            $_banner['image'] = url($banner->image);
             $_banner['title_en'] = $banner->title;
             $_banner['title_kh'] = $banner->content;
             $_banners[] = $_banner;
