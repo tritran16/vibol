@@ -25,13 +25,14 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('content_kh',  __('news.content_khmer')) }}
-                                {{ Form::textarea('content_kh', request('content_kh', $news->translate('kh')->content), array('class' => 'form-control textarea', 'disabled' => true, 'id' => 'content_kh', 'rows' => 10)) }}
+{{--                                {{ Form::textarea('content_kh', request('content_kh', $news->translate('kh')->content), array('class' => 'form-control textarea', 'disabled' => true, 'id' => 'content_kh', 'rows' => 10)) }}--}}
+                                <p class="border border-info">{!! $news->translate('en')->content !!}</p>
                             </div>
                         </div>
                         <div class="tab-pane" id="english">
                             <div class="form-group">
                                 {{ Form::label('title_en', __('news.title_en')) }}<span style="color: red">*</span>
-                                {{ Form::text('title_en', request('title_en', $news->translate('en')->title), array('class' => 'form-control', 'disabled' => true)) }}
+                                {{ Form::label('title_en', request('title_en', $news->translate('en')->title), array('class' => 'form-control', 'disabled' => true)) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('short_desc_en', __('news.short_description_en')) }}<span style="color: red">*</span>
@@ -39,7 +40,8 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('content_en', __('news.content_en')) }}
-                                {{ Form::textarea('content_en', request('content_en', $news->translate('kh')->content), array('class' => 'form-control textarea', 'disabled' => true, 'id' => 'content_en', 'rows' => 10)) }}
+{{--                                {{ Form::label('content_en', request('content_en', $news->translate('kh')->content), array('class' => 'form-control textarea', 'disabled' => true, 'id' => 'content_en', 'rows' => 10)) }}--}}
+                                <p class="border border-info">{{$news->translate('kh')->content}}</p>
                             </div>
                         </div>
                     </div>

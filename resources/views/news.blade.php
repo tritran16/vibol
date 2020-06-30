@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="content">
-            {!! $news->translate('en')->content !!}
+            {!! $news->translate(request('lang', 'en'))->content !!}
         </div>
     </body>
 </html>
