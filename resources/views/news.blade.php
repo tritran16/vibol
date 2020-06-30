@@ -9,6 +9,9 @@
             img {
                 max-width: 100%;
             }
+            iframe {
+                width: 100%;
+            }
         </style>
     </head>
     <body>
