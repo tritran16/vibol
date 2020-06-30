@@ -7,7 +7,7 @@
         <title>News</title>
         <style>
             img {
-                max-width: 100%;
+                width: 100%;
             }
             iframe {
                 width: 100%;
