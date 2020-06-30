@@ -167,8 +167,10 @@
         function copy(){
             $("input[name=title_en]").val($("input[name=title_kh]").val())
             $("input[name=short_desc_en]").val($("input[name=short_desc_kh]").val())
-            var content_kh = editor_kh.getData();
-            editor_en.setData(content_kh);
+            // var content_kh = editor_kh.getData();
+            // editor_en.setData(content_kh);
+            var content_en = tinymce.get("content_kh").getContent();
+            tinymce.get("content_en").setContent(content_en);
         }
     </script>
 @endpush
