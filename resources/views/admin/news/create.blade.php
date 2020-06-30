@@ -108,11 +108,37 @@
             dateFormat: 'yy/mm/dd',
             minDate: 0,
         });
-        CKEDITOR.replace( 'content_kh' );
-        CKEDITOR.replace( 'content_en' );
+        // CKEDITOR.replace( 'content_kh' );
+        // CKEDITOR.replace( 'content_en' );
         // CKEDITOR.instances.content_kh.updateElement();
         // CKEDITOR.instances.content_en.updateElement();
+        tinymce.init({
+            selector: 'textarea#content_kh',
+            menubar: false,
+            height: 500,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste imagetools wordcount",
+                "media"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media",
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
 
+        tinymce.init({
+            selector: 'textarea#content_en',
+            menubar: false,
+            height: 500,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste imagetools wordcount",
+                "media"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media",
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
 
         function copy(){
             $("input[name=title_en]").val($("input[name=title_kh]").val())

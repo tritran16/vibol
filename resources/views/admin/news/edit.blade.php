@@ -13,6 +13,11 @@
         </ul>
     </div>
 @endif
+<style >
+    .ck-editor__editable {
+        min-height: 500px;
+    }
+</style>
 {{ Form::model($news, array('route' => array('news.update', $news->id), 'method' => 'PUT', 'enctype' => 'multipart/form-data')) }}
 {{--    <div class="form-group">--}}
 {{--        {{ Form::label('title', 'Title') }}<span style="color: red">*</span>--}}
@@ -129,13 +134,41 @@
             dateFormat: 'yy/mm/dd',
             minDate: 0,
         });
-        CKEDITOR.replace( 'content_kh' );
-        CKEDITOR.replace( 'content_en' );
+        //CKEDITOR.replace( 'content_kh' );
+        //CKEDITOR.replace( 'content_en' );
+        tinymce.init({
+            selector: 'textarea#content_kh',
+            menubar: false,
+            height: 500,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste imagetools wordcount",
+                "media"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media",
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
+
+        tinymce.init({
+            selector: 'textarea#content_en',
+            menubar: false,
+            height: 500,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste imagetools wordcount",
+                "media"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media",
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
+
         function copy(){
             $("input[name=title_en]").val($("input[name=title_kh]").val())
             $("input[name=short_desc_en]").val($("input[name=short_desc_kh]").val())
-            var content_kh = CKEDITOR.instances['content_kh'].getData();
-            CKEDITOR.instances['content_en'].setData(content_kh);
+            var content_kh = editor_kh.getData();
+            editor_en.setData(content_kh);
         }
     </script>
 @endpush

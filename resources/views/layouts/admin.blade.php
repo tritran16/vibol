@@ -174,7 +174,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.9/js/adminlte.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/jquery.daterangepicker.min.js"></script>
-<script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
+{{--<script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>--}}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 @stack('scripts')
 </body>
