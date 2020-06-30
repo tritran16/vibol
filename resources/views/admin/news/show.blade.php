@@ -73,7 +73,7 @@
         {{ Form::label('is_hot', __('news.is_hot_news')) }}
         {{ Form::checkbox('is_hot', '1', request('is_hot', false), ['class' => 'form-control', 'disabled' => true]) }}
     </div>
-    <a class="btn btn-primary" href="{{route('news.update', $news->id)}}"> {{__('common.button.edit')}}</a>
+    <a class="btn btn-primary" href="{{route('news.edit', $news->id)}}"> {{__('common.button.edit')}}</a>
     <a class="btn btn-default" href="{{route('news.index')}}"> {{__('common.button.back')}}</a>
 
 @endsection

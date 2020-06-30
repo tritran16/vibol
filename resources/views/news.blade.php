@@ -5,6 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>News</title>
+        <style>
+            img {
+                max-width: 100%;
+            }
+        </style>
     </head>
     <body>
         <div class="content">
