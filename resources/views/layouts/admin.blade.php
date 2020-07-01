@@ -20,6 +20,8 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <script src="https://cdn.tiny.cloud/1/1gij6uomqeagja3z5o2f7uv7bo2lrkebbyzquoohjmv3zeym/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <![endif]-->
 
     <!-- Google Font -->
@@ -175,7 +177,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/jquery.daterangepicker.min.js"></script>
 {{--<script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>--}}
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 @stack('scripts')
