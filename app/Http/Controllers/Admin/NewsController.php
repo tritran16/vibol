@@ -286,7 +286,7 @@ class NewsController extends Controller
     public function uploadImage(UploadImageRequest  $request){
         if ($request->file('image')){
             $image = $request->file('image');
-            $file_name  = urlencode($image->getClientOriginalName()) ;
+            $file_name  = time() . '_' . urlencode($image->getClientOriginalName()) ;
             Storage::disk('public')->put('news/images/'. $file_name, File::get($image));
             return response()->json(['status' => true, 'url' => url('storage/news/images/' . $file_name)]);
         }

@@ -68,9 +68,11 @@
             </div>
         </div>
     </div>
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-upload-image">
-    Upload Image
-</button>
+    <div class="form-group">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-upload-image">
+            Upload Image
+        </button>
+    </div>
     <div class="form-group">
         {{ Form::label('thumbnail',  __('news.thumbnail')) }}<span style="color: red">*</span>
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
