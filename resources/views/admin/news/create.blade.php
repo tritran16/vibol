@@ -68,6 +68,9 @@
             </div>
         </div>
     </div>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-upload-image">
+    Upload Image
+</button>
     <div class="form-group">
         {{ Form::label('thumbnail',  __('news.thumbnail')) }}<span style="color: red">*</span>
         {!! Form::file('thumbnail', ['accept' => "image/png, image/jpeg, image/jpg"]) !!}
@@ -100,7 +103,96 @@
     {{ Form::submit( __('common.button.save'), array('class' => 'btn btn-primary')) }}
     <a class="btn btn-default" href="{{route('news.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
+<div class="modal fade" id="modal-upload-image">
+    <div class="modal-dialog">
+        <div class="modal-content bg-success">
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+                <meta name="csrf-token" content="{{ csrf_token() }}" />
+                <form method="post" action="{{route('admin.news.upload_image')}}" enctype="multipart/form-data" id="frmUpload">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <div class='preview' style="display: none">
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Upload Image Successful!
+                        </div>
 
+                        <div class="row">
+                            <div class="col-lg-2 col-xl-2 col-md-2">
+                            {{ Form::label('Image URL',  __('Image URL')) }}
+                            </div>
+                            <div class="col-lg-10 col-xl-2 col-md-10">
+                                <input id="url" class="form-control warning disabled"/>
+                                <a class="btn btn-default pull-right" href="#" onclick="copyURL()" title="Copy all field From Khmer field">
+                                    <i class="fa fa-clone"></i>
+                                    {{__('Copy')}}
+                                </a>
+                            </div>
+
+
+                        </div>
+                        <div class="row ">
+                            <img class="img-responsive center-block" src="" id="imgPreview" width="100" height="100" >
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input class="form-control" type="file" id="img" name="img" accept = "image/png, image/jpeg, image/jpg"/>
+                        <span class="input-group-btn">
+                            <input type="button" class="btn btn-primary" value="Upload" id="btnUpload">
+                        </span>
+                    </div>
+
+                </form>
+                <p id="img_url"> </p>
+                <script type="text/javascript">
+                    function copyURL() {
+                        var $temp = $("<input>");
+                        $("body").append($temp);
+                        $temp.val($('#url').val()).select();
+                        document.execCommand("copy");
+                        console.log('copy success');
+                        $temp.remove();
+
+                    }
+                    $("#btnUpload").click(function() {
+                        var fd = new FormData();
+                        var files = $('#img')[0].files[0];
+                        fd.append('image',files);
+                        fd.append('_token', '{{csrf_token()}}');
+                        $.ajax({
+                            url: '{{route('admin.news.upload_image')}}',
+                            type: 'POST',
+                            data: fd,
+                            dataType: "json",
+                            contentType: false,
+                            processData: false,
+                            success: function(response){
+
+                                if(response != 0){
+                                    $("#imgPreview").attr("src",response.url);
+                                    $('#url').val(response.url);
+                                    $(".preview").show(); // Display image element
+                                }else{
+                                    alert('file not uploaded');
+                                }
+                            },
+                        });
+                    });
+                </script>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default btn-outline-light" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 @endsection
 @push('scripts')
     <script type="text/javascript">

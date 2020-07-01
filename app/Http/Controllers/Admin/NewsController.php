@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsRequest;
+use App\Http\Requests\UploadImageRequest;
 use App\Models\News;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
@@ -276,6 +277,21 @@ class NewsController extends Controller
         }
         else {
             return redirect(route('news.index'))->with('error', 'Not found News!');
+        }
+    }
+
+    public function  upload(Request $request) {
+        return view('admin.news.upload');
+    }
+    public function uploadImage(UploadImageRequest  $request){
+        if ($request->file('image')){
+            $image = $request->file('image');
+            $file_name  = urlencode($image->getClientOriginalName()) ;
+            Storage::disk('public')->put('news/images/'. $file_name, File::get($image));
+            return response()->json(['status' => true, 'url' => url('storage/news/images/' . $file_name)]);
+        }
+        else {
+            return response()->json(['status' => false, 'error' => 'Image is null']);
         }
     }
 }

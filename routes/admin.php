@@ -43,7 +43,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('news_categories', 'NewsCategoriesController');
     Route::get('/news/categories', 'NewsCategoriesController@index')->name('news.categories.index');
     Route::get('news/active/{id}', 'NewsController@active')->name('admin.news.active');
-
+    Route::get('upload', 'NewsController@upload')->name('admin.news.upload_test');
+    Route::post('news/upload_image', 'NewsController@uploadImage')->name('admin.news.upload_image');
     Route::resource('books', 'BooksController');
     Route::resource('book_categories', 'BookCategoriesController');
 
