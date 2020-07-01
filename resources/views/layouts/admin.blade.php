@@ -20,9 +20,9 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
     <script src="https://cdn.tiny.cloud/1/1gij6uomqeagja3z5o2f7uv7bo2lrkebbyzquoohjmv3zeym/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <![endif]-->
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
