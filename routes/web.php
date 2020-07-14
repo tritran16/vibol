@@ -12,6 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('admin.dashboard'));
 });
 Route::get('/news/view/{id}', 'NewsController@view')->name('news.view');

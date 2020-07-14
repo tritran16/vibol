@@ -128,11 +128,11 @@
                     <i class="fa fa-id-card-o"></i> {{__('common.admin_account.list')}}
                 </a>
             </li>
-            <li>
-                <a href="{{ route('system_pages.index') }}">
-                    <i class="fa fa-share-alt"></i> {{__('common.system_page.list')}}
-                </a>
-            </li>
+{{--            <li>--}}
+{{--                <a href="{{ route('system_pages.index') }}">--}}
+{{--                    <i class="fa fa-share-alt"></i> {{__('common.system_page.list')}}--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li>
                 <a href="{{ route('banners.index') }}">
                     <i class="fa fa-image"></i> {{__('common.banner.list')}}
