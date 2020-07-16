@@ -91,7 +91,7 @@ class UserController extends Controller
         //$roles = $this->roleRepository->get();
         //$userRoles = $user->roles->pluck('id', 'id')->all();
 
-        return view('acl.users.edit', compact('user', 'roles', 'userRoles'));
+        return view('acl.users.edit', compact(['user']));
     }
 
 
