@@ -9,11 +9,10 @@ return [
     'author' => 'Author',
     'status' => 'Status',
     'is_hot' => 'IS HOT',
-    'created_at' => 'Created',
+    'create_at' => 'Created At',
     'content' => 'Content',
     'pdf_file' => 'PDF File',
     'source' => 'Source',
-    'create_at' => 'Created At',
 
     'confirm.delete.msg' =>  'Do you want to delete this item?',
 

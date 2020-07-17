@@ -1,6 +1,6 @@
 <?php
 return [
-    'listing.header' => 'Books',
+    'listing.header' => 'Reading Book ',
     'view' => 'View Book',
     'create.header' => 'Create Book',
     'update.header' => 'Update Book',

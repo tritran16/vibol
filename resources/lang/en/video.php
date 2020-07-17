@@ -1,6 +1,6 @@
 <?php
 return [
-    'header' => 'Videos',
+    'header' => 'Social Education Video',
     'create.header' => 'Create Video',
     'update.header' => 'Update Video',
     'title' => 'Video Title',
