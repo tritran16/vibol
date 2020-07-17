@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'list' => 'News Listing',
+    'list' => 'Daily News',
     'detail' => 'View News Detail',
     'title' => 'Title',
     'title_en' => 'Title(English)',
