@@ -33,7 +33,7 @@ class AboutRequest extends FormRequest
 
             'content' => 'required|max:80000',
             'video_link' => 'required|active_url',
-            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:8000',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:4000',
         ];
 
 
