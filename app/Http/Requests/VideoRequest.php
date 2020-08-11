@@ -49,7 +49,7 @@ class VideoRequest extends FormRequest
         $rules =  [
             'title' => 'required|string|max:255',
             'category_id' => 'required|integer',
-            'link' => 'required|string|max:1000|active_url'
+            'link' => 'required|string|max:1000|url'
         ];
 
         if ($this->getMethod() == 'POST') {

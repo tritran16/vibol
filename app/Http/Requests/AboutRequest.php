@@ -32,7 +32,7 @@ class AboutRequest extends FormRequest
         $rules =  [
 
             'content' => 'required|max:80000',
-            'video_link' => 'required|active_url',
+            'video_link' => 'required|url',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:8000',
         ];
 
