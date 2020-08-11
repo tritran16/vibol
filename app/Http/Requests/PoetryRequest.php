@@ -48,7 +48,7 @@ class PoetryRequest extends FormRequest
     {
         $rules =  [
             'title' => 'required|string|max:255',
-            'video_link' => 'nullable|url',
+            'video_link' => 'nullable|active_url',
             //'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4000'
         ];
         if ($this->getMethod() == 'POST') {

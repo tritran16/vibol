@@ -29,7 +29,7 @@ class AdviceRequest extends FormRequest
             'author' => 'nullable|string|max:100',
             //'image' => 'required_if:type,==,1|mimes:jpeg,png,jpg,gif,svg|max:8000',
             'video_file' => 'nullable|mimes:mp4|max:16000',
-            'video' => 'nullable|url',
+            'video' => 'nullable|active_url',
         ];
         if ($this->getMethod() == 'POST') {
             $rules += [
