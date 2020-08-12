@@ -5,7 +5,7 @@ return [
     'update.header' => 'Update Video',
     'title' => 'Video Title',
     'thumbnail' => 'Thumbnail',
-    'link' => 'Link',
+    'link' => 'Video Link',
     'author' => 'Author',
     'status' => 'Status',
     'is_hot' => 'IS HOT',
