@@ -63,6 +63,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('pages/about_us', 'StaticPagesController@aboutUs')->name('page.about_us');
     Route::get('pages/edit_about_us', 'StaticPagesController@editAboutUs')->name('page.about_us.edit');
     Route::post('pages/save_about_us', 'StaticPagesController@saveAboutUs')->name('page.about_us.save');
+
+    Route::resource('bank_accounts', 'BankAccountsController');
+
+    Route::resource('educations', 'EducationsController');
 });
 
 

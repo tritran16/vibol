@@ -102,6 +102,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('educations.index') }}">
+                    <i class="fa fa-sticky-note"></i> {{__('education.list')}}
+                </a>
+                <a href="{{ route('bank_accounts.index') }}">
+                    <i class="fa fa-bank"></i> {{__('bank_account.list')}}
+                </a>
                 <a href="{{ route('banners.index') }}">
                     <i class="fa fa-image"></i> {{__('common.banner.list')}}
                 </a>

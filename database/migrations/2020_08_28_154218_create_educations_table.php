@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikePoetryTable extends Migration
+class CreateEducationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateLikePoetryTable extends Migration
      */
     public function up()
     {
-        Schema::create('like_poetry', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('poetry_id');
-            $table->integer('device_id');
+        Schema::create('educations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 255);
+            $table->string('image', 255);
+            $table->string('link', 1000);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateLikePoetryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('like_poetry');
+        Schema::dropIfExists('educations');
     }
 }
