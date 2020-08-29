@@ -39,7 +39,7 @@
     </div>
 
     {{ Form::submit(__('common.button.update'), array('class' => 'btn btn-primary')) }}
-    <button type="button" class="btn btn-secondary" onclick="javascript:window.location.href = '{{route('educations.index')}}">{{__('common.button.cancel')}}</button>
+    <a class="btn btn-default" href="{{route('bank_accounts.index')}}"> {{__('common.button.cancel')}}</a>
 {{ Form::close() }}
 
 @endsection
