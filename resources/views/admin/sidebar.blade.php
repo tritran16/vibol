@@ -95,17 +95,17 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
-        <ul class="treeview-menu">
+        <ul class="treeview-menu ">
             <li>
                 <a href="{{ route('admin_accounts.index') }}">
                     <i class="fa fa-id-card-o"></i> {{__('common.admin_account.list')}}
                 </a>
             </li>
-            <li>
-                <a href="{{ route('educations.index') }}">
+            <li >
+                <a href="{{ route('educations.index') }}" class="hidden">
                     <i class="fa fa-sticky-note"></i> {{__('education.list')}}
                 </a>
-                <a href="{{ route('bank_accounts.index') }}">
+                <a href="{{ route('bank_accounts.index') }}" class="hidden">
                     <i class="fa fa-bank"></i> {{__('bank_account.list')}}
                 </a>
                 <a href="{{ route('banners.index') }}">
