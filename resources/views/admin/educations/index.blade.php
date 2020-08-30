@@ -12,9 +12,9 @@
                         </div>
                         <div class="pull-right">
 
-                            <a class="btn btn-success btn-flat" href="{{ route('educations.create') }}">
-                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
-                            </a>
+{{--                            <a class="btn btn-success btn-flat" href="{{ route('educations.create') }}">--}}
+{{--                                <i class="fa fa-plus"></i> {{__('common.button.create')}}--}}
+{{--                            </a>--}}
                         </div>
                     </div>
                 </div>
@@ -42,11 +42,11 @@
                                     <a class="btn btn-sm btn-primary btn-flat" href="{{ route('educations.edit', $education->id) }}">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    {!! Form::open(['method' => 'DELETE','route' => ['educations.destroy', $education->id],'style'=>'display:inline']) !!}
-                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_item')}}')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                    {!! Form::close() !!}
+{{--                                    {!! Form::open(['method' => 'DELETE','route' => ['educations.destroy', $education->id],'style'=>'display:inline']) !!}--}}
+{{--                                    <button class="btn btn-danger btn-flat btn-sm" onclick="return confirm('{{__('common.confirm_delete_item')}}')">--}}
+{{--                                        <i class="fa fa-trash"></i>--}}
+{{--                                    </button>--}}
+{{--                                    {!! Form::close() !!}--}}
                                 </td>
                             </tr>
                         @endforeach

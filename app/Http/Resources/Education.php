@@ -22,7 +22,7 @@ class Education extends JsonResource
 
         $data['name'] = $this->name;
         $data['image'] = $this->image ? url($this->image) : '';
-        $data['link'] = $this->video_link;
+        $data['link'] = $this->link;
         return $data;
 
     }

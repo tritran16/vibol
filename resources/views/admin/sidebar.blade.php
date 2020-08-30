@@ -87,7 +87,16 @@
     <li>
         <a href="{{ route('abouts.index') }}"><i class="fa fa-user-circle-o"></i> <span>{{__('common.menu.about')}}</span></a>
     </li>
-
+    <li>
+        <a href="{{ route('educations.index') }}">
+            <i class="fa fa-sticky-note"></i> {{__('education.list')}}
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('bank_accounts.index') }}">
+            <i class="fa fa-bank"></i> {{__('bank_account.list')}}
+        </a>
+    </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-cogs"></i> <span>{{__('common.menu.system')}}</span>
@@ -102,12 +111,7 @@
                 </a>
             </li>
             <li >
-                <a href="{{ route('educations.index') }}" class="hidden">
-                    <i class="fa fa-sticky-note"></i> {{__('education.list')}}
-                </a>
-                <a href="{{ route('bank_accounts.index') }}" class="hidden">
-                    <i class="fa fa-bank"></i> {{__('bank_account.list')}}
-                </a>
+
                 <a href="{{ route('banners.index') }}">
                     <i class="fa fa-image"></i> {{__('common.banner.list')}}
                 </a>
