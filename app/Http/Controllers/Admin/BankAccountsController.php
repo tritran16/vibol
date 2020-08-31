@@ -59,17 +59,25 @@ class BankAccountsController extends Controller
                 ->withInput();
         }
 
-        if ($request->file('logo') && $request->file('pdf_file')){
+        if ($request->file('logo') && $request->file('pdf_file_en') && $request->file('pdf_file_kh')){
             $image = $request->file('logo');
             $img_name  = urlencode($image->getClientOriginalName()) ;
             Storage::disk('public')->put('bank_accounts/logo/'.  $img_name, File::get($image));
 
-            $pdf = $request->file('pdf_file');
-            $pdf_name  = urlencode($pdf->getClientOriginalName()) ;
-            Storage::disk('public')->put('bank_accounts/pdf/'.  $pdf_name, File::get($pdf));
+            $pdf_kh = $request->file('pdf_file_kh');
+            $pdf_name_kh  = urlencode($pdf_kh->getClientOriginalName()) ;
+            Storage::disk('public')->put('bank_accounts/pdf_kh/'.  $pdf_name_kh, File::get($pdf_kh));
+
+            $pdf_en = $request->file('pdf_file_en');
+            $pdf_name_en  = urlencode($pdf_en->getClientOriginalName()) ;
+            Storage::disk('public')->put('bank_accounts/pdf_en/'.  $pdf_name_en, File::get($pdf_en));
 
             $data = array_merge($request->only(['name', 'account', 'owner', 'description_en', 'description_kh']),
-                [ 'logo' => 'storage/bank_accounts/logo/'.$img_name, 'pdf_file' => 'storage/bank_accounts/pdf/'.$pdf_name]);
+                [
+                    'logo' => 'storage/bank_accounts/logo/'.$img_name,
+                    'pdf_file_kh' => 'storage/bank_accounts/pdf_kh/'.$pdf_name_kh,
+                    'pdf_file_en' => 'storage/bank_accounts/pdf_en/'.$pdf_name_en
+                ]);
             $bank_account = BankAccount::create($data);
         }
 
@@ -118,11 +126,17 @@ class BankAccountsController extends Controller
             Storage::disk('public')->put('bank_accounts/logo/'.  $img_name, File::get($image));
             BankAccount::where('id', $bank_account->id)->update([ 'logo' => 'storage/bank_accounts/logo/'.$img_name]);
         }
-        if ($request->file('pdf_file')){
-            $pdf = $request->file('pdf_file');
+        if ($request->file('pdf_file_kh')){
+            $pdf = $request->file('pdf_file_kh');
             $pdf_name  = urlencode($pdf->getClientOriginalName()) ;
-            Storage::disk('public')->put('bank_accounts/pdf/'.  $pdf_name, File::get($pdf));
-            BankAccount::where('id', $bank_account->id)->update([ 'pdf_file' => 'storage/bank_accounts/pdf/'.$pdf_name]);
+            Storage::disk('public')->put('bank_accounts/pdf_kh/'.  $pdf_name, File::get($pdf));
+            BankAccount::where('id', $bank_account->id)->update([ 'pdf_file_kh' => 'storage/bank_accounts/pdf_kh/'.$pdf_name]);
+        }
+        if ($request->file('pdf_file_en')){
+            $pdf = $request->file('pdf_file_en');
+            $pdf_name  = urlencode($pdf->getClientOriginalName()) ;
+            Storage::disk('public')->put('bank_accounts/pdf_en/'.  $pdf_name, File::get($pdf));
+            BankAccount::where('id', $bank_account->id)->update([ 'pdf_file_en' => 'storage/bank_accounts/pdf_en/'.$pdf_name]);
         }
         return redirect(route('bank_accounts.index'))->with('success', 'Update BankAccount successfully!');
     }

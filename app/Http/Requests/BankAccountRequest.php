@@ -34,13 +34,15 @@ class BankAccountRequest extends FormRequest
         if ($this->getMethod() == 'POST') {
             $rules += [
                 'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000',
-                 'pdf_file' => 'required|mimes:pdf|max:8000'
+                'pdf_file_kh' => 'required|mimes:pdf|max:8000',
+                'pdf_file_en' => 'required|mimes:pdf|max:8000'
             ];
         }
         else if ($this->getMethod() == 'PUT') {
             $rules += [
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000',
-                'pdf_file' => 'nullable|mimes:pdf|max:8000'
+                'pdf_file_kh' => 'nullable|mimes:pdf|max:8000',
+                'pdf_file_en' => 'nullable|mimes:pdf|max:8000'
             ];
 
         }

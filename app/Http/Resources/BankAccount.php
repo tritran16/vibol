@@ -24,7 +24,8 @@ class BankAccount extends JsonResource
         $data['account'] = $this->account;
         $data['owner'] = $this->owner;
         $data['logo'] = $this->logo ? url($this->logo) : '';
-        $data['pdf_file'] = $this->pdf_file?url($this->pdf_file):'';
+        $data['pdf_file_kh'] = $this->pdf_file_kh?url($this->pdf_file_kh):'';
+        $data['pdf_file_en'] = $this->pdf_file_en?url($this->pdf_file_en):'';
         return $data;
 
     }

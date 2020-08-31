@@ -37,12 +37,22 @@
         @endif
     </div>
     <div class="form-group">
-        {{ Form::label('pdf_file', __('bank_account.pdf_file')) }}
-        {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}
+        {{ Form::label('pdf_file_kh', __('bank_account.pdf_file') . "(KH)") }}
+        {{ Form::file('pdf_file_kh', ['accept' => "application/pdf"]) }}
 
-        @if ($bank_account->pdf_file)
+        @if ($bank_account->pdf_file_kh)
         <br><span> File : </span>
-        <a target="_blank" href="{{asset($bank_account->pdf_file)}}">{{basename($bank_account->pdf_file) }}</a>
+        <a target="_blank" href="{{asset($bank_account->pdf_file_kh)}}">{{basename($bank_account->pdf_file_kh) }}</a>
+        @endif
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('pdf_file_en', __('bank_account.pdf_file') . "(EN)") }}
+        {{ Form::file('pdf_file_en', ['accept' => "application/pdf"]) }}
+
+        @if ($bank_account->pdf_file_en)
+            <br><span> File : </span>
+            <a target="_blank" href="{{asset($bank_account->pdf_file_en)}}">{{basename($bank_account->pdf_file_en) }}</a>
         @endif
     </div>
     <div class="form-group">

@@ -35,8 +35,12 @@
         {{ Form::file('logo', ['accept' => "image/png, image/jpeg, image/jpg"], array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('pdf_file', __('bank_account.pdf_file')) }}<span style="color: red">*</span>
+        {{ Form::label('pdf_file', __('bank_account.pdf_file')). "(KH)" }}<span style="color: red">*</span>
         {{ Form::file('pdf_file', ['accept' => "application/pdf"]) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('pdf_file_en', __('bank_account.pdf_file'). "(EN)") }}<span style="color: red">*</span>
+        {{ Form::file('pdf_file_en', ['accept' => "application/pdf"]) }}
     </div>
     <div class="form-group">
         {{ Form::label('description_en', __('bank_account.description_en')) }}<span style="color: red">*</span>
