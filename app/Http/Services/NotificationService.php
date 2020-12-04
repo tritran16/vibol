@@ -62,48 +62,48 @@ class NotificationService
      * @param array $payload
      * @throws \LaravelFCM\Message\Exceptions\InvalidOptionsException
      */
-    public  function  pushNotificationIOS($tokens, $title , $description, $data, $payload = []){
-        if (!$tokens) return;
-        $optionBuilder = new OptionsBuilder();
-        if (strlen($title) > 50) {
-            //$title = substr($title, 0, 50);
+        public  function  pushNotificationIOS($tokens, $title , $description, $data, $payload = []){
+            if (!$tokens) return;
+            $optionBuilder = new OptionsBuilder();
+            if (strlen($title) > 50) {
+                //$title = substr($title, 0, 50);
+            }
+            if (strlen($description) > 50) {
+                //$description = substr($description, 0, 50);
+            }
+            $optionBuilder->setTimeToLive(60*20);
+
+            $notificationBuilder = new PayloadNotificationBuilder($title);
+            $notificationBuilder->setBody($description)
+                ->setSound('default');
+
+            $dataBuilder = new PayloadDataBuilder();
+            $data = array_merge($data, ["click_action" => "FLUTTER_NOTIFICATION_CLICK"]);
+            $dataBuilder->addData(["data" => $data]);
+
+           // $dataBuilder->addData($payload);
+
+            $option = $optionBuilder->build();
+            $notification = $notificationBuilder->build();
+            $payload_data = $dataBuilder->build();
+
+            // You must change it to get your tokens
+            $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $payload_data);
+
+            $downstreamResponse->numberModification();
+
+            // return Array - you must remove all this tokens in your database
+            $downstreamResponse->tokensToDelete();
+
+    // return Array (key : oldToken, value : new token - you must change the token in your database)
+            $downstreamResponse->tokensToModify();
+
+            // return Array - you should try to resend the message to the tokens in the array
+            $downstreamResponse->tokensToRetry();
+
+    // return Array (key:token, value:error) - in production you should remove from your database the tokens present in this array
+            $downstreamResponse->tokensWithError();
         }
-        if (strlen($description) > 50) {
-            //$description = substr($description, 0, 50);
-        }
-        $optionBuilder->setTimeToLive(60*20);
-
-        $notificationBuilder = new PayloadNotificationBuilder($title);
-        $notificationBuilder->setBody($description)
-            ->setSound('default');
-
-        $dataBuilder = new PayloadDataBuilder();
-        $data = array_merge($data, ["click_action" => "FLUTTER_NOTIFICATION_CLICK"]);
-        $dataBuilder->addData(["data" => $data]);
-
-       // $dataBuilder->addData($payload);
-
-        $option = $optionBuilder->build();
-        $notification = $notificationBuilder->build();
-        $payload_data = $dataBuilder->build();
-
-        // You must change it to get your tokens
-        $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $payload_data);
-
-        $downstreamResponse->numberModification();
-
-        // return Array - you must remove all this tokens in your database
-        $downstreamResponse->tokensToDelete();
-
-// return Array (key : oldToken, value : new token - you must change the token in your database)
-        $downstreamResponse->tokensToModify();
-
-        // return Array - you should try to resend the message to the tokens in the array
-        $downstreamResponse->tokensToRetry();
-
-// return Array (key:token, value:error) - in production you should remove from your database the tokens present in this array
-        $downstreamResponse->tokensWithError();
-    }
     // https://github.com/davibennun/laravel-push-notification
 
     /**

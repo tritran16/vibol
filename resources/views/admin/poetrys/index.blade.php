@@ -56,11 +56,11 @@
                                 </td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
-                                    @if ($item->status != 1)
-                                        <a type="button" class="btn btn-success" href="{{route('admin.poetrys.active', $item->id)}}" onclick="confirm('{{__('poetry.confirm.publish.msg')}}')">
-                                            <i class="fa fa-check"></i>
-                                        </a>
-                                    @endif
+{{--                                    @if ($item->status != 1)--}}
+{{--                                        <a type="button" class="btn btn-success" href="{{route('admin.poetrys.active', $item->id)}}" onclick="confirm('{{__('poetry.confirm.publish.msg')}}')">--}}
+{{--                                            <i class="fa fa-check"></i>--}}
+{{--                                        </a>--}}
+{{--                                    @endif--}}
                                     <a class="btn btn-sm btn-primary btn-flat" href="{{ route('poetrys.edit', $item->id) }}">
                                         <i class="fa fa-pencil"></i>
                                     </a>
